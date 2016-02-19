@@ -51,8 +51,13 @@
     <Compile Include="AddIn.cs" />
     <Compile Include="gliffy\model\GliffyBox.cs" />
     <Compile Include="gliffy\model\GliffyDiagram.cs" />
+    <Compile Include="gliffy\model\GliffyLayer.cs" />
     <Compile Include="gliffy\model\GliffyLocation.cs" />
+    <Compile Include="gliffy\model\GliffySimpleObject.cs" />
+    <Compile Include="gliffy\model\GliffyParentObject.cs" />
+    <Compile Include="gliffy\model\GliffyPrintModel.cs" />
     <Compile Include="gliffy\model\GliffyStage.cs" />
+    <Compile Include="gliffy\model\graphics\GliffyGraphic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
