@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,10 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddIn.cs" />
+    <Compile Include="gliffy\builder\DiagramBuilder.cs" />
+    <Compile Include="gliffy\builder\MetadataBuilder.cs" />
+    <Compile Include="gliffy\builder\StageBuilder.cs" />
     <Compile Include="gliffy\model\GliffyBox.cs" />
     <Compile Include="gliffy\model\GliffyDiagram.cs" />
     <Compile Include="gliffy\model\GliffyLayer.cs" />
     <Compile Include="gliffy\model\GliffyLocation.cs" />
+    <Compile Include="gliffy\model\GliffyMetaData.cs" />
     <Compile Include="gliffy\model\GliffySimpleObject.cs" />
     <Compile Include="gliffy\model\GliffyParentObject.cs" />
     <Compile Include="gliffy\model\GliffyPrintModel.cs" />

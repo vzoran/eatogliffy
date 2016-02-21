@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using EA;
+using eatogliffy.gliffy.builder;
+using eatogliffy.gliffy.model;
 using System.Windows.Forms;
 
 namespace eatogliffy
@@ -67,15 +66,30 @@ namespace eatogliffy
         {
             switch (itemName)
             {
-                case "Project statistic...":
-                    var count = 0;
-                    foreach (Package model in repository.Models)
-                        foreach (Package package in model.Packages)
-                            count += CountClasses(package);
-                    MessageBox.Show("This project contains "
-                        + count + " " + (count == 1 ? "class" : "classes"));
+                case menuNameExportSelected:
+                    buildCurrent(repository);
+                    break;
+
+                case menuNameExportAll:
+                    MessageBox.Show("This function is under construction.", "Info", MessageBoxButtons.OK);
                     break;
             }
+        }
+
+        private void buildCurrent(Repository repository)
+        {
+            DiagramBuilder diagramBuilder = new DiagramBuilder();
+            GliffyDiagram gliffyDiagram = diagramBuilder
+                .withContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
+                .withVersion(DiagramBuilder.DEFAULT_VERSION)
+                .fromActiveDiagram(repository)
+                .build()
+                .getDiagram();
+
+            var json = new JavaScriptSerializer()
+                .Serialize(gliffyDiagram);
+
+            System.IO.File.WriteAllText("d:\\temp.gliffy", json);
         }
 
         private static int CountClasses(Package package)
