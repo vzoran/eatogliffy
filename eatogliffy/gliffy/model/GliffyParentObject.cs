@@ -2,8 +2,8 @@
 
 namespace eatogliffy.gliffy.model
 {
-    public class GliffyParentObject : GliffySimpleObject
+    public class GliffyParentObject : GliffyObject
     {
-        public List<GliffySimpleObject> children { get; set; }
+        public List<GliffyObject> children { get; set; }
     }
 }

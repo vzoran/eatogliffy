@@ -9,7 +9,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
 {
     public abstract class ObjectBuilder
     {
-        protected GliffyParentObject gliffyObject;
+        protected GliffyObject gliffyObject;
         protected DiagramObject eaDiagramObject;
         protected Element eaElement;
         protected string layerId = "";
@@ -62,7 +62,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
             return this;
         }
 
-        public ObjectBuilder build()
+        public ObjectBuilder buildAsParent()
         {
             gliffyObject = new GliffyParentObject();
 
@@ -74,7 +74,17 @@ namespace eatogliffy.gliffy.builder.diagramobject
             return this;
         }
 
-        public GliffyParentObject getObject()
+        public ObjectBuilder buildAsChild()
+        {
+            gliffyObject = new GliffyObject();
+
+            buildProperties();
+            buildGraphic();
+
+            return this;
+        }
+
+        public GliffyObject getObject()
         {
             return gliffyObject;
         }

@@ -26,6 +26,6 @@ namespace eatogliffy.gliffy.model
         public GliffyBox fitBB { get; set; }
         public GliffyPrintModel printModel { get; set; }
         public List<GliffyLayer> layers { get; set; }
-        public List<GliffyParentObject> objects { get; set; }
+        public List<GliffyObject> objects { get; set; }
     }
 }

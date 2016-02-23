@@ -2,7 +2,7 @@
 
 namespace eatogliffy.gliffy.model
 {
-    public class GliffySimpleObject
+    public class GliffyObject
     {
         public int x { get; set; }
         public int y { get; set; }

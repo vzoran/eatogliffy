@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AddIn.cs" />
     <Compile Include="gliffy\builder\DiagramBuilder.cs" />
+    <Compile Include="gliffy\builder\diagramobject\TextBuilder.cs" />
     <Compile Include="gliffy\builder\MetadataBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\ObjectBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\RectangleBuilder.cs" />
@@ -61,13 +62,15 @@
     <Compile Include="gliffy\model\GliffyLayer.cs" />
     <Compile Include="gliffy\model\GliffyLocation.cs" />
     <Compile Include="gliffy\model\GliffyMetaData.cs" />
-    <Compile Include="gliffy\model\GliffySimpleObject.cs" />
+    <Compile Include="gliffy\model\GliffyObject.cs" />
     <Compile Include="gliffy\model\GliffyParentObject.cs" />
     <Compile Include="gliffy\model\GliffyPrintModel.cs" />
     <Compile Include="gliffy\model\GliffyStage.cs" />
     <Compile Include="gliffy\model\graphics\GliffyGraphic.cs" />
     <Compile Include="gliffy\model\graphics\GliffyGraphicShape.cs" />
+    <Compile Include="gliffy\model\graphics\GliffyGraphicText.cs" />
     <Compile Include="gliffy\model\graphics\GliffyShape.cs" />
+    <Compile Include="gliffy\model\graphics\GliffyText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

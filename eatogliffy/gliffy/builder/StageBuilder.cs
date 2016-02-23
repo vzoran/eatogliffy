@@ -58,7 +58,7 @@ namespace eatogliffy.gliffy.builder
 
         private void buildObjects()
         {
-            gliffyStage.objects = new List<GliffyParentObject>();
+            gliffyStage.objects = new List<GliffyObject>();
 
             IEnumerator objectEnumerator = eaDiagram.DiagramObjects.GetEnumerator();
             while(objectEnumerator.MoveNext())
@@ -74,7 +74,7 @@ namespace eatogliffy.gliffy.builder
                         .withEaObject(diagramObject)
                         .withEaElement(currentElement)
                         .withLayer(gliffyStage.layers[0].guid)
-                        .build()
+                        .buildAsParent()
                         .getObject());
                 }
             }

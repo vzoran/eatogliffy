@@ -1,4 +1,5 @@
-﻿using eatogliffy.gliffy.model.graphics;
+﻿using eatogliffy.gliffy.model;
+using eatogliffy.gliffy.model.graphics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -33,6 +34,23 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
             gliffyGraphicShape.Shape = shape;
             this.gliffyObject.graphic = gliffyGraphicShape;
+        }
+
+        protected override void buildChildren()
+        {
+            base.buildChildren();
+
+            GliffyParentObject gliffyParentObject = gliffyObject as GliffyParentObject;
+            TextBuilder textBuilder = new TextBuilder();
+
+            gliffyParentObject.children = new List<GliffyObject>();
+            gliffyParentObject.children.Add(textBuilder
+                .withEaElement(this.eaElement)
+                .withEaObject(this.eaDiagramObject)
+                .withLayer(this.layerId)
+                .buildAsChild()
+                .getObject());
+
         }
 
         private string hexConverter(Color c)
