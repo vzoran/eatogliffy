@@ -11,6 +11,7 @@ namespace eatogliffy.gliffy.builder
          
         private GliffyDiagram gliffyDiagram;
         private Diagram eaDiagram;
+        private Repository eaRepository;
 
         public DiagramBuilder()
         {
@@ -35,7 +36,7 @@ namespace eatogliffy.gliffy.builder
             {
                 throw new NullReferenceException("Repository is empty or invalid.");
             }
-
+            eaRepository = repository;
             eaDiagram = repository.GetCurrentDiagram();
             return this;
         }
@@ -57,6 +58,7 @@ namespace eatogliffy.gliffy.builder
         {
             StageBuilder stageBuilder = new StageBuilder();
             gliffyDiagram.stage = stageBuilder
+                .withEaRepository(eaRepository)
                 .withEaDiagram(eaDiagram)
                 .build()
                 .getStage();

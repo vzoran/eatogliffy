@@ -73,23 +73,50 @@ namespace eatogliffy
                 case menuNameExportAll:
                     MessageBox.Show("This function is under construction.", "Info", MessageBoxButtons.OK);
                     break;
+
+                case menuNameDebug:
+                    buildDebug(repository);
+                    break;
+            }
+        }
+
+        private void buildDebug(Repository repository)
+        {
+            try
+            {
+                System.IO.File.WriteAllText("d:\\repository.json", new JavaScriptSerializer()
+                        .Serialize(repository));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString() + " " + ex.StackTrace);
+                throw;
             }
         }
 
         private void buildCurrent(Repository repository)
         {
-            DiagramBuilder diagramBuilder = new DiagramBuilder();
-            GliffyDiagram gliffyDiagram = diagramBuilder
-                .withContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
-                .withVersion(DiagramBuilder.DEFAULT_VERSION)
-                .fromActiveDiagram(repository)
-                .build()
-                .getDiagram();
 
-            var json = new JavaScriptSerializer()
-                .Serialize(gliffyDiagram);
+            try
+            {
+                DiagramBuilder diagramBuilder = new DiagramBuilder();
+                GliffyDiagram gliffyDiagram = diagramBuilder
+                    .withContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
+                    .withVersion(DiagramBuilder.DEFAULT_VERSION)
+                    .fromActiveDiagram(repository)
+                    .build()
+                    .getDiagram();
 
-            System.IO.File.WriteAllText("d:\\temp.gliffy", json);
+                var json = new JavaScriptSerializer()
+                    .Serialize(gliffyDiagram);
+
+                System.IO.File.WriteAllText("d:\\temp.gliffy", json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString() + " " + ex.StackTrace);
+                throw;
+            }
         }
 
         private static int CountClasses(Package package)

@@ -10,8 +10,8 @@ namespace eatogliffy.gliffy.model
         public int id { get; set; }
         public int width { get; set; }
         public int height { get; set; }
-        public int order { get; set; }
-        public bool locakAspectRatio { get; set; }
+        public string order { get; set; }
+        public bool lockAspectRatio { get; set; }
         public bool lockShape { get; set; }
         public string uid { get; set; }
         public bool hidden { get; set; }

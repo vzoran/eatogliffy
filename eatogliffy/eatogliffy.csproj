@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +53,8 @@
     <Compile Include="AddIn.cs" />
     <Compile Include="gliffy\builder\DiagramBuilder.cs" />
     <Compile Include="gliffy\builder\MetadataBuilder.cs" />
+    <Compile Include="gliffy\builder\diagramobject\ObjectBuilder.cs" />
+    <Compile Include="gliffy\builder\diagramobject\RectangleBuilder.cs" />
     <Compile Include="gliffy\builder\StageBuilder.cs" />
     <Compile Include="gliffy\model\GliffyBox.cs" />
     <Compile Include="gliffy\model\GliffyDiagram.cs" />
@@ -63,7 +66,12 @@
     <Compile Include="gliffy\model\GliffyPrintModel.cs" />
     <Compile Include="gliffy\model\GliffyStage.cs" />
     <Compile Include="gliffy\model\graphics\GliffyGraphic.cs" />
+    <Compile Include="gliffy\model\graphics\GliffyGraphicShape.cs" />
+    <Compile Include="gliffy\model\graphics\GliffyShape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="gliffy\builder\graphics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
