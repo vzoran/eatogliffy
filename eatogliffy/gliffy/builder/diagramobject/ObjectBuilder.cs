@@ -1,5 +1,6 @@
 ﻿using EA;
 using eatogliffy.gliffy.model;
+using eatogliffy.gliffy.builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +18,16 @@ namespace eatogliffy.gliffy.builder.diagramobject
         protected virtual void buildProperties()
         {
             gliffyObject.x = eaDiagramObject.left;
-            gliffyObject.y = eaDiagramObject.top;
+            gliffyObject.y = Math.Abs(eaDiagramObject.top);
             gliffyObject.rotation = 0;
             gliffyObject.width = eaDiagramObject.right - eaDiagramObject.left;
-            gliffyObject.height = eaDiagramObject.bottom - eaDiagramObject.top;
+            gliffyObject.height = Math.Abs(eaDiagramObject.bottom) - Math.Abs(eaDiagramObject.top);
             gliffyObject.order = "auto";
             gliffyObject.lockShape = false;
             gliffyObject.lockAspectRatio = false;
             gliffyObject.hidden = false;
             gliffyObject.layerId = layerId;
-            gliffyObject.id = eaDiagramObject.ElementID;
+            gliffyObject.id = IdManager.GetNextId();
         }
 
         protected virtual void buildGraphic()

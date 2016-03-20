@@ -8,10 +8,17 @@ namespace eatogliffy.gliffy.builder.diagramobject
 {
     class TextBuilder : ObjectBuilder
     {
+        private int MARGIN = 2;
+
         protected override void buildProperties()
         {
             base.buildProperties();
             this.gliffyObject.uid = null;
+            this.gliffyObject.x = MARGIN;
+            this.gliffyObject.y = 0;
+            this.gliffyObject.width = this.eaDiagramObject.right - this.eaDiagramObject.left - (2 * MARGIN);
+            this.gliffyObject.height = 14;
+            this.gliffyObject.order = "auto";
         }
 
         protected override void buildGraphic()

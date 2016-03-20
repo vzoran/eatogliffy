@@ -31,6 +31,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
             shape.shadowX = 0;
             shape.shadowY = 0;
             shape.tid = "com.gliffy.stencil.rectangle.basic_v1";
+            shape.strokeWidth = eaDiagramObject.BorderLineWidth;
 
             gliffyGraphicShape.Shape = shape;
             this.gliffyObject.graphic = gliffyGraphicShape;

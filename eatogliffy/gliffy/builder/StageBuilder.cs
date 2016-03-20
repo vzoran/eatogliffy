@@ -43,10 +43,11 @@ namespace eatogliffy.gliffy.builder
             gliffyStage = new GliffyStage();
 
             buildProperties();
-            gliffyStage.printModel = buildPrintModel();
-            gliffyStage.fitBB = buildBoundaryBox();
-            gliffyStage.layers = new List<GliffyLayer>() { buildLayer() };
+            buildPrintModel();
+            buildBoundaryBox();
+            buildLayers();
             buildObjects();
+            finalizeBuild();
 
             return this;
         }
@@ -80,6 +81,12 @@ namespace eatogliffy.gliffy.builder
             }
         }
 
+        private void finalizeBuild()
+        {
+            gliffyStage.nodeIndex = IdManager.Counter;
+            gliffyStage.layers[0].nodeIndex = gliffyStage.objects.Count;
+        }
+
         private ObjectBuilder getBuilder(string eaElementType)
         {
             return new RectangleBuilder();
@@ -106,7 +113,7 @@ namespace eatogliffy.gliffy.builder
             gliffyStage.width = eaDiagram.cx;
         }
 
-        private GliffyPrintModel buildPrintModel()
+        private void buildPrintModel()
         {
             GliffyPrintModel printModel = new GliffyPrintModel();
             printModel.pageSize = "a4";
@@ -114,10 +121,10 @@ namespace eatogliffy.gliffy.builder
             printModel.fitToOnePage = false;
             printModel.displayPageBreaks = false;
 
-            return printModel;
+            gliffyStage.printModel = printModel;
         }
 
-        private GliffyLayer buildLayer()
+        private void buildLayers()
         {
             GliffyLayer gliffyLayer = new GliffyLayer();
             gliffyLayer.active = true;
@@ -126,11 +133,11 @@ namespace eatogliffy.gliffy.builder
             gliffyLayer.name = "Layer 0";
             gliffyLayer.visible = true;
             gliffyLayer.guid = randomString(GUID_LENGTH);
-            
-            return gliffyLayer;
+
+            gliffyStage.layers = new List<GliffyLayer>() { gliffyLayer };
         }
 
-        private GliffyBox buildBoundaryBox ()
+        private void buildBoundaryBox ()
         {
             GliffyBox gliffyBox = new GliffyBox();
             gliffyBox.min = new GliffyLocation();
@@ -141,7 +148,7 @@ namespace eatogliffy.gliffy.builder
             gliffyBox.max.x = eaDiagram.cx;
             gliffyBox.max.y = eaDiagram.cy;
 
-            return gliffyBox;
+            gliffyStage.fitBB = gliffyBox;
         }
 
         private string randomString(int length)

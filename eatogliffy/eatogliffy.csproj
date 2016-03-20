@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.EA">
-      <HintPath>C:\Program Files (x86)\Sparx Systems\EA Trial\Interop.EA.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -53,6 +53,7 @@
     <Compile Include="AddIn.cs" />
     <Compile Include="gliffy\builder\DiagramBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\TextBuilder.cs" />
+    <Compile Include="gliffy\builder\IdManager.cs" />
     <Compile Include="gliffy\builder\MetadataBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\ObjectBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\RectangleBuilder.cs" />
