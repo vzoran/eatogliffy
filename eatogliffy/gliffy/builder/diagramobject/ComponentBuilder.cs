@@ -7,12 +7,12 @@ using System.Text;
 
 namespace eatogliffy.gliffy.builder.diagramobject
 {
-    public class RectangleBuilder : ObjectBuilder
+    public class ComponentBuilder : ObjectBuilder
     {
         protected override void buildProperties()
         {
             base.buildProperties();
-            this.gliffyObject.uid = "com.gliffy.shape.basic.basic_v1.default.rectangle";
+            this.gliffyObject.uid = "com.gliffy.shape.uml.uml_v2.component.component1";
         }
 
         protected override void buildGraphic()
@@ -20,10 +20,10 @@ namespace eatogliffy.gliffy.builder.diagramobject
             base.buildGraphic();
 
             ShapeBuilder shapeBuilder = new ShapeBuilder();
-            
+
             this.gliffyObject.graphic = shapeBuilder
                     .withEaObject(this.eaDiagramObject)
-                    .withType(eShapeType.Rectangle)
+                    .withType(eShapeType.Component)
                     .build()
                     .getShape();
         }

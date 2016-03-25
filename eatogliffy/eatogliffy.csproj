@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="AddIn.cs" />
     <Compile Include="gliffy\builder\DiagramBuilder.cs" />
+    <Compile Include="gliffy\builder\diagramobject\ComponentBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\TextBuilder.cs" />
+    <Compile Include="gliffy\builder\graphics\ShapeBuilder.cs" />
     <Compile Include="gliffy\builder\IdManager.cs" />
     <Compile Include="gliffy\builder\MetadataBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\ObjectBuilder.cs" />
@@ -74,9 +76,7 @@
     <Compile Include="gliffy\model\graphics\GliffyText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="gliffy\builder\graphics\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

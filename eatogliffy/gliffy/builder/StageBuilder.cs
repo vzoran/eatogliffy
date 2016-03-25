@@ -89,7 +89,19 @@ namespace eatogliffy.gliffy.builder
 
         private ObjectBuilder getBuilder(string eaElementType)
         {
-            return new RectangleBuilder();
+            switch(eaElementType)
+            {
+                case "Boundary":
+                    return new RectangleBuilder();
+
+                case "Component":
+                    return new ComponentBuilder();
+
+                default:
+                    return null;
+            }
+
+            
         }
 
         private void buildProperties()
