@@ -60,6 +60,8 @@
     <Compile Include="gliffy\builder\diagramobject\ObjectBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\RectangleBuilder.cs" />
     <Compile Include="gliffy\builder\StageBuilder.cs" />
+    <Compile Include="gliffy\io\EaManager.cs" />
+    <Compile Include="gliffy\io\EaObject.cs" />
     <Compile Include="gliffy\model\GliffyBox.cs" />
     <Compile Include="gliffy\model\GliffyDiagram.cs" />
     <Compile Include="gliffy\model\GliffyLayer.cs" />
