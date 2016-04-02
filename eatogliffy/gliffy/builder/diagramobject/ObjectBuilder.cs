@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using eatogliffy.gliffy.builder.tools;
 
 namespace eatogliffy.gliffy.builder.diagramobject
 {
@@ -27,7 +28,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
             gliffyObject.lockAspectRatio = false;
             gliffyObject.hidden = false;
             gliffyObject.layerId = layerId;
-            gliffyObject.id = IdManager.GetNextId();
+            gliffyObject.id = IdManager.GetNextId(eaElement.ElementGUID);
         }
 
         protected virtual void buildGraphic()

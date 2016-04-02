@@ -1,4 +1,5 @@
 ﻿using EA;
+using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.model.graphics;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,6 @@ namespace eatogliffy.gliffy.builder.graphics
 {
     public class ShapeBuilder
     {
-        private const string COLOR_DEFAULT = "#FFFFFF";
-        private const string COLOR_BLACK = "#000000";
-
         private DiagramObject eaDiagramObject;
         private eShapeType shapeType;
         private GliffyGraphicShape gliffyGraphicShape;
@@ -35,8 +33,8 @@ namespace eatogliffy.gliffy.builder.graphics
 
             shape.dashStyle = null;
             shape.dropShadow = false;
-            shape.fillColor = hexConverter(eaDiagramObject.BackgroundColor);
-            shape.strokeColor = hexConverter(eaDiagramObject.BorderColor, COLOR_BLACK);
+            shape.fillColor = BuilderTools.hexConverter(eaDiagramObject.BackgroundColor);
+            shape.strokeColor = BuilderTools.hexConverter(eaDiagramObject.BorderColor, BuilderTools.COLOR_BLACK);
             shape.gradient = false;
             shape.opacity = 1;
             shape.shadowX = 0;
@@ -67,27 +65,6 @@ namespace eatogliffy.gliffy.builder.graphics
                 default:
                     return String.Empty;
             }
-        }
-
-        private string hexConverter(int color)
-        {
-            return hexConverter(color, null);
-        }
-
-        private string hexConverter(int color, string overrideDefault)
-        {
-            var b = ((color >> 16) & 0xff);
-            var g = ((color >> 8) & 0xff);
-            var r = (color & 0xff);
-
-            string colorStr = "#" + r.ToString("X2") + g.ToString("X2") + b.ToString("X2");
-
-            if(colorStr.Equals(COLOR_DEFAULT) && !String.IsNullOrEmpty( overrideDefault))
-            {
-                colorStr = overrideDefault;
-            }
-
-            return colorStr;
         }
     }
 

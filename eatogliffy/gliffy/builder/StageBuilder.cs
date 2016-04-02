@@ -1,5 +1,6 @@
 ﻿using EA;
 using eatogliffy.gliffy.builder.diagramobject;
+using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.model;
 using System;
 using System.Collections;
@@ -41,12 +42,14 @@ namespace eatogliffy.gliffy.builder
         public StageBuilder build()
         {
             gliffyStage = new GliffyStage();
+            gliffyStage.objects = new List<GliffyObject>();
 
             buildProperties();
             buildPrintModel();
             buildBoundaryBox();
             buildLayers();
             buildObjects();
+            buildLinks();
             finalizeBuild();
 
             return this;
@@ -59,14 +62,12 @@ namespace eatogliffy.gliffy.builder
 
         private void buildObjects()
         {
-            gliffyStage.objects = new List<GliffyObject>();
-
             IEnumerator objectEnumerator = eaDiagram.DiagramObjects.GetEnumerator();
             while(objectEnumerator.MoveNext())
             {
                 DiagramObject diagramObject = (DiagramObject)objectEnumerator.Current;
                 Element currentElement = eaRepository.GetElementByID(diagramObject.ElementID);
-                ObjectBuilder objectBuilder = getBuilder(currentElement.Type);
+                ObjectBuilder objectBuilder = getObjectBuilder(currentElement.Type);
 
                 if(objectBuilder != null)
                 {
@@ -81,13 +82,35 @@ namespace eatogliffy.gliffy.builder
             }
         }
 
+        private void buildLinks()
+        {
+            IEnumerator linkEnumerator = eaDiagram.DiagramLinks.GetEnumerator();
+            while (linkEnumerator.MoveNext())
+            {
+                DiagramLink diagramLink = (DiagramLink)linkEnumerator.Current;
+                Connector currentElement = eaRepository.GetConnectorByID(diagramLink.ConnectorID);
+                LinkBuilder linkBuilder = getLinkBuilder(currentElement.Type);
+
+                if (linkBuilder != null)
+                {
+                    gliffyStage.objects.Add(
+                    linkBuilder
+                        .withEaConnector(currentElement)
+                        .withEaLink(diagramLink)
+                        .withLayer(gliffyStage.layers[0].guid)
+                        .build()
+                        .getObject());
+                }
+            }
+        }
+
         private void finalizeBuild()
         {
             gliffyStage.nodeIndex = IdManager.Counter;
             gliffyStage.layers[0].nodeIndex = gliffyStage.objects.Count;
         }
 
-        private ObjectBuilder getBuilder(string eaElementType)
+        private ObjectBuilder getObjectBuilder(string eaElementType)
         {
             switch(eaElementType)
             {
@@ -100,8 +123,18 @@ namespace eatogliffy.gliffy.builder
                 default:
                     return null;
             }
+        }
 
-            
+        private LinkBuilder getLinkBuilder(string eaLinkType)
+        {
+            switch (eaLinkType)
+            {
+                case "Dependency":
+                    return new DependecyBuilder();
+
+                default:
+                    return null;
+            }
         }
 
         private void buildProperties()
