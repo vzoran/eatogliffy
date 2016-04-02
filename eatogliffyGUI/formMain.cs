@@ -71,6 +71,11 @@ namespace eatogliffyGUI
                 }
 
                 treeDiagrams.ExpandAll();
+                if(!String.IsNullOrEmpty(Properties.Settings.Default.SelectedDiagram))
+                {
+                    treeDiagrams.SelectedNode = treeDiagrams.Nodes.Find(Properties.Settings.Default.SelectedDiagram, true).First();
+                    treeDiagrams.Select();
+                }
             }
             catch (Exception)
             {
@@ -94,6 +99,7 @@ namespace eatogliffyGUI
 
             Properties.Settings.Default.SourcePath = textSourceFile.Text;
             Properties.Settings.Default.TargetPath = textTargetFile.Text;
+            Properties.Settings.Default.SelectedDiagram = treeDiagrams.SelectedNode.Name;
             Properties.Settings.Default.Save();
         }
 

@@ -58,5 +58,17 @@ namespace eatogliffyGUI.Properties {
                 this["SelectedDiagram"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedGUID {
+            get {
+                return ((string)(this["SelectedGUID"]));
+            }
+            set {
+                this["SelectedGUID"] = value;
+            }
+        }
     }
 }
