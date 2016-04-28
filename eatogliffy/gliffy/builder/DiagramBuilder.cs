@@ -1,4 +1,5 @@
 ﻿using EA;
+using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.model;
 using System;
 
@@ -47,6 +48,8 @@ namespace eatogliffy.gliffy.builder
             {
                 throw new NullReferenceException("No diagram selected");
             }
+
+            IdManager.Initialize(eaRepository);
 
             buildStage();
             buildMetadata();
