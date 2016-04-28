@@ -43,6 +43,10 @@ namespace eatogliffy.gliffy.builder.graphics
             gliffyLine.Line.startArrowRotation = "auto";
             gliffyLine.Line.endArrowRotation = "auto";
             gliffyLine.Line.interpolationType = "linear";
+            gliffyLine.Line.controlPath = new List<int[]>();
+            gliffyLine.Line.controlPath.Add(new int[] { 0, 0 });
+
+            Console.WriteLine(eaDiagramLink.Path);
 
             return this;
         }

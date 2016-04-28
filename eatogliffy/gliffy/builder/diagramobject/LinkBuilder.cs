@@ -2,6 +2,7 @@
 using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
             gliffyLink.lockAspectRatio = false;
             gliffyLink.hidden = false;
             gliffyLink.layerId = layerId;
-            gliffyLink.id = IdManager.GetNextId(eaConnector.ConnectorGUID);
+            gliffyLink.id = IdManager.GetId(eaConnector.ConnectorGUID);
         }
 
         protected virtual void buildGraphic()
@@ -48,12 +49,12 @@ namespace eatogliffy.gliffy.builder.diagramobject
             gliffyLink.constraints = new List<GliffyConstraint>();
 
             gliffyLink.startConstraint = new GliffyStartConstraint();
-            gliffyLink.startConstraint.StartPositionConstraint.nodeId = IdManager.GetNextId(eaDiagramLink.SourceInstanceUID);
+            gliffyLink.startConstraint.StartPositionConstraint.nodeId = IdManager.GetIdByIndex(eaConnector.SupplierID);
             gliffyLink.startConstraint.StartPositionConstraint.px = 0;
             gliffyLink.startConstraint.StartPositionConstraint.py = 0;
 
             gliffyLink.endConstraint = new GliffyEndConstraint();
-            gliffyLink.endConstraint.EndPositionConstraint.nodeId = IdManager.GetNextId(eaDiagramLink.TargetInstanceUID);
+            gliffyLink.endConstraint.EndPositionConstraint.nodeId = IdManager.GetIdByIndex(eaConnector.ClientID);
             gliffyLink.endConstraint.EndPositionConstraint.px = 0;
             gliffyLink.endConstraint.EndPositionConstraint.py = 0;
         }

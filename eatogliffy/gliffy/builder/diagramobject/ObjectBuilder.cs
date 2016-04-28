@@ -28,7 +28,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
             gliffyObject.lockAspectRatio = false;
             gliffyObject.hidden = false;
             gliffyObject.layerId = layerId;
-            gliffyObject.id = IdManager.GetNextId(eaElement.ElementGUID);
+            gliffyObject.id = IdManager.GetId(eaElement.ElementGUID);
         }
 
         protected virtual void buildGraphic()
