@@ -33,6 +33,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonReload = new System.Windows.Forms.Button();
             this.buttonOpenFile = new System.Windows.Forms.Button();
             this.textSourceFile = new System.Windows.Forms.TextBox();
             this.labelInputFile = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.labelTarget = new System.Windows.Forms.Label();
             this.treeDiagrams = new System.Windows.Forms.TreeView();
             this.imageTree = new System.Windows.Forms.ImageList(this.components);
-            this.buttonReload = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -68,13 +68,24 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(435, 46);
+            this.panel1.Size = new System.Drawing.Size(563, 46);
             this.panel1.TabIndex = 6;
+            // 
+            // buttonReload
+            // 
+            this.buttonReload.Image = ((System.Drawing.Image)(resources.GetObject("buttonReload.Image")));
+            this.buttonReload.Location = new System.Drawing.Point(527, 10);
+            this.buttonReload.Name = "buttonReload";
+            this.buttonReload.Size = new System.Drawing.Size(24, 23);
+            this.buttonReload.TabIndex = 6;
+            this.buttonReload.Text = "...";
+            this.buttonReload.UseVisualStyleBackColor = true;
+            this.buttonReload.Click += new System.EventHandler(this.buttonReload_Click);
             // 
             // buttonOpenFile
             // 
             this.buttonOpenFile.Image = ((System.Drawing.Image)(resources.GetObject("buttonOpenFile.Image")));
-            this.buttonOpenFile.Location = new System.Drawing.Point(372, 10);
+            this.buttonOpenFile.Location = new System.Drawing.Point(497, 10);
             this.buttonOpenFile.Name = "buttonOpenFile";
             this.buttonOpenFile.Size = new System.Drawing.Size(24, 23);
             this.buttonOpenFile.TabIndex = 5;
@@ -85,7 +96,7 @@
             // 
             this.textSourceFile.Location = new System.Drawing.Point(92, 12);
             this.textSourceFile.Name = "textSourceFile";
-            this.textSourceFile.Size = new System.Drawing.Size(274, 20);
+            this.textSourceFile.Size = new System.Drawing.Size(399, 20);
             this.textSourceFile.TabIndex = 4;
             // 
             // labelInputFile
@@ -104,9 +115,9 @@
             this.panel2.Controls.Add(this.textTargetFile);
             this.panel2.Controls.Add(this.labelTarget);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 261);
+            this.panel2.Location = new System.Drawing.Point(0, 407);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(435, 108);
+            this.panel2.Size = new System.Drawing.Size(563, 108);
             this.panel2.TabIndex = 7;
             // 
             // panel3
@@ -116,12 +127,12 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 42);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(435, 66);
+            this.panel3.Size = new System.Drawing.Size(563, 66);
             this.panel3.TabIndex = 9;
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(190, 19);
+            this.buttonOk.Location = new System.Drawing.Point(345, 19);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(100, 35);
             this.buttonOk.TabIndex = 1;
@@ -132,7 +143,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(296, 19);
+            this.buttonCancel.Location = new System.Drawing.Point(451, 19);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(100, 35);
             this.buttonCancel.TabIndex = 0;
@@ -143,7 +154,7 @@
             // buttonTargetFile
             // 
             this.buttonTargetFile.Image = ((System.Drawing.Image)(resources.GetObject("buttonTargetFile.Image")));
-            this.buttonTargetFile.Location = new System.Drawing.Point(399, 10);
+            this.buttonTargetFile.Location = new System.Drawing.Point(497, 9);
             this.buttonTargetFile.Name = "buttonTargetFile";
             this.buttonTargetFile.Size = new System.Drawing.Size(24, 23);
             this.buttonTargetFile.TabIndex = 8;
@@ -154,7 +165,7 @@
             // 
             this.textTargetFile.Location = new System.Drawing.Point(92, 12);
             this.textTargetFile.Name = "textTargetFile";
-            this.textTargetFile.Size = new System.Drawing.Size(304, 20);
+            this.textTargetFile.Size = new System.Drawing.Size(399, 20);
             this.textTargetFile.TabIndex = 7;
             // 
             // labelTarget
@@ -174,7 +185,7 @@
             this.treeDiagrams.Location = new System.Drawing.Point(0, 46);
             this.treeDiagrams.Name = "treeDiagrams";
             this.treeDiagrams.SelectedImageIndex = 0;
-            this.treeDiagrams.Size = new System.Drawing.Size(435, 215);
+            this.treeDiagrams.Size = new System.Drawing.Size(563, 361);
             this.treeDiagrams.TabIndex = 8;
             // 
             // imageTree
@@ -184,24 +195,13 @@
             this.imageTree.Images.SetKeyName(0, "folder.png");
             this.imageTree.Images.SetKeyName(1, "chart_organisation.png");
             // 
-            // buttonReload
-            // 
-            this.buttonReload.Image = ((System.Drawing.Image)(resources.GetObject("buttonReload.Image")));
-            this.buttonReload.Location = new System.Drawing.Point(399, 10);
-            this.buttonReload.Name = "buttonReload";
-            this.buttonReload.Size = new System.Drawing.Size(24, 23);
-            this.buttonReload.TabIndex = 6;
-            this.buttonReload.Text = "...";
-            this.buttonReload.UseVisualStyleBackColor = true;
-            this.buttonReload.Click += new System.EventHandler(this.buttonReload_Click);
-            // 
             // formMain
             // 
             this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(435, 369);
+            this.ClientSize = new System.Drawing.Size(563, 515);
             this.Controls.Add(this.treeDiagrams);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
