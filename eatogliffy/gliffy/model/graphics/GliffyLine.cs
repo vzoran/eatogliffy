@@ -16,7 +16,7 @@ namespace eatogliffy.gliffy.model.graphics
         public string startArrowRotation { get; set; }
         public string endArrowRotation { get; set; }
         public string interpolationType { get; set; }
-        public string cornerRadius { get; set; }
+        public int cornerRadius { get; set; }
         public bool ortho { get; set; }
         // public object lockSegment { get; set; }
         public List<int[]> controlPath { get; set; }

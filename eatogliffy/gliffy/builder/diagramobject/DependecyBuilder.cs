@@ -21,6 +21,8 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
             LineBuilder lineBuilder = new LineBuilder();
             GliffyGraphicLine line = lineBuilder
+                .withEaRepository(eaRepository)
+                .withEaConnector(eaConnector)
                 .withEaLink(this.eaDiagramLink)
                 .withType(eLineType.Dependency)
                 .build()

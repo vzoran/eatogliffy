@@ -1,5 +1,6 @@
 ﻿using EA;
 using eatogliffy.gliffy.builder.tools;
+using eatogliffy.gliffy.exception;
 using eatogliffy.gliffy.model;
 using System;
 
@@ -44,9 +45,9 @@ namespace eatogliffy.gliffy.builder
 
         public DiagramBuilder build()
         {
-            if(eaDiagram == null)
+            if(eaDiagram == null || eaRepository == null)
             {
-                throw new NullReferenceException("No diagram selected");
+                throw new InvalidBuilderSetupException();
             }
 
             IdManager.Initialize(eaRepository);

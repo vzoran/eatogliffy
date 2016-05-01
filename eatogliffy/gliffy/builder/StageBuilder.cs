@@ -95,6 +95,7 @@ namespace eatogliffy.gliffy.builder
                 {
                     gliffyStage.objects.Add(
                     linkBuilder
+                        .withEaRepository(eaRepository)
                         .withEaConnector(currentElement)
                         .withEaLink(diagramLink)
                         .withLayer(gliffyStage.layers[0].guid)

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace eatogliffy.gliffy.builder.diagramobject
 {
-    public class LinkBuilder
+    public abstract class LinkBuilder
     {
         private const int DEFAULT_WIDTH = 100;
         private const int DEFAULT_HEIGHT = 100;
@@ -17,6 +17,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
         protected GliffyLink gliffyLink;
         protected DiagramLink eaDiagramLink;
         protected Connector eaConnector;
+        protected Repository eaRepository;
         protected string layerId = "";
 
         protected virtual void buildProperties()
@@ -68,6 +69,12 @@ namespace eatogliffy.gliffy.builder.diagramobject
         public LinkBuilder withEaLink(DiagramLink diagramLink)
         {
             eaDiagramLink = diagramLink;
+            return this;
+        }
+
+        public LinkBuilder withEaRepository(Repository repository)
+        {
+            eaRepository = repository;
             return this;
         }
 

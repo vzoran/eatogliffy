@@ -64,6 +64,8 @@
     <Compile Include="gliffy\builder\diagramobject\ObjectBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\RectangleBuilder.cs" />
     <Compile Include="gliffy\builder\StageBuilder.cs" />
+    <Compile Include="gliffy\builder\tools\LinkGeometry.cs" />
+    <Compile Include="gliffy\exception\InvalidBuilderSetupException.cs" />
     <Compile Include="gliffy\io\EaManager.cs" />
     <Compile Include="gliffy\io\EaObject.cs" />
     <Compile Include="gliffy\model\GliffyBox.cs" />
