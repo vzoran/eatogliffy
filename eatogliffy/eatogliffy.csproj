@@ -59,6 +59,7 @@
     <Compile Include="gliffy\builder\graphics\LineBuilder.cs" />
     <Compile Include="gliffy\builder\graphics\path\DirectPathBuilder.cs" />
     <Compile Include="gliffy\builder\graphics\path\PathBuilder.cs" />
+    <Compile Include="gliffy\builder\graphics\path\TreePathBuilder.cs" />
     <Compile Include="gliffy\builder\graphics\ShapeBuilder.cs" />
     <Compile Include="gliffy\builder\tools\BuilderTools.cs" />
     <Compile Include="gliffy\builder\tools\DiagramCoordinate.cs" />

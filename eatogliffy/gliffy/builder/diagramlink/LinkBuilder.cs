@@ -11,9 +11,6 @@ namespace eatogliffy.gliffy.builder.diagramlink
         private const int DEFAULT_WIDTH = 100;
         private const int DEFAULT_HEIGHT = 100;
 
-        private const int DEFAULT_POS_X = 0;
-        private const int DEFAULT_POS_Y = 0;
-
         protected GliffyLink gliffyLink;
         protected DiagramLink eaDiagramLink;
         protected Connector eaConnector;
@@ -22,8 +19,8 @@ namespace eatogliffy.gliffy.builder.diagramlink
 
         protected virtual void buildProperties()
         {
-            gliffyLink.x = DEFAULT_POS_X;
-            gliffyLink.y = DEFAULT_POS_Y;
+            gliffyLink.x = 0;
+            gliffyLink.y = 0;
             gliffyLink.rotation = 0;
             gliffyLink.width = DEFAULT_WIDTH;
             gliffyLink.height = DEFAULT_HEIGHT;
@@ -43,7 +40,6 @@ namespace eatogliffy.gliffy.builder.diagramlink
                 .withEaConnector(eaConnector)
                 .withEaLink(this.eaDiagramLink)
                 .withType(eLineType.Dependency)
-                .withLinkPosition(new tools.DiagramCoordinate(this.gliffyLink.x, this.gliffyLink.y))
                 .build()
                 .getLine();
         }

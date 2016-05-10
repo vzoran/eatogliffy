@@ -21,7 +21,6 @@ namespace eatogliffy.gliffy.builder.graphics
         private Repository eaRepository;
         private eLineType lineType;
         private GliffyGraphicLine gliffyLine;
-        private DiagramCoordinate linkPosition;
  
         /// <summary>
         /// Add EA Connector object to the builder. Without this object the builder will fail.
@@ -68,19 +67,13 @@ namespace eatogliffy.gliffy.builder.graphics
             return this;
         }
 
-        public LineBuilder withLinkPosition(DiagramCoordinate linkPosition)
-        {
-            this.linkPosition = linkPosition;
-            return this;
-        }
-
         /// <summary>
         /// Build a gliffy line object. 
         /// </summary>
         /// <returns>Returns with the builder instance</returns>
         public LineBuilder build()
         {
-            if(eaDiagramLink == null || eaConnector == null || eaRepository == null || linkPosition == null)
+            if(eaDiagramLink == null || eaConnector == null || eaRepository == null)
             {
                 throw new InvalidBuilderSetupException();
             }
@@ -132,24 +125,6 @@ namespace eatogliffy.gliffy.builder.graphics
                 .withLinkInfo(linkInfo)
                 .build()
                 .getPath();
-        }
-
-        /// <summary>
-        /// Calculates a connection point of a DiagramObject
-        /// </summary>
-        /// <param name="point">Coordinates relative to the center point of the object</param>
-        /// <param name="startObject">Connected Object. It is expected to be not null</param>
-        /// <returns>2-length int array containing X and Y coordinate point</returns>
-        private int[] getObjectPoint(DiagramCoordinate point, DiagramObject startObject)
-        {
-            int startX = 0, startY = 0;
-            int objectWidth = startObject.right - startObject.left;
-            int objectHeight = Math.Abs(startObject.bottom) - Math.Abs(startObject.top);
-
-            startX = startObject.left + (objectWidth / 2) + point.NormalizedPointX - linkPosition.PointX;
-            startY = Math.Abs(startObject.top) + (objectHeight / 2) + point.NormalizedPointY - linkPosition.PointY;
-
-            return new int[] { startX, startY };
         }
 
         /// <summary>
