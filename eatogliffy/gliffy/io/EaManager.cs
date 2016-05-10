@@ -1,10 +1,8 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder;
+using eatogliffy.gliffy.builder.core;
 using eatogliffy.gliffy.model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Script.Serialization;
 
 namespace eatogliffy.gliffy.io

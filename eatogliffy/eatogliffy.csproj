@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddIn.cs" />
-    <Compile Include="gliffy\builder\DiagramBuilder.cs" />
+    <Compile Include="gliffy\builder\core\DiagramBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\ComponentBuilder.cs" />
     <Compile Include="gliffy\builder\diagramlink\DependecyBuilder.cs" />
     <Compile Include="gliffy\builder\diagramlink\LinkBuilder.cs" />
@@ -64,10 +64,10 @@
     <Compile Include="gliffy\builder\tools\BuilderTools.cs" />
     <Compile Include="gliffy\builder\tools\DiagramCoordinate.cs" />
     <Compile Include="gliffy\builder\tools\IdManager.cs" />
-    <Compile Include="gliffy\builder\MetadataBuilder.cs" />
+    <Compile Include="gliffy\builder\core\MetadataBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\ObjectBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\RectangleBuilder.cs" />
-    <Compile Include="gliffy\builder\StageBuilder.cs" />
+    <Compile Include="gliffy\builder\core\StageBuilder.cs" />
     <Compile Include="gliffy\builder\tools\LinkInfo.cs" />
     <Compile Include="gliffy\exception\InvalidBuilderSetupException.cs" />
     <Compile Include="gliffy\io\EaManager.cs" />

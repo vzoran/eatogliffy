@@ -2,9 +2,9 @@
 using System.Runtime.InteropServices;
 using System.Web.Script.Serialization;
 using EA;
-using eatogliffy.gliffy.builder;
 using eatogliffy.gliffy.model;
 using System.Windows.Forms;
+using eatogliffy.gliffy.builder.core;
 
 namespace eatogliffy
 {

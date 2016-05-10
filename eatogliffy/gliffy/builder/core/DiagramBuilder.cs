@@ -4,7 +4,7 @@ using eatogliffy.gliffy.exception;
 using eatogliffy.gliffy.model;
 using System;
 
-namespace eatogliffy.gliffy.builder
+namespace eatogliffy.gliffy.builder.core
 {
     public class DiagramBuilder
     {
