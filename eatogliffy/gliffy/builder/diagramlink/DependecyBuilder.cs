@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.diagramobject
+namespace eatogliffy.gliffy.builder.diagramlink
 {
     public class DependecyBuilder : LinkBuilder
     {
@@ -25,6 +25,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
                 .withEaConnector(eaConnector)
                 .withEaLink(this.eaDiagramLink)
                 .withType(eLineType.Dependency)
+                .withLinkPosition(new tools.DiagramCoordinate(this.gliffyLink.x, this.gliffyLink.y))
                 .build()
                 .getLine();
 

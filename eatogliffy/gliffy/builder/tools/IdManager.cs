@@ -33,10 +33,20 @@ namespace eatogliffy.gliffy.builder.tools
             }
             else
             {
-                int val = ++idCounter;
+                int val = getNextId();
                 keyStore.Add(eaId, val);
                 return val;
             }
+        }
+
+        public static int GetIdWithoutReference()
+        {
+            return getNextId();
+        }
+
+        private static int getNextId()
+        {
+            return idCounter++;
         }
 
         public static int GetIdByIndex(int index)

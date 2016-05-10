@@ -9,9 +9,9 @@ namespace eatogliffy.gliffy.builder.diagramobject
 {
     public class ComponentBuilder : ObjectBuilder
     {
-        protected override void buildProperties()
+        protected override void buildProperties(bool isParent)
         {
-            base.buildProperties();
+            base.buildProperties(isParent);
             this.gliffyObject.uid = "com.gliffy.shape.uml.uml_v2.component.component1";
         }
 

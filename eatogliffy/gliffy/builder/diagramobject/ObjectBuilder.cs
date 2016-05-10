@@ -16,7 +16,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
         protected Element eaElement;
         protected string layerId = "";
 
-        protected virtual void buildProperties()
+        protected virtual void buildProperties(bool isParent)
         {
             gliffyObject.x = eaDiagramObject.left;
             gliffyObject.y = Math.Abs(eaDiagramObject.top);
@@ -28,7 +28,15 @@ namespace eatogliffy.gliffy.builder.diagramobject
             gliffyObject.lockAspectRatio = false;
             gliffyObject.hidden = false;
             gliffyObject.layerId = layerId;
-            gliffyObject.id = IdManager.GetId(eaElement.ElementGUID);
+
+            if(isParent)
+            {
+                gliffyObject.id = IdManager.GetId(eaElement.ElementGUID);
+            }
+            else
+            {
+                gliffyObject.id = IdManager.GetIdWithoutReference();
+            }
         }
 
         protected virtual void buildGraphic()
@@ -68,7 +76,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
         {
             gliffyObject = new GliffyParentObject();
 
-            buildProperties();
+            buildProperties(true);
             buildGraphic();
             buildChildren();
             buildLinkMap();
@@ -80,7 +88,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
         {
             gliffyObject = new GliffyObject();
 
-            buildProperties();
+            buildProperties(false);
             buildGraphic();
 
             return this;

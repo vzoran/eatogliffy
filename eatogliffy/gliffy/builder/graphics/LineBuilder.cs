@@ -3,6 +3,7 @@ using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.exception;
 using eatogliffy.gliffy.model.graphics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,11 @@ namespace eatogliffy.gliffy.builder.graphics
     {
         private DiagramLink eaDiagramLink;
         private Connector eaConnector;
+        private Repository eaRepository;
         private eLineType lineType;
         private GliffyGraphicLine gliffyLine;
-        private Repository eaRepository;
-
+        private DiagramCoordinate linkPosition;
+ 
         /// <summary>
         /// Add EA Connector object to the builder. Without this object the builder will fail.
         /// </summary>
@@ -43,16 +45,16 @@ namespace eatogliffy.gliffy.builder.graphics
         }
 
         /// <summary>
-        /// Add EA Diagram Repository object. Without this object the builder will fail.
+        /// Add EA Repository for further query. Without this object the builder will fail.
         /// </summary>
-        /// <param name="repository"></param>
+        /// <param name="repository">Not null repositry object</param>
         /// <returns>Returns with the builder instance</returns>
         public LineBuilder withEaRepository(Repository repository)
         {
             this.eaRepository = repository;
             return this;
         }
-
+        
         /// <summary>
         /// Set line type
         /// </summary>
@@ -65,16 +67,25 @@ namespace eatogliffy.gliffy.builder.graphics
             return this;
         }
 
+        public LineBuilder withLinkPosition(DiagramCoordinate linkPosition)
+        {
+            this.linkPosition = linkPosition;
+            return this;
+        }
+
         /// <summary>
         /// Build a gliffy line object. 
         /// </summary>
         /// <returns>Returns with the builder instance</returns>
         public LineBuilder build()
         {
-            if(eaDiagramLink == null || eaConnector == null || eaRepository == null)
+            if(eaDiagramLink == null || eaConnector == null || eaRepository == null || linkPosition == null)
             {
                 throw new InvalidBuilderSetupException();
             }
+
+            this.eaDiagramLink.Update();
+            LinkInfo linkInfo = new LinkInfo(eaDiagramLink);
 
             gliffyLine = new GliffyGraphicLine();
             gliffyLine.Line = new GliffyLine();
@@ -83,33 +94,59 @@ namespace eatogliffy.gliffy.builder.graphics
             gliffyLine.Line.startArrowRotation = "auto";
             gliffyLine.Line.endArrowRotation = "auto";
             gliffyLine.Line.interpolationType = "linear";
-            gliffyLine.Line.controlPath = getControlPath(eaDiagramLink.Path);
+            gliffyLine.Line.controlPath = createControlPath(linkInfo);
             gliffyLine.Line.fillColor = "none";
             gliffyLine.Line.cornerRadius = 2;
-            gliffyLine.Line.ortho = true;
+            gliffyLine.Line.ortho = !linkInfo.IsStraight;
             gliffyLine.Line.strokeWidth = eaDiagramLink.LineWidth > 0 ? eaDiagramLink.LineWidth : 1;
-
-            LinkGeometry linkGeometry = new LinkGeometry(eaDiagramLink.Geometry);
-
+            
             return this;
         }
 
         /// <summary>
         /// Generate list if breakpoint coordinates out of path variable of a Diagram Link.
         /// </summary>
-        /// <param name="pathString">Path of the Diagram link.</param>
+        /// <param name="linkInfo">LinkInfo object which has parsed the DiagramLink characteristics already.</param>
         /// <returns>Generated list of coordinates</returns>
-        private List<int[]> getControlPath(string pathString)
+        private List<int[]> createControlPath(LinkInfo linkInfo)
         {
             List<int[]> retList = new List<int[]>();
-            string[] pathCoords = pathString.Split(new char[] { ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
-                        
-            for(int i = 0; i < pathCoords.Length; i += 2)
+
+            Diagram diagram = eaRepository.GetDiagramByID(eaDiagramLink.DiagramID);
+            DiagramObject startObject = BuilderTools.getDiagramObjectById(diagram, eaDiagramLink.SourceInstanceUID);
+
+            // Add first point
+            retList.Add(getObjectPoint(linkInfo.Start, startObject));
+
+            // Add breakpoints if needed
+            if (!linkInfo.IsStraight)
             {
-                retList.Add(new int[] { Math.Abs(Int32.Parse(pathCoords[i])), Math.Abs(Int32.Parse(pathCoords[i + 1])) });
+                string[] pathCoords = eaDiagramLink.Path.Split(new char[] { ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < pathCoords.Length; i += 2)
+                {
+                    retList.Add(new int[] { Math.Abs(Int32.Parse(pathCoords[i])) - linkPosition.PointX,
+                                            Math.Abs(Int32.Parse(pathCoords[i + 1])) - linkPosition.PointY });
+                }
             }
-            
+
+            // Add endpoint
+            DiagramObject endObject = BuilderTools.getDiagramObjectById(diagram, eaDiagramLink.TargetInstanceUID);
+            retList.Add(getObjectPoint(linkInfo.End, endObject));
+
             return retList;
+        }
+
+        private int[] getObjectPoint(DiagramCoordinate point, DiagramObject startObject)
+        {
+            int startX = 0, startY = 0;
+            int objectWidth = startObject.right - startObject.left;
+            int objectHeight = Math.Abs(startObject.bottom) - Math.Abs(startObject.top);
+
+            startX = startObject.left + (objectWidth / 2) + point.NormalizedPointX - linkPosition.PointX;
+            startY = Math.Abs(startObject.top) + (objectHeight / 2) + point.NormalizedPointY - linkPosition.PointY;
+
+            return new int[] { startX, startY };
         }
 
         /// <summary>

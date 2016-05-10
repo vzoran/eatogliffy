@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EA;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +31,32 @@ namespace eatogliffy.gliffy.builder.tools
             }
 
             return colorStr;
+        }
+
+        /// <summary>
+        /// Returns with a given object of a diagram.
+        /// </summary>
+        /// <param name="diagram">Not null diagram object</param>
+        /// <param name="diagramId">Id of the selected diagram object</param>
+        /// <returns>Selected diagram object or null</returns>
+        public static DiagramObject getDiagramObjectById(Diagram diagram, string diagramId)
+        {
+            if(String.IsNullOrEmpty(diagramId) || diagram == null)
+            {
+                return null;
+            }
+
+            IEnumerator objectEnumerator = diagram.DiagramObjects.GetEnumerator();
+            while (objectEnumerator.MoveNext())
+            {
+                DiagramObject diagramObject = (DiagramObject)objectEnumerator.Current;
+                if(diagramId.Equals(diagramObject.InstanceGUID))
+                {
+                    return diagramObject;
+                }
+            }
+
+            return null;
         }
     }
 }

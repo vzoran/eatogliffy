@@ -10,9 +10,9 @@ namespace eatogliffy.gliffy.builder.diagramobject
     {
         private int MARGIN = 2;
 
-        protected override void buildProperties()
+        protected override void buildProperties(bool isParent)
         {
-            base.buildProperties();
+            base.buildProperties(isParent);
             this.gliffyObject.uid = null;
             this.gliffyObject.x = MARGIN;
             this.gliffyObject.y = 0;

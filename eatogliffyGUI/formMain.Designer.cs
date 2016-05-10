@@ -78,7 +78,6 @@
             this.buttonReload.Name = "buttonReload";
             this.buttonReload.Size = new System.Drawing.Size(24, 23);
             this.buttonReload.TabIndex = 6;
-            this.buttonReload.Text = "...";
             this.buttonReload.UseVisualStyleBackColor = true;
             this.buttonReload.Click += new System.EventHandler(this.buttonReload_Click);
             // 

@@ -9,9 +9,9 @@ namespace eatogliffy.gliffy.builder.diagramobject
 {
     public class RectangleBuilder : ObjectBuilder
     {
-        protected override void buildProperties()
+        protected override void buildProperties(bool isParent)
         {
-            base.buildProperties();
+            base.buildProperties(isParent);
             this.gliffyObject.uid = "com.gliffy.shape.basic.basic_v1.default.rectangle";
         }
 

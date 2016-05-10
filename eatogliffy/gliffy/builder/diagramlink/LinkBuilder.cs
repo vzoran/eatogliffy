@@ -7,12 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.diagramobject
+namespace eatogliffy.gliffy.builder.diagramlink
 {
     public abstract class LinkBuilder
     {
         private const int DEFAULT_WIDTH = 100;
         private const int DEFAULT_HEIGHT = 100;
+
+        private const int DEFAULT_POS_X = 110;
+        private const int DEFAULT_POS_Y = 110;
 
         protected GliffyLink gliffyLink;
         protected DiagramLink eaDiagramLink;
@@ -22,8 +25,8 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
         protected virtual void buildProperties()
         {
-            gliffyLink.x = eaConnector.StartPointX;
-            gliffyLink.y = eaConnector.StartPointY;
+            gliffyLink.x = DEFAULT_POS_X;
+            gliffyLink.y = DEFAULT_POS_Y;
             gliffyLink.rotation = 0;
             gliffyLink.width = DEFAULT_WIDTH;
             gliffyLink.height = DEFAULT_HEIGHT;
@@ -52,12 +55,14 @@ namespace eatogliffy.gliffy.builder.diagramobject
             gliffyLink.startConstraint = new GliffyStartConstraint();
             gliffyLink.startConstraint.StartPositionConstraint.nodeId = IdManager.GetIdByIndex(eaConnector.SupplierID);
             gliffyLink.startConstraint.StartPositionConstraint.px = 0;
-            gliffyLink.startConstraint.StartPositionConstraint.py = 0;
+            gliffyLink.startConstraint.StartPositionConstraint.py = 0.5;
 
             gliffyLink.endConstraint = new GliffyEndConstraint();
             gliffyLink.endConstraint.EndPositionConstraint.nodeId = IdManager.GetIdByIndex(eaConnector.ClientID);
             gliffyLink.endConstraint.EndPositionConstraint.px = 0;
-            gliffyLink.endConstraint.EndPositionConstraint.py = 0;
+            gliffyLink.endConstraint.EndPositionConstraint.py = 0.5;
+
+            Connector x = (Connector)eaRepository.GetElementByID(eaConnector.SupplierID).Connectors.GetAt(0);
         }
 
         public LinkBuilder withEaConnector(Connector diagramConnector)

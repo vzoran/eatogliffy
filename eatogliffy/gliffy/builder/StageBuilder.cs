@@ -1,4 +1,5 @@
 ﻿using EA;
+using eatogliffy.gliffy.builder.diagramlink;
 using eatogliffy.gliffy.builder.diagramobject;
 using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.model;
@@ -91,7 +92,7 @@ namespace eatogliffy.gliffy.builder
                 Connector currentElement = eaRepository.GetConnectorByID(diagramLink.ConnectorID);
                 LinkBuilder linkBuilder = getLinkBuilder(currentElement.Type);
 
-                if (linkBuilder != null)
+                if (linkBuilder != null && !diagramLink.IsHidden)
                 {
                     gliffyStage.objects.Add(
                     linkBuilder
