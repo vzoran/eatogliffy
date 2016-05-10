@@ -1,11 +1,8 @@
 ﻿using EA;
+using eatogliffy.gliffy.builder.graphics;
 using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.model;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace eatogliffy.gliffy.builder.diagramlink
 {
@@ -40,7 +37,15 @@ namespace eatogliffy.gliffy.builder.diagramlink
 
         protected virtual void buildGraphic()
         {
-
+            LineBuilder lineBuilder = new LineBuilder();
+            this.gliffyLink.graphic = lineBuilder
+                .withEaRepository(eaRepository)
+                .withEaConnector(eaConnector)
+                .withEaLink(this.eaDiagramLink)
+                .withType(eLineType.Dependency)
+                .withLinkPosition(new tools.DiagramCoordinate(this.gliffyLink.x, this.gliffyLink.y))
+                .build()
+                .getLine();
         }
 
         protected virtual void buildLinkMap()

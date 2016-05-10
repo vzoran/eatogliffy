@@ -137,6 +137,12 @@ namespace eatogliffy.gliffy.builder.graphics
             return retList;
         }
 
+        /// <summary>
+        /// Calculates a connection point of a DiagramObject
+        /// </summary>
+        /// <param name="point">Coordinates relative to the center point of the object</param>
+        /// <param name="startObject">Connected Object. It is expected to be not null</param>
+        /// <returns>2-length int array containing X and Y coordinate point</returns>
         private int[] getObjectPoint(DiagramCoordinate point, DiagramObject startObject)
         {
             int startX = 0, startY = 0;

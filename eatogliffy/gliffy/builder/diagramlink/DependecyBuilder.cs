@@ -1,9 +1,4 @@
-﻿using eatogliffy.gliffy.builder.graphics;
-using eatogliffy.gliffy.model.graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using eatogliffy.gliffy.model.graphics;
 
 namespace eatogliffy.gliffy.builder.diagramlink
 {
@@ -18,29 +13,14 @@ namespace eatogliffy.gliffy.builder.diagramlink
         protected override void buildGraphic()
         {
             base.buildGraphic();
+            GliffyGraphicLine line = this.gliffyLink.graphic as GliffyGraphicLine;
 
-            LineBuilder lineBuilder = new LineBuilder();
-            GliffyGraphicLine line = lineBuilder
-                .withEaRepository(eaRepository)
-                .withEaConnector(eaConnector)
-                .withEaLink(this.eaDiagramLink)
-                .withType(eLineType.Dependency)
-                .withLinkPosition(new tools.DiagramCoordinate(this.gliffyLink.x, this.gliffyLink.y))
-                .build()
-                .getLine();
-
-            line.Line.dashStyle = "8.0,2.0";
-            line.Line.endArrow = 6;
-            line.Line.startArrow = 0;
-
-            this.gliffyLink.graphic = line;
-        }
-
-        protected override void buildConstraints()
-        {
-            base.buildConstraints();
-
-
+            if(line != null && line.Line != null)
+            {
+                line.Line.dashStyle = "8.0,2.0";
+                line.Line.endArrow = 6;
+                line.Line.startArrow = 0;
+            }
         }
     }
 }
