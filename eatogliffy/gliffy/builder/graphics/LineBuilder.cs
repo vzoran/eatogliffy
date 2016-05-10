@@ -1,4 +1,5 @@
 ﻿using EA;
+using eatogliffy.gliffy.builder.graphics.path;
 using eatogliffy.gliffy.builder.tools;
 using eatogliffy.gliffy.exception;
 using eatogliffy.gliffy.model.graphics;
@@ -110,31 +111,27 @@ namespace eatogliffy.gliffy.builder.graphics
         /// <returns>Generated list of coordinates</returns>
         private List<int[]> createControlPath(LinkInfo linkInfo)
         {
-            List<int[]> retList = new List<int[]>();
+            PathBuilder pathBuilder;
+
+            if(linkInfo.IsStraight)
+            {
+                pathBuilder = new DirectPathBuilder();
+            }
+            else
+            {
+                pathBuilder = new TreePathBuilder();
+            }
 
             Diagram diagram = eaRepository.GetDiagramByID(eaDiagramLink.DiagramID);
             DiagramObject startObject = BuilderTools.getDiagramObjectById(diagram, eaDiagramLink.SourceInstanceUID);
-
-            // Add first point
-            retList.Add(getObjectPoint(linkInfo.Start, startObject));
-
-            // Add breakpoints if needed
-            if (!linkInfo.IsStraight)
-            {
-                string[] pathCoords = eaDiagramLink.Path.Split(new char[] { ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-                for (int i = 0; i < pathCoords.Length; i += 2)
-                {
-                    retList.Add(new int[] { Math.Abs(Int32.Parse(pathCoords[i])) - linkPosition.PointX,
-                                            Math.Abs(Int32.Parse(pathCoords[i + 1])) - linkPosition.PointY });
-                }
-            }
-
-            // Add endpoint
             DiagramObject endObject = BuilderTools.getDiagramObjectById(diagram, eaDiagramLink.TargetInstanceUID);
-            retList.Add(getObjectPoint(linkInfo.End, endObject));
 
-            return retList;
+            return pathBuilder
+                .withStartObject(startObject)
+                .withEndObject(endObject)
+                .withLinkInfo(linkInfo)
+                .build()
+                .getPath();
         }
 
         /// <summary>

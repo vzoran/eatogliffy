@@ -11,8 +11,8 @@ namespace eatogliffy.gliffy.builder.diagramlink
         private const int DEFAULT_WIDTH = 100;
         private const int DEFAULT_HEIGHT = 100;
 
-        private const int DEFAULT_POS_X = 110;
-        private const int DEFAULT_POS_Y = 110;
+        private const int DEFAULT_POS_X = 0;
+        private const int DEFAULT_POS_Y = 0;
 
         protected GliffyLink gliffyLink;
         protected DiagramLink eaDiagramLink;
