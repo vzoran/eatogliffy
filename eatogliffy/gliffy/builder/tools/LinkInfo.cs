@@ -7,10 +7,11 @@ namespace eatogliffy.gliffy.builder.tools
 {
     public class LinkInfo
     {
-        public DiagramCoordinate Start;
-        public DiagramCoordinate End;
+        public DiagramCoordinate Start { get; private set; }
+        public DiagramCoordinate End { get; private set; }
         public eObjectSide Edge { get; private set; }
         public eLinkLineMode LineMode { get; private set; }
+        public string Path { get; private set; }
 
         /// <summary>
         /// Helper property to decide whether the line goes directly to the end or not.
@@ -39,6 +40,7 @@ namespace eatogliffy.gliffy.builder.tools
         {
             this.Start = new DiagramCoordinate();
             this.End = new DiagramCoordinate();
+            this.Path = diagramLink.Path;
 
             parseGeometry(diagramLink.Geometry);
             parseStyle(diagramLink.Style);
