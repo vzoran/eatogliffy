@@ -134,6 +134,9 @@ namespace eatogliffy.gliffy.builder.core
                 case "Dependency":
                     return new DependecyBuilder();
 
+                case "Assosiation":
+
+
                 default:
                     return null;
             }
