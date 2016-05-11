@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace eatogliffy.gliffy.builder.tools
 {
+    /// <summary>
+    /// Class for extracting diagram line characteristics.
+    /// </summary>
     public class LinkInfo
     {
         public DiagramCoordinate Start { get; private set; }
@@ -95,6 +95,9 @@ namespace eatogliffy.gliffy.builder.tools
         }
     }
 
+    /// <summary>
+    /// Definition of object sides
+    /// </summary>
     public enum eObjectSide
     {
         Default = 0,
@@ -104,6 +107,9 @@ namespace eatogliffy.gliffy.builder.tools
         Left = 4
     }
 
+    /// <summary>
+    /// Definition of characteristics of a diagram link
+    /// </summary>
     public enum eLinkLineMode
     {
         Default = -1,

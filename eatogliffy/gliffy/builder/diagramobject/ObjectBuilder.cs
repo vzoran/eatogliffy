@@ -35,7 +35,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
             }
             else
             {
-                gliffyObject.id = IdManager.GetIdWithoutReference();
+                gliffyObject.id = IdManager.GetId();
             }
         }
 

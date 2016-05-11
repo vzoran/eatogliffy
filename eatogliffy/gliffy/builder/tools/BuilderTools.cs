@@ -7,16 +7,30 @@ using System.Text;
 
 namespace eatogliffy.gliffy.builder.tools
 {
+    /// <summary>
+    /// Set of generic purpose tools 
+    /// </summary>
     public class BuilderTools
     {
         public static string COLOR_DEFAULT = "#FFFFFF";
         public static string COLOR_BLACK = "#000000";
 
+        /// <summary>
+        /// Converts color codes from Integer to HTML encoding
+        /// </summary>
+        /// <param name="color">Integer color code</param>
+        /// <returns>Color code in HTML format (e.g. #FFFFFF)</returns>
         public static string hexConverter(int color)
         {
             return hexConverter(color, null);
         }
 
+        /// <summary>
+        /// Converts color codes from Integer to HTML encoding
+        /// </summary>
+        /// <param name="color">Integer color code</param>
+        /// <param name="overrideDefault">Replacement of the default color</param>
+        /// <returns>Color code in HTML format (e.g. #FFFFFF)</returns>
         public static string hexConverter(int color, string overrideDefault)
         {
             var b = ((color >> 16) & 0xff);
