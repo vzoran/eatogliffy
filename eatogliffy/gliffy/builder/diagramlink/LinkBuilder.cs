@@ -62,8 +62,6 @@ namespace eatogliffy.gliffy.builder.diagramlink
             gliffyLink.endConstraint.EndPositionConstraint.nodeId = IdManager.GetIdByIndex(eaConnector.ClientID);
             gliffyLink.endConstraint.EndPositionConstraint.px = 0;
             gliffyLink.endConstraint.EndPositionConstraint.py = 0.5;
-
-            Connector x = (Connector)eaRepository.GetElementByID(eaConnector.SupplierID).Connectors.GetAt(0);
         }
 
         public LinkBuilder withEaConnector(Connector diagramConnector)

@@ -8,7 +8,7 @@ namespace eatogliffy.gliffy.builder.diagramobject
 {
     class TextBuilder : ObjectBuilder
     {
-        private int MARGIN = 2;
+        private readonly int MARGIN = 2;
 
         protected override void buildProperties(bool isParent)
         {
@@ -32,11 +32,6 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
             gliffyGraphicText.Text = gliffyText;
             this.gliffyObject.graphic = gliffyGraphicText;
-        }
-
-        protected override void buildChildren()
-        {
-            base.buildChildren();
         }
     }
 }

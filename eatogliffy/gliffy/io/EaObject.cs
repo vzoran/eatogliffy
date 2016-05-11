@@ -5,7 +5,6 @@ using System.Text;
 
 namespace eatogliffy.gliffy.io
 {
-    // TODO Add comments 
     public class EaObject
     {
         public string Id { get; set; }

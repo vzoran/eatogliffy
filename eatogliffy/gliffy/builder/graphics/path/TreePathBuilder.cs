@@ -47,8 +47,8 @@ namespace eatogliffy.gliffy.builder.graphics.path
         /// <returns>Calculated coordinates</returns>
         private int[] getEndPoint()
         {
-            int endX = 0, endY = 0;
-            int prevX = 0, prevY = 0;
+            int endX, endY;
+            int prevX, prevY;
             int objectWidth = endObject.right - endObject.left;
             int objectHeight = Math.Abs(endObject.bottom) - Math.Abs(endObject.top);
 
@@ -81,7 +81,7 @@ namespace eatogliffy.gliffy.builder.graphics.path
         /// <returns>Calculated coordinates</returns>
         private int[] calculatePosition(eObjectSide edge, DiagramCoordinate point, DiagramObject diagramObject)
         {
-            int startX = 0, startY = 0;
+            int startX, startY;
             int objectWidth = diagramObject.right - diagramObject.left;
             int objectHeight = Math.Abs(diagramObject.bottom) - Math.Abs(diagramObject.top);
 
@@ -105,6 +105,11 @@ namespace eatogliffy.gliffy.builder.graphics.path
                 case eObjectSide.Bottom:
                     startX = diagramObject.left + (objectWidth / 2) + point.PointX;
                     startY = Math.Abs(diagramObject.bottom);
+                    break;
+
+                default:
+                    startX = 0;
+                    startY = 0;
                     break;
             }
 

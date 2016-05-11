@@ -10,10 +10,10 @@ namespace eatogliffy.gliffy.builder.tools
     /// <summary>
     /// Set of generic purpose tools 
     /// </summary>
-    public class BuilderTools
+    public static class BuilderTools
     {
-        public static string COLOR_DEFAULT = "#FFFFFF";
-        public static string COLOR_BLACK = "#000000";
+        public static readonly string COLOR_DEFAULT = "#FFFFFF";
+        public static readonly string COLOR_BLACK = "#000000";
 
         /// <summary>
         /// Converts color codes from Integer to HTML encoding

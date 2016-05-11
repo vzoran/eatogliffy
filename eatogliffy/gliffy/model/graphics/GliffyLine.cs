@@ -18,8 +18,6 @@ namespace eatogliffy.gliffy.model.graphics
         public string interpolationType { get; set; }
         public int cornerRadius { get; set; }
         public bool ortho { get; set; }
-        // public object lockSegment { get; set; }
         public List<int[]> controlPath { get; set; }
-        
     }
 }

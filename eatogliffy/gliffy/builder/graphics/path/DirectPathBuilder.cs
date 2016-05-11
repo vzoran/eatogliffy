@@ -32,7 +32,7 @@ namespace eatogliffy.gliffy.builder.graphics.path
         /// <returns>2-length int array containing X and Y coordinate point</returns>
         private int[] getObjectPoint(DiagramCoordinate point, DiagramObject startObject)
         {
-            int startX = 0, startY = 0;
+            int startX, startY;
             int objectWidth = startObject.right - startObject.left;
             int objectHeight = Math.Abs(startObject.bottom) - Math.Abs(startObject.top);
 

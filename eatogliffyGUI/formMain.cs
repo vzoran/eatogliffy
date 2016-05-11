@@ -13,7 +13,7 @@ namespace eatogliffyGUI
 {
     public partial class formMain : Form
     {
-        private EaManager eaManager = new EaManager();
+        private readonly EaManager eaManager = new EaManager();
 
         public formMain()
         {

@@ -8,10 +8,10 @@ namespace eatogliffy.gliffy.builder.core
 {
     public class DiagramBuilder
     {
-        public static string DEFAULT_VERSION = "1.3";
-        public static string DEFAULT_CONTENT_TYPE = "application/gliffy+json";
+        public static readonly string DEFAULT_VERSION = "1.3";
+        public static readonly string DEFAULT_CONTENT_TYPE = "application/gliffy+json";
          
-        private GliffyDiagram gliffyDiagram;
+        private readonly GliffyDiagram gliffyDiagram;
         private Diagram eaDiagram;
         private Repository eaRepository;
 

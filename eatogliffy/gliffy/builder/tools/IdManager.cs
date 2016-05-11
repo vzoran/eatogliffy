@@ -6,7 +6,7 @@ namespace eatogliffy.gliffy.builder.tools
     /// <summary>
     /// Global manager of Gliffy element IDs
     /// </summary>
-    public class IdManager
+    public static class IdManager
     {
         private static int idCounter = 0;
         private static Dictionary<string, int> keyStore = new Dictionary<string, int>();
