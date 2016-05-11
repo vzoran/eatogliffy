@@ -51,7 +51,7 @@ namespace eatogliffy.gliffy.builder.tools
         {
             get
             {
-                return -1 * PointY;
+                return Math.Abs(PointY);
             }
         }
     }
