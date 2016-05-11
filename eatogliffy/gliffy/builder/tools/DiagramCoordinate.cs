@@ -18,7 +18,8 @@ namespace eatogliffy.gliffy.builder.tools
         /// </summary>
         public DiagramCoordinate()
         {
-
+            PointX = 0;
+            PointY = 0;
         }
 
         /// <summary>
