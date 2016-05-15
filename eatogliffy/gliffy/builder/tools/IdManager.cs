@@ -69,5 +69,14 @@ namespace eatogliffy.gliffy.builder.tools
         {
             return GetId(eaRepository.GetElementByID(index).ElementGUID);
         }
+
+        /// <summary>
+        /// Reset inner counter
+        /// </summary>
+        public static void Reset()
+        {
+            idCounter = 0;
+            keyStore.Clear();
+        }
     }
 }

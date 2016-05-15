@@ -1,6 +1,5 @@
-MSBuild.SonarQube.Runner.exe begin /k:"EA2G" /n:"EA2Gliffy" /v:"0.1" /d:sonar.cs.vscoveragexml.reportsPaths="%CD%\VisualStudio.coveragexml"
+MSBuild.SonarQube.Runner.exe begin /k:"EA2G" /n:"EA2Gliffy" /v:"0.1" /d:sonar.cs.vscoveragexml.reportsPaths="%CD%\opencover.xml"
 "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" /t:Rebuild
-"%VSINSTALLDIR%\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" collect /output:"%CD%\VisualStudio.coverage" 
-"%VSINSTALLDIR%\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" "UnitTestProject1\bin\Debug\eatogliffyTest.dll"
-"%VSINSTALLDIR%\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" analyze /output:"%CD%\VisualStudio.coveragexml" "%CD%\VisualStudio.coverage"
+rem "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\MSTest.exe" /testcontainer:"eatogliffyTest\bin\Debug\eatogliffyTest.dll" /resultsfile:MSTestResults.trx
+"%LOCALAPPDATA%\Apps\OpenCover\OpenCover.Console.exe" -output:"%CD%\opencover.xml" -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" -targetargs:"eatogliffyTest\bin\Debug\eatogliffyTest.dll"
 MSBuild.SonarQube.Runner.exe end

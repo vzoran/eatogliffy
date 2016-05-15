@@ -50,7 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="gliffy\builder\tools\DiagramCoordinateUT.cs" />
+    <Compile Include="gliffy\builder\tools\DiagramCoordinateUnitTest.cs" />
+    <Compile Include="gliffy\builder\tools\IdManagerUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

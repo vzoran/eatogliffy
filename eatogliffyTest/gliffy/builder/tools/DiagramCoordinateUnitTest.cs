@@ -5,7 +5,7 @@ using eatogliffy.gliffy.builder.tools;
 namespace eatogliffyTest
 {
     [TestClass]
-    public class DiagramCoordinateUT
+    public class DiagramCoordinateUnitTest
     {
         [TestMethod]
         public void TestDefaultConstructor()
