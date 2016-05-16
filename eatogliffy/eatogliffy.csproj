@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AddIn.cs" />
     <Compile Include="gliffy\builder\core\DiagramBuilder.cs" />
+    <Compile Include="gliffy\builder\diagramlink\SimpleLineBuilder.cs" />
     <Compile Include="gliffy\builder\diagramobject\ComponentBuilder.cs" />
     <Compile Include="gliffy\builder\diagramlink\DependecyBuilder.cs" />
     <Compile Include="gliffy\builder\diagramlink\LinkBuilder.cs" />
