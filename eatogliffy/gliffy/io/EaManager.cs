@@ -81,7 +81,7 @@ namespace eatogliffy.gliffy.io
 
                     return json;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
