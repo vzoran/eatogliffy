@@ -135,10 +135,8 @@ namespace eatogliffy.gliffy.builder.core
                     return new DependecyBuilder();
 
                 case "Association":
-                    return new SimpleLineBuilder();
-
                 default:
-                    return null;
+                    return new SimpleLineBuilder();
             }
         }
 
