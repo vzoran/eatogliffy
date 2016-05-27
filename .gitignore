@@ -213,3 +213,4 @@ ModelManifest.xml
 .sonarqube/
 *.trx
 opencover.xml
+sh.exe.stackdump
