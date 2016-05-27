@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using eatogliffy.gliffy.io;
+using NUnit.Framework;
 
 namespace eatogliffyTest.gliffy.io
 {
-    [TestClass]
+    [TestFixture]
     public class EaObjectUnitTest
     {
-        [TestMethod]
+        [Test]
         public void TestConstrutors()
         {
             string id = "001";

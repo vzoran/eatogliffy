@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using eatogliffy.gliffy.builder.tools;
+using NUnit.Framework;
 
 namespace eatogliffyTest
 {
-    [TestClass]
+    [TestFixture]
     public class DiagramCoordinateUnitTest
     {
-        [TestMethod]
+        [Test]
         public void TestDefaultConstructor()
         {
             DiagramCoordinate diagramCoordinate = new DiagramCoordinate();
@@ -15,7 +15,7 @@ namespace eatogliffyTest
             Assert.AreEqual(0, diagramCoordinate.PointY, 0f, "Y coordinate must be 0 in default constructor");
         }
 
-        [TestMethod]
+        [Test]
         public void TestNormalConstructor()
         {
             const int pointX = 10;
@@ -26,7 +26,7 @@ namespace eatogliffyTest
             Assert.AreEqual(pointY, diagramCoordinate.PointY, 0f, String.Format("Y coordinate must be {0} in normal constructor", pointY));
         }
 
-        [TestMethod]
+        [Test]
         public void TestNormalization()
         {
             const int pointX1 = 10;

@@ -1,16 +1,16 @@
 ﻿using eatogliffy.gliffy.builder.tools;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 
 namespace eatogliffyTest.gliffy.builder.tools
 {
-    [TestClass]
+    [TestFixture]
     public class IdManagerUnitTest
     {
         private const string key01 = "key01";
         private const string key02 = "key02";
 
-        [TestMethod]
+        [Test]
         public void TestGetIdWithKey()
         {
             IdManager.Reset();
@@ -24,14 +24,14 @@ namespace eatogliffyTest.gliffy.builder.tools
             Assert.AreEqual(1, key02id, 0f, "Second index must be diffrerent than 0");
         }
 
-        [TestMethod]
+        [Test]
         public void TestReset()
         {
             IdManager.Reset();
 
             IdManager.GetId(key01);
             IdManager.GetId(key02);
-            Assert.AreNotEqual(0, IdManager.Counter, 0f, "Last index of IDManager cannot be 0");
+            Assert.AreNotEqual(0, IdManager.Counter, "Last index of IDManager cannot be 0");
 
             IdManager.Reset();
             Assert.AreEqual(0, IdManager.Counter, 0f, "Last index of IDManager must be 0 after reset");
