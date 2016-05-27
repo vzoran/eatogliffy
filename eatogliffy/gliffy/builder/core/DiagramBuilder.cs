@@ -6,6 +6,9 @@ using System;
 
 namespace eatogliffy.gliffy.builder.core
 {
+    /// <summary>
+    /// Builder class for a complete diagram.
+    /// </summary>
     public class DiagramBuilder
     {
         public static readonly string DEFAULT_VERSION = "1.3";
@@ -15,23 +18,41 @@ namespace eatogliffy.gliffy.builder.core
         private Diagram eaDiagram;
         private Repository eaRepository;
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public DiagramBuilder()
         {
             gliffyDiagram = new GliffyDiagram();
         }
 
+        /// <summary>
+        /// Setter of Gliffy version used at export
+        /// </summary>
+        /// <param name="version">Version number</param>
+        /// <returns>Self reference</returns>
         public DiagramBuilder withVersion(string version)
         {
             gliffyDiagram.version = version;
             return this;
         }
 
+        /// <summary>
+        /// Setter of content type.
+        /// </summary>
+        /// <param name="contentType">Target content type</param>
+        /// <returns>Self reference</returns>
         public DiagramBuilder withContentType(string contentType)
         {
             gliffyDiagram.contentType = contentType;
             return this;
         }
 
+        /// <summary>
+        /// Select the active diagram of a given repository
+        /// </summary>
+        /// <param name="repository">An opened EA repository</param>
+        /// <returns>Self reference</returns>
         public DiagramBuilder fromActiveDiagram (Repository repository)
         {
             if(repository == null)
@@ -43,6 +64,10 @@ namespace eatogliffy.gliffy.builder.core
             return this;
         }
 
+        /// <summary>
+        /// Build a glffy diagram out of an EA diagram object.
+        /// </summary>
+        /// <returns>Self reference</returns>
         public DiagramBuilder build()
         {
             if(eaDiagram == null || eaRepository == null)
@@ -51,6 +76,7 @@ namespace eatogliffy.gliffy.builder.core
             }
 
             IdManager.Initialize(eaRepository);
+            IdManager.Reset();
 
             buildStage();
             buildMetadata();
@@ -77,6 +103,10 @@ namespace eatogliffy.gliffy.builder.core
                 .getMetadata();
         }
 
+        /// <summary>
+        /// Retrieve the generated glffy diagram objects.
+        /// </summary>
+        /// <returns>Generated diagram</returns>
         public GliffyDiagram getDiagram()
         {
             return gliffyDiagram;

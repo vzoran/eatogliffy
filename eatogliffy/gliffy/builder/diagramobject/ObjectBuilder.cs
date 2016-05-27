@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using eatogliffy.gliffy.builder.tools;
+using eatogliffy.gliffy.exception;
 
 namespace eatogliffy.gliffy.builder.diagramobject
 {
@@ -74,6 +75,11 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
         public ObjectBuilder buildAsParent()
         {
+            if(eaDiagramObject == null || eaElement == null || String.IsNullOrEmpty(layerId))
+            {
+                throw new InvalidBuilderSetupException();
+            }
+
             gliffyObject = new GliffyParentObject();
 
             buildProperties(true);
@@ -86,6 +92,11 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
         public ObjectBuilder buildAsChild()
         {
+            if (eaDiagramObject == null || eaElement == null || String.IsNullOrEmpty(layerId))
+            {
+                throw new InvalidBuilderSetupException();
+            }
+
             gliffyObject = new GliffyObject();
 
             buildProperties(false);

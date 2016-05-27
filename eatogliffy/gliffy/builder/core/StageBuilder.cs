@@ -2,6 +2,7 @@
 using eatogliffy.gliffy.builder.diagramlink;
 using eatogliffy.gliffy.builder.diagramobject;
 using eatogliffy.gliffy.builder.tools;
+using eatogliffy.gliffy.exception;
 using eatogliffy.gliffy.model;
 using System;
 using System.Collections;
@@ -11,6 +12,9 @@ using System.Text;
 
 namespace eatogliffy.gliffy.builder.core
 {
+    /// <summary>
+    /// Class for generating Gliffy's stage object
+    /// </summary>
     class StageBuilder
     {
         private GliffyStage gliffyStage;
@@ -23,25 +27,39 @@ namespace eatogliffy.gliffy.builder.core
         private const int MAX_WIDTH = 5000;
         private const string DEFAULT_BACKGROUND = "#FFFFFF";
 
-        public StageBuilder()
-        {
-            
-        }
-
+        /// <summary>
+        /// Sets the diagram should to be exported
+        /// </summary>
+        /// <param name="diagram">A particular EA diagram object</param>
+        /// <returns>Self reference</returns>
         public StageBuilder withEaDiagram(Diagram diagram)
         {
             eaDiagram = diagram;
             return this;
         }
 
+        /// <summary>
+        /// Sets the repository whom the diagram belongs to
+        /// </summary>
+        /// <param name="diagram">A particular EA repository object</param>
+        /// <returns>Self reference</returns>
         public StageBuilder withEaRepository(Repository repository)
         {
             eaRepository = repository;
             return this;
         }
 
+        /// <summary>
+        /// Builds the stage objects
+        /// </summary>
+        /// <returns>Self reference</returns>
         public StageBuilder build()
         {
+            if (eaDiagram == null || eaRepository == null)
+            {
+                throw new InvalidBuilderSetupException();
+            }
+
             gliffyStage = new GliffyStage();
             gliffyStage.objects = new List<GliffyObject>();
 
@@ -56,6 +74,10 @@ namespace eatogliffy.gliffy.builder.core
             return this;
         }
 
+        /// <summary>
+        /// Returns with the generated stage object
+        /// </summary>
+        /// <returns>Stage object</returns>
         public GliffyStage getStage()
         {
             return gliffyStage;

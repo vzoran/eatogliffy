@@ -1,28 +1,41 @@
 ﻿using EA;
+using eatogliffy.gliffy.exception;
 using eatogliffy.gliffy.model;
 using System;
 using System.Collections.Generic;
 
 namespace eatogliffy.gliffy.builder.core
 {
+    /// <summary>
+    /// Class for generating Gliffy's metadata object
+    /// </summary>
     class MetadataBuilder
     {
         private GliffyMetaData gliffyData;
         private Diagram eaDiagram;
 
-        public MetadataBuilder()
-        {
-            
-        }
-
+        /// <summary>
+        /// Sets the diagram used as basis
+        /// </summary>
+        /// <param name="diagram">selected diagram</param>
+        /// <returns>Self reference</returns>
         public MetadataBuilder withEaDiagram(Diagram diagram)
         {
             eaDiagram = diagram;
             return this;
         }
 
+        /// <summary>
+        /// Builds the metadata objects
+        /// </summary>
+        /// <returns>Self reference</returns>
         public MetadataBuilder build()
         {
+            if(eaDiagram == null)
+            {
+                throw new InvalidBuilderSetupException();
+            }
+
             gliffyData = new GliffyMetaData();
 
             gliffyData.lastSerialized = DateTime.Now.Ticks / 10000;
@@ -48,6 +61,10 @@ namespace eatogliffy.gliffy.builder.core
             return this;
         }
 
+        /// <summary>
+        /// Returns with the generated metadata object
+        /// </summary>
+        /// <returns></returns>
         public GliffyMetaData getMetadata()
         {
             return gliffyData;
