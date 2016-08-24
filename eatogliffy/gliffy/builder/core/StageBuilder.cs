@@ -15,7 +15,7 @@ namespace eatogliffy.gliffy.builder.core
     /// <summary>
     /// Class for generating Gliffy's stage object
     /// </summary>
-    class StageBuilder
+    public class StageBuilder
     {
         private GliffyStage gliffyStage;
         private Diagram eaDiagram;

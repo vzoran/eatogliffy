@@ -9,7 +9,7 @@ namespace eatogliffy.gliffy.builder.core
     /// <summary>
     /// Class for generating Gliffy's metadata object
     /// </summary>
-    class MetadataBuilder
+    public class MetadataBuilder
     {
         private GliffyMetaData gliffyData;
         private Diagram eaDiagram;

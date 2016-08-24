@@ -59,6 +59,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="gliffy\builder\core\MetadataBuilderUnitTest.cs" />
+    <Compile Include="gliffy\builder\core\StageBuilderUnitTest.cs" />
     <Compile Include="gliffy\builder\diagramobject\ComponentBuilderUnitTest.cs" />
     <Compile Include="gliffy\builder\tools\DiagramCoordinateUnitTest.cs" />
     <Compile Include="gliffy\builder\tools\IdManagerUnitTest.cs" />
@@ -81,11 +83,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="resources\ea2gliffyTestProject.EAP">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
