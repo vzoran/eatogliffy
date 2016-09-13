@@ -84,15 +84,15 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
             gliffyLine = new GliffyGraphicLine();
             gliffyLine.Line = new GliffyLine();
 
-            gliffyLine.Line.strokeColor = BuilderTools.HexConverter(eaDiagramLink.LineColor, BuilderTools.COLOR_BLACK);
-            gliffyLine.Line.startArrowRotation = "auto";
-            gliffyLine.Line.endArrowRotation = "auto";
-            gliffyLine.Line.interpolationType = "linear";
-            gliffyLine.Line.controlPath = createControlPath(linkInfo);
-            gliffyLine.Line.fillColor = "none";
-            gliffyLine.Line.cornerRadius = 2;
-            gliffyLine.Line.ortho = !linkInfo.IsStraight;
-            gliffyLine.Line.strokeWidth = eaDiagramLink.LineWidth > 0 ? eaDiagramLink.LineWidth : 1;
+            gliffyLine.Line.StrokeColor = BuilderTools.HexConverter(eaDiagramLink.LineColor, BuilderTools.COLOR_BLACK);
+            gliffyLine.Line.StartArrowRotation = "auto";
+            gliffyLine.Line.EndArrowRotation = "auto";
+            gliffyLine.Line.InterpolationType = "linear";
+            gliffyLine.Line.ControlPath = createControlPath(linkInfo);
+            gliffyLine.Line.FillColor = "none";
+            gliffyLine.Line.CornerRadius = 2;
+            gliffyLine.Line.Ortho = !linkInfo.IsStraight;
+            gliffyLine.Line.StrokeWidth = eaDiagramLink.LineWidth > 0 ? eaDiagramLink.LineWidth : 1;
             
             return this;
         }

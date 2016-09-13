@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,23 +8,58 @@ namespace EaToGliffy.Gliffy.Model.Graphics
 {
     class GliffyText
     {
-        public string overflow { get; set; }
-        public int paddingTop { get; set; }
-        public int paddingRight { get; set; }
-        public int paddingBottom { get; set; }
-        public int paddingLeft { get; set; }
-        public int outerPaddingTop { get; set; }
-        public int outerPaddingRight { get; set; }
-        public int outerPaddingBottom { get; set; }
-        public int outerPaddingLeft { get; set; }
-        public string type { get; set; }
-        public object lineTValue { get; set; }
-        public object linePerpValue { get; set; }
-        public object cardinalityType { get; set; }
-        public string html { get; set; }
-        public object tid { get; set; }
-        public string valign { get; set; }
-        public string vposition { get; set; }
-        public string hposition { get; set; }
+        [JsonProperty(PropertyName = "overflow")]
+        public string Overflow { get; set; }
+
+        [JsonProperty(PropertyName = "paddingTop")]
+        public int PaddingTop { get; set; }
+
+        [JsonProperty(PropertyName = "paddingRight")]
+        public int PaddingRight { get; set; }
+
+        [JsonProperty(PropertyName = "paddingBottom")]
+        public int PaddingBottom { get; set; }
+
+        [JsonProperty(PropertyName = "paddingLeft")]
+        public int PaddingLeft { get; set; }
+
+        [JsonProperty(PropertyName = "outerPaddingTop")]
+        public int OuterPaddingTop { get; set; }
+
+        [JsonProperty(PropertyName = "outerPaddingRight")]
+        public int OuterPaddingRight { get; set; }
+
+        [JsonProperty(PropertyName = "outerPaddingBottom")]
+        public int OuterPaddingBottom { get; set; }
+
+        [JsonProperty(PropertyName = "outerPaddingLeft")]
+        public int OuterPaddingLeft { get; set; }
+
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; }
+
+        [JsonProperty(PropertyName = "lineTValue")]
+        public object LineTValue { get; set; }
+
+        [JsonProperty(PropertyName = "linePerpValue")]
+        public object LinePerpValue { get; set; }
+
+        [JsonProperty(PropertyName = "cardinalityType")]
+        public object CardinalityType { get; set; }
+
+        [JsonProperty(PropertyName = "html")]
+        public string Html { get; set; }
+
+        [JsonProperty(PropertyName = "tid")]
+        public object Tid { get; set; }
+
+        [JsonProperty(PropertyName = "valign")]
+        public string VAlign { get; set; }
+
+        [JsonProperty(PropertyName = "vposition")]
+        public string VPosition { get; set; }
+
+        [JsonProperty(PropertyName = "hposition")]
+        public string HPosition { get; set; }
     }
 }

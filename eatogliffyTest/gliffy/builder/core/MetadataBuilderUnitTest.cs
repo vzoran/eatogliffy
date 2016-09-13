@@ -28,12 +28,12 @@ namespace eatogliffyTest.gliffy.builder.core
             GliffyMetaData gliffyMetaData = metadataBuilder.GetMetadata();
             Assert.NotNull(gliffyMetaData, "Metadata cannot be null after Build.");
 
-            Assert.AreNotEqual(0, gliffyMetaData.lastSerialized, "Lastserialized cannot be 0");
-            Assert.AreEqual("Confluence", gliffyMetaData.analyticsProduct, "AnalyticsProduct cannot be empty");
-            Assert.AreEqual("default", gliffyMetaData.loadPosition, "AnalyticsProduct cannot be empty");
-            Assert.AreEqual("Test", gliffyMetaData.title, "title cannot be empty");
-            Assert.NotNull(gliffyMetaData.libraries, "Libraries cannot be null");
-            Assert.AreNotEqual(0, gliffyMetaData.libraries.Count, "Libraries cannot be empty");
+            Assert.AreNotEqual(0, gliffyMetaData.LastSerialized, "Lastserialized cannot be 0");
+            Assert.AreEqual("Confluence", gliffyMetaData.AnalyticsProduct, "AnalyticsProduct cannot be empty");
+            Assert.AreEqual("default", gliffyMetaData.LoadPosition, "AnalyticsProduct cannot be empty");
+            Assert.AreEqual("Test", gliffyMetaData.Title, "title cannot be empty");
+            Assert.NotNull(gliffyMetaData.Libraries, "Libraries cannot be null");
+            Assert.AreNotEqual(0, gliffyMetaData.Libraries.Count, "Libraries cannot be empty");
         }
     }
 }

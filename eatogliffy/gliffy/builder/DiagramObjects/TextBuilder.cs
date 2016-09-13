@@ -17,12 +17,12 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
         protected override void buildProperties(bool isParent)
         {
             base.buildProperties(isParent);
-            this.gliffyObject.uid = null;
-            this.gliffyObject.x = MARGIN;
-            this.gliffyObject.y = 0;
-            this.gliffyObject.width = this.eaDiagramObject.right - this.eaDiagramObject.left - (2 * MARGIN);
-            this.gliffyObject.height = 14;
-            this.gliffyObject.order = "auto";
+            this.gliffyObject.Uid = null;
+            this.gliffyObject.XPos = MARGIN;
+            this.gliffyObject.YPos = 0;
+            this.gliffyObject.Width = this.eaDiagramObject.right - this.eaDiagramObject.left - (2 * MARGIN);
+            this.gliffyObject.Height = 14;
+            this.gliffyObject.Order = "auto";
         }
 
         protected override void buildGraphic()
@@ -32,10 +32,10 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
             GliffyGraphicText gliffyGraphicText = new GliffyGraphicText();
             GliffyText gliffyText = new GliffyText();
 
-            gliffyText.html = eaElement.Name;
+            gliffyText.Html = eaElement.Name;
 
             gliffyGraphicText.Text = gliffyText;
-            this.gliffyObject.graphic = gliffyGraphicText;
+            this.gliffyObject.Graphic = gliffyGraphicText;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
         protected override void buildProperties()
         {
             base.buildProperties();
-            this.gliffyLink.uid = "com.gliffy.shape.basic.basic_v1.default.line";
+            this.gliffyLink.Uid = "com.gliffy.shape.basic.basic_v1.default.line";
         }
     }
 }

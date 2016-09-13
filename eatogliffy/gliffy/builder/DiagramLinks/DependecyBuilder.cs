@@ -7,19 +7,19 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
         protected override void buildProperties()
         {
             base.buildProperties();
-            this.gliffyLink.uid = "com.gliffy.shape.uml.uml_v2.class.dependency";
+            this.gliffyLink.Uid = "com.gliffy.shape.uml.uml_v2.class.dependency";
         }
 
         protected override void buildGraphic()
         {
             base.buildGraphic();
-            GliffyGraphicLine line = this.gliffyLink.graphic as GliffyGraphicLine;
+            GliffyGraphicLine line = this.gliffyLink.Graphic as GliffyGraphicLine;
 
             if(line != null && line.Line != null)
             {
-                line.Line.dashStyle = "8.0,2.0";
-                line.Line.endArrow = 6;
-                line.Line.startArrow = 0;
+                line.Line.DashStyle = "8.0,2.0";
+                line.Line.EndArrow = 6;
+                line.Line.StartArrow = 0;
             }
         }
     }

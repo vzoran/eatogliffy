@@ -1,10 +1,19 @@
-﻿namespace EaToGliffy.Gliffy.Model
+﻿using Newtonsoft.Json;
+
+namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyDiagram
     {
-        public string contentType { get; set; }
-        public string version { get; set; }
-        public GliffyStage stage { get; set; }
-        public GliffyMetaData metadata { get; set; }
+        [JsonProperty(PropertyName = "contentType")]
+        public string ContentType { get; set; }
+
+        [JsonProperty(PropertyName = "version")]
+        public string Version { get; set; }
+
+        [JsonProperty(PropertyName = "stage")]
+        public GliffyStage Stage { get; set; }
+
+        [JsonProperty(PropertyName = "metadata")]
+        public GliffyMetaData Metadata { get; set; }
     }
 }

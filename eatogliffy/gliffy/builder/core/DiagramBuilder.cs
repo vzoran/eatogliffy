@@ -35,7 +35,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
         /// <returns>Self reference</returns>
         public DiagramBuilder WithVersion(string version)
         {
-            gliffyDiagram.version = version;
+            gliffyDiagram.Version = version;
             return this;
         }
 
@@ -46,7 +46,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
         /// <returns>Self reference</returns>
         public DiagramBuilder WithContentType(string contentType)
         {
-            gliffyDiagram.contentType = contentType;
+            gliffyDiagram.ContentType = contentType;
             return this;
         }
 
@@ -101,7 +101,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
         private void buildStage()
         {
             StageBuilder stageBuilder = new StageBuilder();
-            gliffyDiagram.stage = stageBuilder
+            gliffyDiagram.Stage = stageBuilder
                 .WithEaRepository(eaRepository)
                 .WithEaDiagram(eaDiagram)
                 .Build()
@@ -111,7 +111,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
         private void buildMetadata()
         {
             MetadataBuilder metadataBuilder = new MetadataBuilder();
-            gliffyDiagram.metadata = metadataBuilder
+            gliffyDiagram.Metadata = metadataBuilder
                 .WithEaDiagram(eaDiagram)
                 .Build()
                 .GetMetadata();

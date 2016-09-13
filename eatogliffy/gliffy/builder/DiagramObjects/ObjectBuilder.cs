@@ -26,24 +26,24 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
 
         protected virtual void buildProperties(bool isParent)
         {
-            gliffyObject.x = eaDiagramObject.left;
-            gliffyObject.y = Math.Abs(eaDiagramObject.top);
-            gliffyObject.rotation = 0;
-            gliffyObject.width = eaDiagramObject.right - eaDiagramObject.left;
-            gliffyObject.height = Math.Abs(eaDiagramObject.bottom) - Math.Abs(eaDiagramObject.top);
-            gliffyObject.order = "auto";
-            gliffyObject.lockShape = false;
-            gliffyObject.lockAspectRatio = false;
-            gliffyObject.hidden = false;
-            gliffyObject.layerId = layerId;
+            gliffyObject.XPos = eaDiagramObject.left;
+            gliffyObject.YPos = Math.Abs(eaDiagramObject.top);
+            gliffyObject.Rotation = 0;
+            gliffyObject.Width = eaDiagramObject.right - eaDiagramObject.left;
+            gliffyObject.Height = Math.Abs(eaDiagramObject.bottom) - Math.Abs(eaDiagramObject.top);
+            gliffyObject.Order = "auto";
+            gliffyObject.LockShape = false;
+            gliffyObject.LockAspectRatio = false;
+            gliffyObject.Hidden = false;
+            gliffyObject.LayerId = layerId;
 
             if(isParent)
             {
-                gliffyObject.id = IdManager.GetId(eaElement.ElementGUID);
+                gliffyObject.Id = IdManager.GetId(eaElement.ElementGUID);
             }
             else
             {
-                gliffyObject.id = IdManager.GetId();
+                gliffyObject.Id = IdManager.GetId();
             }
         }
 

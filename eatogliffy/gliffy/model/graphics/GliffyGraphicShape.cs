@@ -11,7 +11,7 @@ namespace EaToGliffy.Gliffy.Model.Graphics
     
         public GliffyGraphicShape()
         {
-            type = "Shape";
+            Type = "Shape";
         }
     }
 }

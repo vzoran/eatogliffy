@@ -46,8 +46,8 @@ namespace eatogliffyTest.gliffy.builder.diagramobject
 
             GliffyObject gliffyObject = componentBuilder.GetObject();
             Assert.NotNull(gliffyObject, "Generated component cannot be null");
-            Assert.NotNull(gliffyObject.graphic, "Generated graphic cannot be null");
-            Assert.AreEqual(gliffyObject.uid, "com.gliffy.shape.uml.uml_v2.component.component1", "Invalid object uid");
+            Assert.NotNull(gliffyObject.Graphic, "Generated graphic cannot be null");
+            Assert.AreEqual(gliffyObject.Uid, "com.gliffy.shape.uml.uml_v2.component.component1", "Invalid object uid");
         }
     }
 }

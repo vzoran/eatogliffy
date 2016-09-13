@@ -38,14 +38,14 @@ namespace EaToGliffy.Gliffy.Builder.Core
 
             gliffyData = new GliffyMetaData();
 
-            gliffyData.lastSerialized = DateTime.Now.Ticks / 10000;
-            gliffyData.analyticsProduct = "Confluence";
-            gliffyData.exportBorder = false;
-            gliffyData.loadPosition = "default";
-            gliffyData.revision = 0;
-            gliffyData.title = eaDiagram.Name;
+            gliffyData.LastSerialized = DateTime.Now.Ticks / 10000;
+            gliffyData.AnalyticsProduct = "Confluence";
+            gliffyData.ExportBorder = false;
+            gliffyData.LoadPosition = "default";
+            gliffyData.Revision = 0;
+            gliffyData.Title = eaDiagram.Name;
 
-            gliffyData.libraries = new List<string>() {
+            gliffyData.Libraries = new List<string>() {
                   "com.Gliffy.libraries.uml.uml_v2.class",
                   "com.Gliffy.libraries.uml.uml_v2.sequence",
                   "com.Gliffy.libraries.uml.uml_v2.activity",

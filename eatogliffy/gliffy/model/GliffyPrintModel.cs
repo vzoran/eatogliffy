@@ -1,10 +1,19 @@
-﻿namespace EaToGliffy.Gliffy.Model
+﻿using Newtonsoft.Json;
+
+namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyPrintModel
     {
-        public string pageSize { get; set; }
-        public bool portrait { get; set; }
-        public bool fitToOnePage { get; set; }
-        public bool displayPageBreaks { get; set; }
+        [JsonProperty(PropertyName = "pageSize")]
+        public string PageSize { get; set; }
+
+        [JsonProperty(PropertyName = "portrait")]
+        public bool Portrait { get; set; }
+
+        [JsonProperty(PropertyName = "fitToOnePage")]
+        public bool FitToOnePage { get; set; }
+
+        [JsonProperty(PropertyName = "displayPageBreaks")]
+        public bool DisplayPageBreaks { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +8,37 @@ namespace EaToGliffy.Gliffy.Model.Graphics
 {
     public class GliffyShape 
     {
-        public string tid { get; set; }
-        public int strokeWidth { get; set; }
-        public string strokeColor { get; set; }
-        public string fillColor { get; set; }
-        public bool gradient { get; set; }
-        public object dashStyle { get; set; }
-        public bool dropShadow { get; set; }
-        public int state { get; set; }
-        public int opacity { get; set; }
-        public int shadowX { get; set; }
-        public int shadowY { get; set; }
+        [JsonProperty(PropertyName = "tid")]
+        public string Tid { get; set; }
+
+        [JsonProperty(PropertyName = "strokeWidth")]
+        public int StrokeWidth { get; set; }
+
+        [JsonProperty(PropertyName = "strokeColor")]
+        public string StrokeColor { get; set; }
+
+        [JsonProperty(PropertyName = "fillColor")]
+        public string FillColor { get; set; }
+
+        [JsonProperty(PropertyName = "gradient")]
+        public bool Gradient { get; set; }
+
+        [JsonProperty(PropertyName = "dashStyle")]
+        public object DashStyle { get; set; }
+
+        [JsonProperty(PropertyName = "dropShadow")]
+        public bool DropShadow { get; set; }
+
+        [JsonProperty(PropertyName = "state")]
+        public int State { get; set; }
+
+        [JsonProperty(PropertyName = "opacity")]
+        public int Opacity { get; set; }
+
+        [JsonProperty(PropertyName = "shadowX")]
+        public int ShadowX { get; set; }
+
+        [JsonProperty(PropertyName = "shadowY")]
+        public int ShadowY { get; set; }
     }
 }

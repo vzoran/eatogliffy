@@ -45,16 +45,16 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
             gliffyGraphicShape = new GliffyGraphicShape();
             GliffyShape shape = new GliffyShape();
 
-            shape.dashStyle = null;
-            shape.dropShadow = false;
-            shape.fillColor = BuilderTools.HexConverter(eaDiagramObject.BackgroundColor);
-            shape.strokeColor = BuilderTools.HexConverter(eaDiagramObject.BorderColor, BuilderTools.COLOR_BLACK);
-            shape.gradient = false;
-            shape.opacity = 1;
-            shape.shadowX = 0;
-            shape.shadowY = 0;
-            shape.tid = getTypeString();
-            shape.strokeWidth = eaDiagramObject.BorderLineWidth;
+            shape.DashStyle = null;
+            shape.DropShadow = false;
+            shape.FillColor = BuilderTools.HexConverter(eaDiagramObject.BackgroundColor);
+            shape.StrokeColor = BuilderTools.HexConverter(eaDiagramObject.BorderColor, BuilderTools.COLOR_BLACK);
+            shape.Gradient = false;
+            shape.Opacity = 1;
+            shape.ShadowX = 0;
+            shape.ShadowY = 0;
+            shape.Tid = getTypeString();
+            shape.StrokeWidth = eaDiagramObject.BorderLineWidth;
 
             gliffyGraphicShape.Shape = shape;
 

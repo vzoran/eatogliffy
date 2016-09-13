@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyParentObject : GliffyObject
     {
-        public List<GliffyObject> children { get; set; }
+        [JsonProperty(PropertyName = "children")]
+        public List<GliffyObject> Children { get; set; }
     }
 }

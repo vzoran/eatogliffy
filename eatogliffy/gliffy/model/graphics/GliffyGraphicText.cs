@@ -11,7 +11,7 @@ namespace EaToGliffy.Gliffy.Model.Graphics
 
         public GliffyGraphicText()
         {
-            type = "Text";
+            Type = "Text";
         }
     }
 }

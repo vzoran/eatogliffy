@@ -1,7 +1,10 @@
-﻿namespace EaToGliffy.Gliffy.Model.Graphics
+﻿using Newtonsoft.Json;
+
+namespace EaToGliffy.Gliffy.Model.Graphics
 {
     public abstract class GliffyGraphic
     {
-        public string type { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; }
     }
 }

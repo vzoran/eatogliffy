@@ -3,7 +3,7 @@ using EaToGliffy.Gliffy.Builder.Core;
 using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace EaToGliffy.Gliffy.io
 {
@@ -102,8 +102,7 @@ namespace EaToGliffy.Gliffy.io
                         .Build()
                         .GetDiagram();
 
-                    var json = new JavaScriptSerializer()
-                        .Serialize(gliffyDiagram);
+                    var json = JsonConvert.SerializeObject(gliffyDiagram);
 
                     return json;
                 }

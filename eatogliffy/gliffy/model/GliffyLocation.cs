@@ -1,8 +1,13 @@
-﻿namespace EaToGliffy.Gliffy.Model
+﻿using Newtonsoft.Json;
+
+namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyLocation
     {
-        public int x { get; set; }
-        public int y { get; set; }
+        [JsonProperty(PropertyName = "x")]
+        public int XPos { get; set; }
+
+        [JsonProperty(PropertyName = "y")]
+        public int YPos { get; set; }
     }
 }

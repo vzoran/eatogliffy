@@ -63,7 +63,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             }
 
             gliffyStage = new GliffyStage();
-            gliffyStage.objects = new List<GliffyObject>();
+            gliffyStage.Objects = new List<GliffyObject>();
 
             buildProperties();
             buildPrintModel();
@@ -100,11 +100,11 @@ namespace EaToGliffy.Gliffy.Builder.Core
 
                 if(objectBuilder != null)
                 {
-                    gliffyStage.objects.Add(
+                    gliffyStage.Objects.Add(
                     objectBuilder
                         .WithEaObject(diagramObject)
                         .WithEaElement(currentElement)
-                        .WithLayer(gliffyStage.layers[0].guid)
+                        .WithLayer(gliffyStage.Layers[0].Guid)
                         .BuildAsParent()
                         .GetObject());
                 }
@@ -122,12 +122,12 @@ namespace EaToGliffy.Gliffy.Builder.Core
 
                 if (linkBuilder != null && !diagramLink.IsHidden)
                 {
-                    gliffyStage.objects.Add(
+                    gliffyStage.Objects.Add(
                     linkBuilder
                         .WithEaRepository(eaRepository)
                         .WithEaConnector(currentElement)
                         .WithEaLink(diagramLink)
-                        .WithLayer(gliffyStage.layers[0].guid)
+                        .WithLayer(gliffyStage.Layers[0].Guid)
                         .Build()
                         .GetObject());
                 }
@@ -136,8 +136,8 @@ namespace EaToGliffy.Gliffy.Builder.Core
 
         private void finalizeBuild()
         {
-            gliffyStage.nodeIndex = IdManager.Counter;
-            gliffyStage.layers[0].nodeIndex = gliffyStage.objects.Count;
+            gliffyStage.NodeIndex = IdManager.Counter;
+            gliffyStage.Layers[0].NodeIndex = gliffyStage.Objects.Count;
         }
 
         private ObjectBuilder getObjectBuilder(string eaElementType)
@@ -170,61 +170,61 @@ namespace EaToGliffy.Gliffy.Builder.Core
 
         private void buildProperties()
         {
-            gliffyStage.autoFit = true;
-            gliffyStage.background = DEFAULT_BACKGROUND;
-            gliffyStage.drawingGuidesOn = true;
-            gliffyStage.exportBorder = false;
-            gliffyStage.gridOn = true;
-            gliffyStage.height = eaDiagram.cy;
-            gliffyStage.maxHeight = MAX_HEIGHT;
-            gliffyStage.maxWidth = MAX_WIDTH;
-            gliffyStage.pageBreaksOn = false;
-            gliffyStage.printGridOn = false;
-            gliffyStage.printPaper = null;
-            gliffyStage.printPortrait = eaDiagram.Orientation.Equals(ORIENTATION_PORTRAIT);
-            gliffyStage.printShrinkToFit = false;
-            gliffyStage.snapToGrid = true;
-            gliffyStage.themeData = null;
-            gliffyStage.viewportType = "default";
-            gliffyStage.width = eaDiagram.cx;
+            gliffyStage.AutoFit = true;
+            gliffyStage.Background = DEFAULT_BACKGROUND;
+            gliffyStage.DrawingGuidesOn = true;
+            gliffyStage.ExportBorder = false;
+            gliffyStage.GridOn = true;
+            gliffyStage.Height = eaDiagram.cy;
+            gliffyStage.MaxHeight = MAX_HEIGHT;
+            gliffyStage.MaxWidth = MAX_WIDTH;
+            gliffyStage.PageBreaksOn = false;
+            gliffyStage.PrintGridOn = false;
+            gliffyStage.PrintPaper = null;
+            gliffyStage.PrintPortrait = eaDiagram.Orientation.Equals(ORIENTATION_PORTRAIT);
+            gliffyStage.PrintShrinkToFit = false;
+            gliffyStage.SnapToGrid = true;
+            gliffyStage.ThemeData = null;
+            gliffyStage.ViewportType = "default";
+            gliffyStage.Width = eaDiagram.cx;
         }
 
         private void buildPrintModel()
         {
             GliffyPrintModel printModel = new GliffyPrintModel();
-            printModel.pageSize = "a4";
-            printModel.portrait = false;
-            printModel.fitToOnePage = false;
-            printModel.displayPageBreaks = false;
+            printModel.PageSize = "a4";
+            printModel.Portrait = false;
+            printModel.FitToOnePage = false;
+            printModel.DisplayPageBreaks = false;
 
-            gliffyStage.printModel = printModel;
+            gliffyStage.PrintModel = printModel;
         }
 
         private void buildLayers()
         {
             GliffyLayer gliffyLayer = new GliffyLayer();
-            gliffyLayer.active = true;
-            gliffyLayer.order = 0;
-            gliffyLayer.locked = false;
-            gliffyLayer.name = "Layer 0";
-            gliffyLayer.visible = true;
-            gliffyLayer.guid = randomString(GUID_LENGTH);
+            gliffyLayer.Active = true;
+            gliffyLayer.Order = 0;
+            gliffyLayer.Locked = false;
+            gliffyLayer.Name = "Layer 0";
+            gliffyLayer.Visible = true;
+            gliffyLayer.Guid = randomString(GUID_LENGTH);
 
-            gliffyStage.layers = new List<GliffyLayer>() { gliffyLayer };
+            gliffyStage.Layers = new List<GliffyLayer>() { gliffyLayer };
         }
 
         private void buildBoundaryBox ()
         {
             GliffyBox gliffyBox = new GliffyBox();
-            gliffyBox.min = new GliffyLocation();
-            gliffyBox.max = new GliffyLocation();
+            gliffyBox.Min = new GliffyLocation();
+            gliffyBox.Max = new GliffyLocation();
 
-            gliffyBox.min.x = 0;
-            gliffyBox.min.y = 0;
-            gliffyBox.max.x = eaDiagram.cx;
-            gliffyBox.max.y = eaDiagram.cy;
+            gliffyBox.Min.XPos = 0;
+            gliffyBox.Min.YPos = 0;
+            gliffyBox.Max.XPos = eaDiagram.cx;
+            gliffyBox.Max.YPos = eaDiagram.cy;
 
-            gliffyStage.fitBB = gliffyBox;
+            gliffyStage.FitBB = gliffyBox;
         }
 
         private string randomString(int length)

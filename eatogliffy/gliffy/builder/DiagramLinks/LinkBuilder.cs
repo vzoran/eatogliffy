@@ -20,23 +20,23 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 
         protected virtual void buildProperties()
         {
-            gliffyLink.x = 0;
-            gliffyLink.y = 0;
-            gliffyLink.rotation = 0;
-            gliffyLink.width = DEFAULT_WIDTH;
-            gliffyLink.height = DEFAULT_HEIGHT;
-            gliffyLink.order = "auto";
-            gliffyLink.lockShape = false;
-            gliffyLink.lockAspectRatio = false;
-            gliffyLink.hidden = false;
-            gliffyLink.layerId = layerId;
-            gliffyLink.id = IdManager.GetId(eaConnector.ConnectorGUID);
+            gliffyLink.XPos = 0;
+            gliffyLink.YPos = 0;
+            gliffyLink.Rotation = 0;
+            gliffyLink.Width = DEFAULT_WIDTH;
+            gliffyLink.Height = DEFAULT_HEIGHT;
+            gliffyLink.Order = "auto";
+            gliffyLink.LockShape = false;
+            gliffyLink.LockAspectRatio = false;
+            gliffyLink.Hidden = false;
+            gliffyLink.LayerId = layerId;
+            gliffyLink.Id = IdManager.GetId(eaConnector.ConnectorGUID);
         }
 
         protected virtual void buildGraphic()
         {
             LineBuilder lineBuilder = new LineBuilder();
-            this.gliffyLink.graphic = lineBuilder
+            this.gliffyLink.Graphic = lineBuilder
                 .WithEaRepository(eaRepository)
                 .WithEaConnector(eaConnector)
                 .WithEaLink(this.eaDiagramLink)
@@ -52,17 +52,17 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 
         protected virtual void buildConstraints()
         {
-            gliffyLink.constraints = new List<GliffyConstraint>();
+            gliffyLink.Constraints = new List<GliffyConstraint>();
 
-            gliffyLink.startConstraint = new GliffyStartConstraint();
-            gliffyLink.startConstraint.StartPositionConstraint.nodeId = IdManager.GetIdByIndex(eaConnector.SupplierID);
-            gliffyLink.startConstraint.StartPositionConstraint.px = 0;
-            gliffyLink.startConstraint.StartPositionConstraint.py = 0.5;
+            gliffyLink.StartConstraint = new GliffyStartConstraint();
+            gliffyLink.StartConstraint.StartPositionConstraint.NodeId = IdManager.GetIdByIndex(eaConnector.SupplierID);
+            gliffyLink.StartConstraint.StartPositionConstraint.Px = 0;
+            gliffyLink.StartConstraint.StartPositionConstraint.Py = 0.5;
 
-            gliffyLink.endConstraint = new GliffyEndConstraint();
-            gliffyLink.endConstraint.EndPositionConstraint.nodeId = IdManager.GetIdByIndex(eaConnector.ClientID);
-            gliffyLink.endConstraint.EndPositionConstraint.px = 0;
-            gliffyLink.endConstraint.EndPositionConstraint.py = 0.5;
+            gliffyLink.EndConstraint = new GliffyEndConstraint();
+            gliffyLink.EndConstraint.EndPositionConstraint.NodeId = IdManager.GetIdByIndex(eaConnector.ClientID);
+            gliffyLink.EndConstraint.EndPositionConstraint.Px = 0;
+            gliffyLink.EndConstraint.EndPositionConstraint.Py = 0.5;
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
         protected override void buildProperties(bool isParent)
         {
             base.buildProperties(isParent);
-            this.gliffyObject.uid = "com.gliffy.shape.basic.basic_v1.default.rectangle";
+            this.gliffyObject.Uid = "com.gliffy.shape.basic.basic_v1.default.rectangle";
         }
 
         protected override void buildGraphic()
@@ -25,7 +25,7 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
 
             ShapeBuilder shapeBuilder = new ShapeBuilder();
             
-            this.gliffyObject.graphic = shapeBuilder
+            this.gliffyObject.Graphic = shapeBuilder
                     .WithEaObject(this.eaDiagramObject)
                     .WithType(eShapeType.Rectangle)
                     .Build()
@@ -39,8 +39,8 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
             GliffyParentObject gliffyParentObject = gliffyObject as GliffyParentObject;
             TextBuilder textBuilder = new TextBuilder();
 
-            gliffyParentObject.children = new List<GliffyObject>();
-            gliffyParentObject.children.Add(textBuilder
+            gliffyParentObject.Children = new List<GliffyObject>();
+            gliffyParentObject.Children.Add(textBuilder
                 .WithEaElement(this.eaElement)
                 .WithEaObject(this.eaDiagramObject)
                 .WithLayer(this.layerId)
