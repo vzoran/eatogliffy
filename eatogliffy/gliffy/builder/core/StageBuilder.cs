@@ -65,13 +65,13 @@ namespace EaToGliffy.Gliffy.Builder.Core
             gliffyStage = new GliffyStage();
             gliffyStage.Objects = new List<GliffyObject>();
 
-            buildProperties();
-            buildPrintModel();
-            buildBoundaryBox();
-            buildLayers();
-            buildObjects();
-            buildLinks();
-            finalizeBuild();
+            BuildProperties();
+            BuildPrintModel();
+            BuildBoundaryBox();
+            BuildLayers();
+            BuildObjects();
+            BuildLinks();
+            FinalizeBuild();
 
             return this;
         }
@@ -89,14 +89,14 @@ namespace EaToGliffy.Gliffy.Builder.Core
 
         #region Private functions
 
-        private void buildObjects()
+        private void BuildObjects()
         {
             IEnumerator objectEnumerator = eaDiagram.DiagramObjects.GetEnumerator();
             while(objectEnumerator.MoveNext())
             {
                 DiagramObject diagramObject = (DiagramObject)objectEnumerator.Current;
                 Element currentElement = eaRepository.GetElementByID(diagramObject.ElementID);
-                ObjectBuilder objectBuilder = getObjectBuilder(currentElement.Type);
+                ObjectBuilder objectBuilder = GetObjectBuilder(currentElement.Type);
 
                 if(objectBuilder != null)
                 {
@@ -111,14 +111,14 @@ namespace EaToGliffy.Gliffy.Builder.Core
             }
         }
 
-        private void buildLinks()
+        private void BuildLinks()
         {
             IEnumerator linkEnumerator = eaDiagram.DiagramLinks.GetEnumerator();
             while (linkEnumerator.MoveNext())
             {
                 EA.DiagramLink diagramLink = (EA.DiagramLink)linkEnumerator.Current;
                 Connector currentElement = eaRepository.GetConnectorByID(diagramLink.ConnectorID);
-                LinkBuilder linkBuilder = getLinkBuilder(currentElement.Type);
+                LinkBuilder linkBuilder = GetLinkBuilder(currentElement.Type);
 
                 if (linkBuilder != null && !diagramLink.IsHidden)
                 {
@@ -134,13 +134,13 @@ namespace EaToGliffy.Gliffy.Builder.Core
             }
         }
 
-        private void finalizeBuild()
+        private void FinalizeBuild()
         {
             gliffyStage.NodeIndex = IdManager.Counter;
             gliffyStage.Layers[0].NodeIndex = gliffyStage.Objects.Count;
         }
 
-        private ObjectBuilder getObjectBuilder(string eaElementType)
+        private ObjectBuilder GetObjectBuilder(string eaElementType)
         {
             switch(eaElementType)
             {
@@ -155,7 +155,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             }
         }
 
-        private LinkBuilder getLinkBuilder(string eaLinkType)
+        private LinkBuilder GetLinkBuilder(string eaLinkType)
         {
             switch (eaLinkType)
             {
@@ -168,7 +168,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             }
         }
 
-        private void buildProperties()
+        private void BuildProperties()
         {
             gliffyStage.AutoFit = true;
             gliffyStage.Background = DEFAULT_BACKGROUND;
@@ -189,7 +189,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             gliffyStage.Width = eaDiagram.cx;
         }
 
-        private void buildPrintModel()
+        private void BuildPrintModel()
         {
             GliffyPrintModel printModel = new GliffyPrintModel();
             printModel.PageSize = "a4";
@@ -200,7 +200,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             gliffyStage.PrintModel = printModel;
         }
 
-        private void buildLayers()
+        private void BuildLayers()
         {
             GliffyLayer gliffyLayer = new GliffyLayer();
             gliffyLayer.Active = true;
@@ -208,12 +208,12 @@ namespace EaToGliffy.Gliffy.Builder.Core
             gliffyLayer.Locked = false;
             gliffyLayer.Name = "Layer 0";
             gliffyLayer.Visible = true;
-            gliffyLayer.Guid = randomString(GUID_LENGTH);
+            gliffyLayer.Guid = RandomString(GUID_LENGTH);
 
             gliffyStage.Layers = new List<GliffyLayer>() { gliffyLayer };
         }
 
-        private void buildBoundaryBox ()
+        private void BuildBoundaryBox ()
         {
             GliffyBox gliffyBox = new GliffyBox();
             gliffyBox.Min = new GliffyLocation();
@@ -227,7 +227,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             gliffyStage.FitBB = gliffyBox;
         }
 
-        private string randomString(int length)
+        private string RandomString(int length)
         {
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var random = new Random();

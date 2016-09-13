@@ -42,15 +42,15 @@ namespace EaToGliffy.Gliffy.Builder.Tools
             this.End = new DiagramCoordinate();
             this.Path = diagramLink.Path;
 
-            parseGeometry(diagramLink.Geometry);
-            parseStyle(diagramLink.Style);
+            ParseGeometry(diagramLink.Geometry);
+            ParseStyle(diagramLink.Style);
         }
 
         /// <summary>
         /// Parser for Style property of a given DiagramLinks
         /// </summary>
         /// <param name="linkStyle">Style string in format: "Mode=1;EOID=F46C55FA;SOID=D811935C;Color=-1;LWidth=0;" </param>
-        private void parseStyle(string linkStyle)
+        private void ParseStyle(string linkStyle)
         {
             string[] linkParams = linkStyle.Split(new char[] { ';', '=' });
             for (int i = 0; i < linkParams.Length; i += 2)
@@ -68,7 +68,7 @@ namespace EaToGliffy.Gliffy.Builder.Tools
         /// Parser for Geometry property of a given DiagramLinks
         /// </summary>
         /// <param name="geometryString">Link geometry in format: "SX=0;SY=-5;EX=0;EY=11;EDGE=2;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;"</param>
-        private void parseGeometry(string geometryString)
+        private void ParseGeometry(string geometryString)
         {
             string[] geoparams = geometryString.Split(new char[] { ';', '=' });
             for (int i = 0; i < geoparams.Length; i += 2)

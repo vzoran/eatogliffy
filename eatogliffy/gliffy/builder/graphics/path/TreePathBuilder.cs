@@ -16,18 +16,18 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
         /// <summary>
         /// Construct line Path from start to end
         /// </summary>
-        protected override void buildSegments()
+        protected override void BuildSegments()
         {
-            this.segments.Add(calculatePosition(linkInfo.Edge, linkInfo.Start, startObject));
-            this.segments.AddRange(getControlPath());
-            this.segments.Add(getEndPoint());
+            this.segments.Add(CalculatePosition(linkInfo.Edge, linkInfo.Start, startObject));
+            this.segments.AddRange(GetControlPath());
+            this.segments.Add(GetEndPoint());
         }
 
         /// <summary>
         /// Translate diagram link's Path string to a list of int arrays
         /// </summary>
         /// <returns>Generated list of coordinates</returns>
-        private List<int[]> getControlPath()
+        private List<int[]> GetControlPath()
         {
             List<int[]> pathArray = new List<int[]>();
 
@@ -46,7 +46,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
         /// Calculate the connection point of end object
         /// </summary>
         /// <returns>Calculated coordinates</returns>
-        private int[] getEndPoint()
+        private int[] GetEndPoint()
         {
             int endX, endY;
             int prevX, prevY;
@@ -69,7 +69,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
                 edge = endX > prevX ? eObjectSide.Left : eObjectSide.Right;
             }
 
-            return calculatePosition(edge, linkInfo.End, endObject);
+            return CalculatePosition(edge, linkInfo.End, endObject);
             
         }
 
@@ -80,7 +80,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
         /// <param name="point">Connecting point relative from the center of the edge</param>
         /// <param name="diagramObject">Connecting object</param>
         /// <returns>Calculated coordinates</returns>
-        private int[] calculatePosition(eObjectSide edge, DiagramCoordinate point, DiagramObject diagramObject)
+        private int[] CalculatePosition(eObjectSide edge, DiagramCoordinate point, DiagramObject diagramObject)
         {
             int startX, startY;
             int objectWidth = diagramObject.right - diagramObject.left;

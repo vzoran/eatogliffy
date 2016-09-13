@@ -13,15 +13,15 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
     /// <see cref="ObjectBuilder"/> 
     public class RectangleBuilder : ObjectBuilder
     {
-        protected override void buildProperties(bool isParent)
+        protected override void BuildProperties(bool isParent)
         {
-            base.buildProperties(isParent);
+            base.BuildProperties(isParent);
             this.gliffyObject.Uid = "com.gliffy.shape.basic.basic_v1.default.rectangle";
         }
 
-        protected override void buildGraphic()
+        protected override void BuildGraphic()
         {
-            base.buildGraphic();
+            base.BuildGraphic();
 
             ShapeBuilder shapeBuilder = new ShapeBuilder();
             
@@ -32,9 +32,9 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
                     .GetShape();
         }
 
-        protected override void buildChildren()
+        protected override void BuildChildren()
         {
-            base.buildChildren();
+            base.BuildChildren();
 
             GliffyParentObject gliffyParentObject = gliffyObject as GliffyParentObject;
             TextBuilder textBuilder = new TextBuilder();

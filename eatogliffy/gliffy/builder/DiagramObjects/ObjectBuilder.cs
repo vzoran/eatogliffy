@@ -24,7 +24,7 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
         protected Element eaElement;
         protected string layerId = "";
 
-        protected virtual void buildProperties(bool isParent)
+        protected virtual void BuildProperties(bool isParent)
         {
             gliffyObject.XPos = eaDiagramObject.left;
             gliffyObject.YPos = Math.Abs(eaDiagramObject.top);
@@ -47,17 +47,17 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
             }
         }
 
-        protected virtual void buildGraphic()
+        protected virtual void BuildGraphic()
         {
            
         }
 
-        protected virtual void buildChildren()
+        protected virtual void BuildChildren()
         {
 
         }
 
-        protected virtual void buildLinkMap()
+        protected virtual void BuildLinkMap()
         {
 
         }
@@ -110,10 +110,10 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
 
             gliffyObject = new GliffyParentObject();
 
-            buildProperties(true);
-            buildGraphic();
-            buildChildren();
-            buildLinkMap();
+            BuildProperties(true);
+            BuildGraphic();
+            BuildChildren();
+            BuildLinkMap();
 
             return this;
         }
@@ -133,8 +133,8 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
 
             gliffyObject = new GliffyObject();
 
-            buildProperties(false);
-            buildGraphic();
+            BuildProperties(false);
+            BuildGraphic();
 
             return this;
         }

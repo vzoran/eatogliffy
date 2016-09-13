@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace eatogliffyGUI
 {
-    public partial class formMain : Form
+    public partial class FormMain : Form
     {
         private readonly EaManager eaManager = new EaManager();
 
-        public formMain()
+        public FormMain()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace eatogliffyGUI
             if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textSourceFile.Text = openFileDialog.FileName;
-                refreshList(openFileDialog.FileName);
+                RefreshList(openFileDialog.FileName);
             }
         }
 
@@ -42,7 +42,7 @@ namespace eatogliffyGUI
             Application.Exit();
         }
 
-        private void refreshList(string sourceFile)
+        private void RefreshList(string sourceFile)
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -111,7 +111,7 @@ namespace eatogliffyGUI
 
         private void buttonReload_Click(object sender, EventArgs e)
         {
-            refreshList(textSourceFile.Text);
+            RefreshList(textSourceFile.Text);
         }
 
         private void buttonOk_Click(object sender, EventArgs e)

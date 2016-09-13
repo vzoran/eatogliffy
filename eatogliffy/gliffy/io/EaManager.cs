@@ -41,7 +41,7 @@ namespace EaToGliffy.Gliffy.io
 
                 foreach (Package package in category.Packages)
                 {
-                    collectDiagrams(results, category.PackageGUID, package);
+                    CollectDiagrams(results, category.PackageGUID, package);
                 }
             }
 
@@ -121,7 +121,7 @@ namespace EaToGliffy.Gliffy.io
         /// <param name="results">Reference of the result list</param>
         /// <param name="parentGuid">Unique ID of the parent folder</param>
         /// <param name="package">Parent package</param>
-        private void collectDiagrams(List<EaObject> results, string parentGuid, Package package)
+        private void CollectDiagrams(List<EaObject> results, string parentGuid, Package package)
         {
             results.Add(new EaObject(package.PackageGUID, package.Name, parentGuid, false));
 
@@ -132,7 +132,7 @@ namespace EaToGliffy.Gliffy.io
 
             foreach(Package pack in package.Packages)
             {
-                collectDiagrams(results, package.PackageGUID, pack);
+                CollectDiagrams(results, package.PackageGUID, pack);
             }
         }
     }

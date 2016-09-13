@@ -16,10 +16,9 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
     /// </summary>
     public class LineBuilder
     {
-        private EA.DiagramLink eaDiagramLink;
+        private DiagramLink eaDiagramLink;
         private Connector eaConnector;
         private Repository eaRepository;
-        private eLineType lineType;
         private GliffyGraphicLine gliffyLine;
  
         /// <summary>
@@ -54,18 +53,6 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
             this.eaRepository = repository;
             return this;
         }
-        
-        /// <summary>
-        /// Set line type
-        /// </summary>
-        /// <param name="lineType">Line type</param>
-        /// <see cref="eLineType"/>
-        /// <returns>Returns with the Builder instance</returns>
-        public LineBuilder WithType(eLineType lineType)
-        {
-            this.lineType = lineType;
-            return this;
-        }
 
         /// <summary>
         /// Build a Gliffy line object. 
@@ -88,7 +75,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
             gliffyLine.Line.StartArrowRotation = "auto";
             gliffyLine.Line.EndArrowRotation = "auto";
             gliffyLine.Line.InterpolationType = "linear";
-            gliffyLine.Line.ControlPath = createControlPath(linkInfo);
+            gliffyLine.Line.ControlPath = CreateControlPath(linkInfo);
             gliffyLine.Line.FillColor = "none";
             gliffyLine.Line.CornerRadius = 2;
             gliffyLine.Line.Ortho = !linkInfo.IsStraight;
@@ -102,7 +89,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
         /// </summary>
         /// <param name="linkInfo">LinkInfo object which has parsed the DiagramLinks characteristics already.</param>
         /// <returns>Generated list of coordinates</returns>
-        private List<int[]> createControlPath(LinkInfo linkInfo)
+        private List<int[]> CreateControlPath(LinkInfo linkInfo)
         {
             PathBuilder pathBuilder;
 

@@ -55,7 +55,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
         {
             segments = new List<int[]> ();
 
-            buildSegments();
+            BuildSegments();
 
             return this;
         }
@@ -72,7 +72,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
         /// <summary>
         /// Create Path put of geometry
         /// </summary>
-        protected virtual void buildSegments()
+        protected virtual void BuildSegments()
         {
 
         }

@@ -4,15 +4,15 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 {
     public class DependecyBuilder : LinkBuilder
     {
-        protected override void buildProperties()
+        protected override void BuildProperties()
         {
-            base.buildProperties();
+            base.BuildProperties();
             this.gliffyLink.Uid = "com.gliffy.shape.uml.uml_v2.class.dependency";
         }
 
-        protected override void buildGraphic()
+        protected override void BuildGraphic()
         {
-            base.buildGraphic();
+            base.BuildGraphic();
             GliffyGraphicLine line = this.gliffyLink.Graphic as GliffyGraphicLine;
 
             if(line != null && line.Line != null)

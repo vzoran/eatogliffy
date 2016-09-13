@@ -17,12 +17,12 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
         /// Create Path put of geometry.
         /// It will result a 2-item length array.
         /// </summary>
-        protected override void buildSegments()
+        protected override void BuildSegments()
         {
-            this.segments.Add(getObjectPoint(linkInfo.Start, startObject));
-            this.segments.Add(getObjectPoint(linkInfo.End, endObject));
+            this.segments.Add(GetObjectPoint(linkInfo.Start, startObject));
+            this.segments.Add(GetObjectPoint(linkInfo.End, endObject));
 
-            base.buildSegments();
+            base.BuildSegments();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics.Path
         /// <param name="point">Coordinates relative to the center point of the object</param>
         /// <param name="startObject">Connected Object. It is expected to be not null</param>
         /// <returns>2-length int array containing X and Y coordinate point</returns>
-        private int[] getObjectPoint(DiagramCoordinate point, DiagramObject startObject)
+        private int[] GetObjectPoint(DiagramCoordinate point, DiagramObject startObject)
         {
             int startX, startY;
             int objectWidth = startObject.right - startObject.left;

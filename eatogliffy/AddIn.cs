@@ -67,7 +67,7 @@ namespace EaToGliffy
             switch (itemName)
             {
                 case menuNameExportSelected:
-                    buildCurrent(repository);
+                    BuildCurrent(repository);
                     break;
 
                 case menuNameExportAll:
@@ -75,12 +75,12 @@ namespace EaToGliffy
                     break;
 
                 case menuNameDebug:
-                    buildDebug(repository);
+                    BuildDebug(repository);
                     break;
             }
         }
 
-        private void buildDebug(Repository repository)
+        private void BuildDebug(Repository repository)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace EaToGliffy
             }
         }
 
-        private void buildCurrent(Repository repository)
+        private void BuildCurrent(Repository repository)
         {
 
             try

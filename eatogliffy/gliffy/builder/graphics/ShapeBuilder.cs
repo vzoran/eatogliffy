@@ -53,7 +53,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
             shape.Opacity = 1;
             shape.ShadowX = 0;
             shape.ShadowY = 0;
-            shape.Tid = getTypeString();
+            shape.Tid = GetTypeString();
             shape.StrokeWidth = eaDiagramObject.BorderLineWidth;
 
             gliffyGraphicShape.Shape = shape;
@@ -70,7 +70,7 @@ namespace EaToGliffy.Gliffy.Builder.Graphics
             return gliffyGraphicShape;
         }
 
-        private string getTypeString()
+        private string GetTypeString()
         {
             switch (this.shapeType)
             {

@@ -14,9 +14,9 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
     {
         private readonly int MARGIN = 2;
 
-        protected override void buildProperties(bool isParent)
+        protected override void BuildProperties(bool isParent)
         {
-            base.buildProperties(isParent);
+            base.BuildProperties(isParent);
             this.gliffyObject.Uid = null;
             this.gliffyObject.XPos = MARGIN;
             this.gliffyObject.YPos = 0;
@@ -25,9 +25,9 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
             this.gliffyObject.Order = "auto";
         }
 
-        protected override void buildGraphic()
+        protected override void BuildGraphic()
         {
-            base.buildGraphic();
+            base.BuildGraphic();
 
             GliffyGraphicText gliffyGraphicText = new GliffyGraphicText();
             GliffyText gliffyText = new GliffyText();

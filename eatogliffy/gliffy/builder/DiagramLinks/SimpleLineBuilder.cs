@@ -7,9 +7,9 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 {
     public class SimpleLineBuilder : LinkBuilder
     {
-        protected override void buildProperties()
+        protected override void BuildProperties()
         {
-            base.buildProperties();
+            base.BuildProperties();
             this.gliffyLink.Uid = "com.gliffy.shape.basic.basic_v1.default.line";
         }
     }

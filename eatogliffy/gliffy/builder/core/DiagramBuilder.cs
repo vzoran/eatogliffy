@@ -80,8 +80,8 @@ namespace EaToGliffy.Gliffy.Builder.Core
             IdManager.Initialize(eaRepository);
             IdManager.Reset();
 
-            buildStage();
-            buildMetadata();
+            BuildStage();
+            BuildMetadata();
 
             return this;
         }
@@ -98,7 +98,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
         #endregion
 
         #region Private functions
-        private void buildStage()
+        private void BuildStage()
         {
             StageBuilder stageBuilder = new StageBuilder();
             gliffyDiagram.Stage = stageBuilder
@@ -108,7 +108,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
                 .GetStage();
         }
 
-        private void buildMetadata()
+        private void BuildMetadata()
         {
             MetadataBuilder metadataBuilder = new MetadataBuilder();
             gliffyDiagram.Metadata = metadataBuilder

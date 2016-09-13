@@ -18,7 +18,7 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
         protected Repository eaRepository;
         protected string layerId = "";
 
-        protected virtual void buildProperties()
+        protected virtual void BuildProperties()
         {
             gliffyLink.XPos = 0;
             gliffyLink.YPos = 0;
@@ -33,24 +33,23 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
             gliffyLink.Id = IdManager.GetId(eaConnector.ConnectorGUID);
         }
 
-        protected virtual void buildGraphic()
+        protected virtual void BuildGraphic()
         {
             LineBuilder lineBuilder = new LineBuilder();
             this.gliffyLink.Graphic = lineBuilder
                 .WithEaRepository(eaRepository)
                 .WithEaConnector(eaConnector)
                 .WithEaLink(this.eaDiagramLink)
-                .WithType(eLineType.Dependency)
                 .Build()
                 .GetLine();
         }
 
-        protected virtual void buildLinkMap()
+        protected virtual void BuildLinkMap()
         {
 
         }
 
-        protected virtual void buildConstraints()
+        protected virtual void BuildConstraints()
         {
             gliffyLink.Constraints = new List<GliffyConstraint>();
 
@@ -122,9 +121,9 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 
             gliffyLink = new GliffyLink();
 
-            buildProperties();
-            buildConstraints();
-            buildGraphic();
+            BuildProperties();
+            BuildConstraints();
+            BuildGraphic();
 
             return this;
         }
