@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.tools
+namespace EaToGliffy.Gliffy.Builder.Tools
 {
     /// <summary>
-    /// Set of generic purpose tools 
+    /// Set of generic purpose Tools 
     /// </summary>
     public static class BuilderTools
     {
@@ -20,9 +20,9 @@ namespace eatogliffy.gliffy.builder.tools
         /// </summary>
         /// <param name="color">Integer color code</param>
         /// <returns>Color code in HTML format (e.g. #FFFFFF)</returns>
-        public static string hexConverter(int color)
+        public static string HexConverter(int color)
         {
-            return hexConverter(color, null);
+            return HexConverter(color, null);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace eatogliffy.gliffy.builder.tools
         /// <param name="color">Integer color code</param>
         /// <param name="overrideDefault">Replacement of the default color</param>
         /// <returns>Color code in HTML format (e.g. #FFFFFF)</returns>
-        public static string hexConverter(int color, string overrideDefault)
+        public static string HexConverter(int color, string overrideDefault)
         {
             var b = ((color >> 16) & 0xff);
             var g = ((color >> 8) & 0xff);
@@ -53,7 +53,7 @@ namespace eatogliffy.gliffy.builder.tools
         /// <param name="diagram">Not null diagram object</param>
         /// <param name="diagramId">Id of the selected diagram object</param>
         /// <returns>Selected diagram object or null</returns>
-        public static DiagramObject getDiagramObjectById(Diagram diagram, string diagramId)
+        public static DiagramObject GetDiagramObjectById(Diagram diagram, string diagramId)
         {
             if(String.IsNullOrEmpty(diagramId) || diagram == null)
             {

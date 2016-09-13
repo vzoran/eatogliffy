@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eatogliffy.gliffy.builder.tools
+namespace EaToGliffy.Gliffy.Builder.Tools
 {
     /// <summary>
     /// Class for extracting diagram line characteristics.
@@ -47,7 +47,7 @@ namespace eatogliffy.gliffy.builder.tools
         }
 
         /// <summary>
-        /// Parser for Style property of a given DiagramLink
+        /// Parser for Style property of a given DiagramLinks
         /// </summary>
         /// <param name="linkStyle">Style string in format: "Mode=1;EOID=F46C55FA;SOID=D811935C;Color=-1;LWidth=0;" </param>
         private void parseStyle(string linkStyle)
@@ -65,7 +65,7 @@ namespace eatogliffy.gliffy.builder.tools
         }
 
         /// <summary>
-        /// Parser for Geometry property of a given DiagramLink
+        /// Parser for Geometry property of a given DiagramLinks
         /// </summary>
         /// <param name="geometryString">Link geometry in format: "SX=0;SY=-5;EX=0;EY=11;EDGE=2;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;"</param>
         private void parseGeometry(string geometryString)

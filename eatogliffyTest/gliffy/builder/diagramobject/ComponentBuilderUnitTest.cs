@@ -1,11 +1,11 @@
 ﻿using System;
 
-using eatogliffy.gliffy.builder.diagramobject;
+using EaToGliffy.Gliffy.Builder.DiagramObjects;
 using NUnit.Framework;
-using eatogliffy.gliffy.exception;
+using EaToGliffy.Gliffy.Exception;
 using EA;
 using NSubstitute;
-using eatogliffy.gliffy.model;
+using EaToGliffy.Gliffy.Model;
 
 namespace eatogliffyTest.gliffy.builder.diagramobject
 {
@@ -16,8 +16,8 @@ namespace eatogliffyTest.gliffy.builder.diagramobject
         public void TestNullSettings()
         {
             ComponentBuilder componentBuilder = new ComponentBuilder();
-            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.buildAsParent(), "BuildAsParent() function cannot be executed without initialization");
-            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.buildAsChild(), "BuildAsChild function cannot be executed without initialization");
+            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.BuildAsParent(), "BuildAsParent() function cannot be executed without initialization");
+            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.BuildAsChild(), "BuildAsChild function cannot be executed without initialization");
 
             var mockedDiagramObject = Substitute.For<DiagramObject>();
             mockedDiagramObject.right.Returns(200);
@@ -28,23 +28,23 @@ namespace eatogliffyTest.gliffy.builder.diagramobject
             mockedDiagramObject.BorderColor.Returns(0);
             mockedDiagramObject.BorderLineWidth.Returns(2);
             
-            componentBuilder.withEaObject(mockedDiagramObject);
-            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.buildAsParent(), "BuildAsParent() function cannot be executed without proper initialization: EAObject: yes");
-            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.buildAsChild(), "BuildAsChild function cannot be executed without proper initialization: EAObject: yes");
+            componentBuilder.WithEaObject(mockedDiagramObject);
+            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.BuildAsParent(), "BuildAsParent() function cannot be executed without proper initialization: EAObject: yes");
+            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.BuildAsChild(), "BuildAsChild function cannot be executed without proper initialization: EAObject: yes");
 
             var mockedElement = Substitute.For<Element>();
             mockedElement.Name.Returns("Test element");
             mockedElement.ElementGUID.Returns("d1b10e65-27a0-4833-80ba-4238d1e16b6d");
             
-            componentBuilder.withEaElement(mockedElement);
-            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.buildAsParent(), "BuildAsParent() function cannot be executed without proper initialization: EAObject: yes, EAElement: yes");
-            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.buildAsChild(), "BuildAsChild function cannot be executed without proper initialization: EAObject: yes, EAElement: yes");
+            componentBuilder.WithEaElement(mockedElement);
+            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.BuildAsParent(), "BuildAsParent() function cannot be executed without proper initialization: EAObject: yes, EAElement: yes");
+            Assert.Catch<InvalidBuilderSetupException>(() => componentBuilder.BuildAsChild(), "BuildAsChild function cannot be executed without proper initialization: EAObject: yes, EAElement: yes");
 
-            componentBuilder.withLayer("LayerId");
-            Assert.DoesNotThrow(() => componentBuilder.buildAsParent(), "BuildAsParent() function cannot be failed with proper initialization");
-            Assert.DoesNotThrow(() => componentBuilder.buildAsChild(), "BuildAsChild() function cannot be failed with proper initialization");
+            componentBuilder.WithLayer("LayerId");
+            Assert.DoesNotThrow(() => componentBuilder.BuildAsParent(), "BuildAsParent() function cannot be failed with proper initialization");
+            Assert.DoesNotThrow(() => componentBuilder.BuildAsChild(), "BuildAsChild() function cannot be failed with proper initialization");
 
-            GliffyObject gliffyObject = componentBuilder.getObject();
+            GliffyObject gliffyObject = componentBuilder.GetObject();
             Assert.NotNull(gliffyObject, "Generated component cannot be null");
             Assert.NotNull(gliffyObject.graphic, "Generated graphic cannot be null");
             Assert.AreEqual(gliffyObject.uid, "com.gliffy.shape.uml.uml_v2.component.component1", "Invalid object uid");

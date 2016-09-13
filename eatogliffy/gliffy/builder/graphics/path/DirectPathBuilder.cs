@@ -1,19 +1,20 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.tools;
+using EaToGliffy.Gliffy.Builder.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.graphics.path
+namespace EaToGliffy.Gliffy.Builder.Graphics.Path
 {
     /// <summary>
     /// Builder of direct line geometries
     /// </summary>
+    /// <see cref="PathBuilder"/>
     public class DirectPathBuilder : PathBuilder
     {
         /// <summary>
-        /// Create path put of geometry.
+        /// Create Path put of geometry.
         /// It will result a 2-item length array.
         /// </summary>
         protected override void buildSegments()

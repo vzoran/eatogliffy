@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.tools
+namespace EaToGliffy.Gliffy.Builder.Tools
 {
     /// <summary>
     /// Description of a point in diagram space

@@ -1,10 +1,10 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.tools;
-using eatogliffy.gliffy.exception;
-using eatogliffy.gliffy.model;
+using EaToGliffy.Gliffy.Builder.Tools;
+using EaToGliffy.Gliffy.Exception;
+using EaToGliffy.Gliffy.Model;
 using System;
 
-namespace eatogliffy.gliffy.builder.core
+namespace EaToGliffy.Gliffy.Builder.Core
 {
     /// <summary>
     /// Builder class for a complete diagram.
@@ -17,6 +17,8 @@ namespace eatogliffy.gliffy.builder.core
         private readonly GliffyDiagram gliffyDiagram;
         private Diagram eaDiagram;
         private Repository eaRepository;
+
+        #region Public functions
 
         /// <summary>
         /// Default constructor.
@@ -31,7 +33,7 @@ namespace eatogliffy.gliffy.builder.core
         /// </summary>
         /// <param name="version">Version number</param>
         /// <returns>Self reference</returns>
-        public DiagramBuilder withVersion(string version)
+        public DiagramBuilder WithVersion(string version)
         {
             gliffyDiagram.version = version;
             return this;
@@ -42,7 +44,7 @@ namespace eatogliffy.gliffy.builder.core
         /// </summary>
         /// <param name="contentType">Target content type</param>
         /// <returns>Self reference</returns>
-        public DiagramBuilder withContentType(string contentType)
+        public DiagramBuilder WithContentType(string contentType)
         {
             gliffyDiagram.contentType = contentType;
             return this;
@@ -53,7 +55,7 @@ namespace eatogliffy.gliffy.builder.core
         /// </summary>
         /// <param name="repository">An opened EA repository</param>
         /// <returns>Self reference</returns>
-        public DiagramBuilder fromActiveDiagram (Repository repository)
+        public DiagramBuilder FromActiveDiagram (Repository repository)
         {
             if(repository == null)
             {
@@ -68,7 +70,7 @@ namespace eatogliffy.gliffy.builder.core
         /// Build a glffy diagram out of an EA diagram object.
         /// </summary>
         /// <returns>Self reference</returns>
-        public DiagramBuilder build()
+        public DiagramBuilder Build()
         {
             if(eaDiagram == null || eaRepository == null)
             {
@@ -84,32 +86,36 @@ namespace eatogliffy.gliffy.builder.core
             return this;
         }
 
+        /// <summary>
+        /// Retrieve the generated glffy diagram objects.
+        /// </summary>
+        /// <returns>Generated diagram</returns>
+        public GliffyDiagram GetDiagram()
+        {
+            return gliffyDiagram;
+        }
+
+        #endregion
+
+        #region Private functions
         private void buildStage()
         {
             StageBuilder stageBuilder = new StageBuilder();
             gliffyDiagram.stage = stageBuilder
-                .withEaRepository(eaRepository)
-                .withEaDiagram(eaDiagram)
-                .build()
-                .getStage();
+                .WithEaRepository(eaRepository)
+                .WithEaDiagram(eaDiagram)
+                .Build()
+                .GetStage();
         }
 
         private void buildMetadata()
         {
             MetadataBuilder metadataBuilder = new MetadataBuilder();
             gliffyDiagram.metadata = metadataBuilder
-                .withEaDiagram(eaDiagram)
-                .build()
-                .getMetadata();
+                .WithEaDiagram(eaDiagram)
+                .Build()
+                .GetMetadata();
         }
-
-        /// <summary>
-        /// Retrieve the generated glffy diagram objects.
-        /// </summary>
-        /// <returns>Generated diagram</returns>
-        public GliffyDiagram getDiagram()
-        {
-            return gliffyDiagram;
-        }
+        #endregion
     }
 }

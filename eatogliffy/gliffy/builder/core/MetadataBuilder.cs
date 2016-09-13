@@ -1,10 +1,10 @@
 ﻿using EA;
-using eatogliffy.gliffy.exception;
-using eatogliffy.gliffy.model;
+using EaToGliffy.Gliffy.Exception;
+using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections.Generic;
 
-namespace eatogliffy.gliffy.builder.core
+namespace EaToGliffy.Gliffy.Builder.Core
 {
     /// <summary>
     /// Class for generating Gliffy's metadata object
@@ -19,7 +19,7 @@ namespace eatogliffy.gliffy.builder.core
         /// </summary>
         /// <param name="diagram">selected diagram</param>
         /// <returns>Self reference</returns>
-        public MetadataBuilder withEaDiagram(Diagram diagram)
+        public MetadataBuilder WithEaDiagram(Diagram diagram)
         {
             eaDiagram = diagram;
             return this;
@@ -29,7 +29,7 @@ namespace eatogliffy.gliffy.builder.core
         /// Builds the metadata objects
         /// </summary>
         /// <returns>Self reference</returns>
-        public MetadataBuilder build()
+        public MetadataBuilder Build()
         {
             if(eaDiagram == null)
             {
@@ -46,16 +46,16 @@ namespace eatogliffy.gliffy.builder.core
             gliffyData.title = eaDiagram.Name;
 
             gliffyData.libraries = new List<string>() {
-                  "com.gliffy.libraries.uml.uml_v2.class",
-                  "com.gliffy.libraries.uml.uml_v2.sequence",
-                  "com.gliffy.libraries.uml.uml_v2.activity",
-                  "com.gliffy.libraries.uml.uml_v2.state_machine",
-                  "com.gliffy.libraries.uml.uml_v2.deployment",
-                  "com.gliffy.libraries.uml.uml_v2.component",
-                  "com.gliffy.libraries.uml.uml_v2.use_case",
-                  "com.gliffy.libraries.erd.erd_v1.default",
-                  "com.gliffy.libraries.basic.basic_v1.default",
-                  "com.gliffy.libraries.images"
+                  "com.Gliffy.libraries.uml.uml_v2.class",
+                  "com.Gliffy.libraries.uml.uml_v2.sequence",
+                  "com.Gliffy.libraries.uml.uml_v2.activity",
+                  "com.Gliffy.libraries.uml.uml_v2.state_machine",
+                  "com.Gliffy.libraries.uml.uml_v2.deployment",
+                  "com.Gliffy.libraries.uml.uml_v2.component",
+                  "com.Gliffy.libraries.uml.uml_v2.use_case",
+                  "com.Gliffy.libraries.erd.erd_v1.default",
+                  "com.Gliffy.libraries.basic.basic_v1.default",
+                  "com.Gliffy.libraries.images"
             };
 
             return this;
@@ -65,7 +65,7 @@ namespace eatogliffy.gliffy.builder.core
         /// Returns with the generated metadata object
         /// </summary>
         /// <returns></returns>
-        public GliffyMetaData getMetadata()
+        public GliffyMetaData GetMetadata()
         {
             return gliffyData;
         }

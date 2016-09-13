@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace eatogliffy.gliffy.model
+namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyStage
     {

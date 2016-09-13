@@ -40,6 +40,7 @@
       <HintPath>C:\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net40\NSubstitute.dll</HintPath>
       <Private>True</Private>
@@ -59,9 +60,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="gliffy\builder\Common\DiagramObjectList.cs" />
     <Compile Include="gliffy\builder\core\MetadataBuilderUnitTest.cs" />
     <Compile Include="gliffy\builder\core\StageBuilderUnitTest.cs" />
+    <Compile Include="gliffy\builder\diagramLink\DiagramLinkBuilderTest.cs" />
     <Compile Include="gliffy\builder\diagramobject\ComponentBuilderUnitTest.cs" />
+    <Compile Include="gliffy\builder\tools\BuilderToolsTest.cs" />
     <Compile Include="gliffy\builder\tools\DiagramCoordinateUnitTest.cs" />
     <Compile Include="gliffy\builder\tools\IdManagerUnitTest.cs" />
     <Compile Include="gliffy\io\EaObjectUnitTest.cs" />

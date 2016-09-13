@@ -1,55 +1,55 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.graphics.path;
-using eatogliffy.gliffy.builder.tools;
-using eatogliffy.gliffy.exception;
-using eatogliffy.gliffy.model.graphics;
+using EaToGliffy.Gliffy.Builder.Graphics.Path;
+using EaToGliffy.Gliffy.Builder.Tools;
+using EaToGliffy.Gliffy.Exception;
+using EaToGliffy.Gliffy.Model.Graphics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.graphics
+namespace EaToGliffy.Gliffy.Builder.Graphics
 {
     /// <summary>
-    /// Create a gliffy line representation out of EA Diagram Line
+    /// Create a Gliffy line representation out of EA Diagram Line
     /// </summary>
     public class LineBuilder
     {
-        private DiagramLink eaDiagramLink;
+        private EA.DiagramLink eaDiagramLink;
         private Connector eaConnector;
         private Repository eaRepository;
         private eLineType lineType;
         private GliffyGraphicLine gliffyLine;
  
         /// <summary>
-        /// Add EA Connector object to the builder. Without this object the builder will fail.
+        /// Add EA Connector object to the Builder. Without this object the Builder will fail.
         /// </summary>
         /// <param name="connector">Not null Connector</param>
-        /// <returns>Returns with the builder instance</returns>
-        public LineBuilder withEaConnector(Connector connector)
+        /// <returns>Returns with the Builder instance</returns>
+        public LineBuilder WithEaConnector(Connector connector)
         {
             this.eaConnector = connector;
             return this;
         }
 
         /// <summary>
-        /// Add EA Diagram Link object. Without this object the builder will fail.
+        /// Add EA Diagram Link object. Without this object the Builder will fail.
         /// </summary>
         /// <param name="diagramLink">Not null diagram object</param>
-        /// <returns>Returns with the builder instance</returns>
-        public LineBuilder withEaLink(DiagramLink diagramLink)
+        /// <returns>Returns with the Builder instance</returns>
+        public LineBuilder WithEaLink(EA.DiagramLink diagramLink)
         {
             this.eaDiagramLink = diagramLink;
             return this;
         }
 
         /// <summary>
-        /// Add EA Repository for further query. Without this object the builder will fail.
+        /// Add EA Repository for further query. Without this object the Builder will fail.
         /// </summary>
         /// <param name="repository">Not null repositry object</param>
-        /// <returns>Returns with the builder instance</returns>
-        public LineBuilder withEaRepository(Repository repository)
+        /// <returns>Returns with the Builder instance</returns>
+        public LineBuilder WithEaRepository(Repository repository)
         {
             this.eaRepository = repository;
             return this;
@@ -60,18 +60,18 @@ namespace eatogliffy.gliffy.builder.graphics
         /// </summary>
         /// <param name="lineType">Line type</param>
         /// <see cref="eLineType"/>
-        /// <returns>Returns with the builder instance</returns>
-        public LineBuilder withType(eLineType lineType)
+        /// <returns>Returns with the Builder instance</returns>
+        public LineBuilder WithType(eLineType lineType)
         {
             this.lineType = lineType;
             return this;
         }
 
         /// <summary>
-        /// Build a gliffy line object. 
+        /// Build a Gliffy line object. 
         /// </summary>
-        /// <returns>Returns with the builder instance</returns>
-        public LineBuilder build()
+        /// <returns>Returns with the Builder instance</returns>
+        public LineBuilder Build()
         {
             if(eaDiagramLink == null || eaConnector == null || eaRepository == null)
             {
@@ -84,7 +84,7 @@ namespace eatogliffy.gliffy.builder.graphics
             gliffyLine = new GliffyGraphicLine();
             gliffyLine.Line = new GliffyLine();
 
-            gliffyLine.Line.strokeColor = BuilderTools.hexConverter(eaDiagramLink.LineColor, BuilderTools.COLOR_BLACK);
+            gliffyLine.Line.strokeColor = BuilderTools.HexConverter(eaDiagramLink.LineColor, BuilderTools.COLOR_BLACK);
             gliffyLine.Line.startArrowRotation = "auto";
             gliffyLine.Line.endArrowRotation = "auto";
             gliffyLine.Line.interpolationType = "linear";
@@ -98,9 +98,9 @@ namespace eatogliffy.gliffy.builder.graphics
         }
 
         /// <summary>
-        /// Generate list if breakpoint coordinates out of path variable of a Diagram Link.
+        /// Generate list if breakpoint coordinates out of Path variable of a Diagram Link.
         /// </summary>
-        /// <param name="linkInfo">LinkInfo object which has parsed the DiagramLink characteristics already.</param>
+        /// <param name="linkInfo">LinkInfo object which has parsed the DiagramLinks characteristics already.</param>
         /// <returns>Generated list of coordinates</returns>
         private List<int[]> createControlPath(LinkInfo linkInfo)
         {
@@ -116,22 +116,22 @@ namespace eatogliffy.gliffy.builder.graphics
             }
 
             Diagram diagram = eaRepository.GetDiagramByID(eaDiagramLink.DiagramID);
-            DiagramObject startObject = BuilderTools.getDiagramObjectById(diagram, eaDiagramLink.SourceInstanceUID);
-            DiagramObject endObject = BuilderTools.getDiagramObjectById(diagram, eaDiagramLink.TargetInstanceUID);
+            DiagramObject startObject = BuilderTools.GetDiagramObjectById(diagram, eaDiagramLink.SourceInstanceUID);
+            DiagramObject endObject = BuilderTools.GetDiagramObjectById(diagram, eaDiagramLink.TargetInstanceUID);
 
             return pathBuilder
-                .withStartObject(startObject)
-                .withEndObject(endObject)
-                .withLinkInfo(linkInfo)
-                .build()
-                .getPath();
+                .WithStartObject(startObject)
+                .WithEndObject(endObject)
+                .WithLinkInfo(linkInfo)
+                .Build()
+                .GetPath();
         }
 
         /// <summary>
-        /// Getter of the generated gliffy line object
+        /// Getter of the generated Gliffy line object
         /// </summary>
         /// <returns>Gliffy line object</returns>
-        public GliffyGraphicLine getLine()
+        public GliffyGraphicLine GetLine()
         {
             return gliffyLine;
         }

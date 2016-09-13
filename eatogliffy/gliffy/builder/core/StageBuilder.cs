@@ -1,16 +1,16 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.diagramlink;
-using eatogliffy.gliffy.builder.diagramobject;
-using eatogliffy.gliffy.builder.tools;
-using eatogliffy.gliffy.exception;
-using eatogliffy.gliffy.model;
+using EaToGliffy.Gliffy.Builder.DiagramLinks;
+using EaToGliffy.Gliffy.Builder.DiagramObjects;
+using EaToGliffy.Gliffy.Builder.Tools;
+using EaToGliffy.Gliffy.Exception;
+using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.core
+namespace EaToGliffy.Gliffy.Builder.Core
 {
     /// <summary>
     /// Class for generating Gliffy's stage object
@@ -27,12 +27,14 @@ namespace eatogliffy.gliffy.builder.core
         private const int MAX_WIDTH = 5000;
         private const string DEFAULT_BACKGROUND = "#FFFFFF";
 
+        #region Public functions
+
         /// <summary>
         /// Sets the diagram should to be exported
         /// </summary>
         /// <param name="diagram">A particular EA diagram object</param>
         /// <returns>Self reference</returns>
-        public StageBuilder withEaDiagram(Diagram diagram)
+        public StageBuilder WithEaDiagram(Diagram diagram)
         {
             eaDiagram = diagram;
             return this;
@@ -43,7 +45,7 @@ namespace eatogliffy.gliffy.builder.core
         /// </summary>
         /// <param name="diagram">A particular EA repository object</param>
         /// <returns>Self reference</returns>
-        public StageBuilder withEaRepository(Repository repository)
+        public StageBuilder WithEaRepository(Repository repository)
         {
             eaRepository = repository;
             return this;
@@ -53,7 +55,7 @@ namespace eatogliffy.gliffy.builder.core
         /// Builds the stage objects
         /// </summary>
         /// <returns>Self reference</returns>
-        public StageBuilder build()
+        public StageBuilder Build()
         {
             if (eaDiagram == null || eaRepository == null)
             {
@@ -78,10 +80,14 @@ namespace eatogliffy.gliffy.builder.core
         /// Returns with the generated stage object
         /// </summary>
         /// <returns>Stage object</returns>
-        public GliffyStage getStage()
+        public GliffyStage GetStage()
         {
             return gliffyStage;
         }
+
+        #endregion
+
+        #region Private functions
 
         private void buildObjects()
         {
@@ -96,11 +102,11 @@ namespace eatogliffy.gliffy.builder.core
                 {
                     gliffyStage.objects.Add(
                     objectBuilder
-                        .withEaObject(diagramObject)
-                        .withEaElement(currentElement)
-                        .withLayer(gliffyStage.layers[0].guid)
-                        .buildAsParent()
-                        .getObject());
+                        .WithEaObject(diagramObject)
+                        .WithEaElement(currentElement)
+                        .WithLayer(gliffyStage.layers[0].guid)
+                        .BuildAsParent()
+                        .GetObject());
                 }
             }
         }
@@ -110,7 +116,7 @@ namespace eatogliffy.gliffy.builder.core
             IEnumerator linkEnumerator = eaDiagram.DiagramLinks.GetEnumerator();
             while (linkEnumerator.MoveNext())
             {
-                DiagramLink diagramLink = (DiagramLink)linkEnumerator.Current;
+                EA.DiagramLink diagramLink = (EA.DiagramLink)linkEnumerator.Current;
                 Connector currentElement = eaRepository.GetConnectorByID(diagramLink.ConnectorID);
                 LinkBuilder linkBuilder = getLinkBuilder(currentElement.Type);
 
@@ -118,12 +124,12 @@ namespace eatogliffy.gliffy.builder.core
                 {
                     gliffyStage.objects.Add(
                     linkBuilder
-                        .withEaRepository(eaRepository)
-                        .withEaConnector(currentElement)
-                        .withEaLink(diagramLink)
-                        .withLayer(gliffyStage.layers[0].guid)
-                        .build()
-                        .getObject());
+                        .WithEaRepository(eaRepository)
+                        .WithEaConnector(currentElement)
+                        .WithEaLink(diagramLink)
+                        .WithLayer(gliffyStage.layers[0].guid)
+                        .Build()
+                        .GetObject());
                 }
             }
         }
@@ -228,5 +234,7 @@ namespace eatogliffy.gliffy.builder.core
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        #endregion
     }
 }

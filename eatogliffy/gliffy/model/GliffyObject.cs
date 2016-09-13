@@ -1,6 +1,6 @@
-﻿using eatogliffy.gliffy.model.graphics;
+﻿using EaToGliffy.Gliffy.Model.Graphics;
 
-namespace eatogliffy.gliffy.model
+namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyObject
     {

@@ -1,10 +1,11 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.graphics;
-using eatogliffy.gliffy.builder.tools;
-using eatogliffy.gliffy.model;
+using EaToGliffy.Gliffy.Builder.Graphics;
+using EaToGliffy.Gliffy.Builder.Tools;
+using EaToGliffy.Gliffy.Exception;
+using EaToGliffy.Gliffy.Model;
 using System.Collections.Generic;
 
-namespace eatogliffy.gliffy.builder.diagramlink
+namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 {
     public abstract class LinkBuilder
     {
@@ -36,12 +37,12 @@ namespace eatogliffy.gliffy.builder.diagramlink
         {
             LineBuilder lineBuilder = new LineBuilder();
             this.gliffyLink.graphic = lineBuilder
-                .withEaRepository(eaRepository)
-                .withEaConnector(eaConnector)
-                .withEaLink(this.eaDiagramLink)
-                .withType(eLineType.Dependency)
-                .build()
-                .getLine();
+                .WithEaRepository(eaRepository)
+                .WithEaConnector(eaConnector)
+                .WithEaLink(this.eaDiagramLink)
+                .WithType(eLineType.Dependency)
+                .Build()
+                .GetLine();
         }
 
         protected virtual void buildLinkMap()
@@ -64,32 +65,61 @@ namespace eatogliffy.gliffy.builder.diagramlink
             gliffyLink.endConstraint.EndPositionConstraint.py = 0.5;
         }
 
-        public LinkBuilder withEaConnector(Connector diagramConnector)
+        /// <summary>
+        /// Setter of the EA connector object
+        /// </summary>
+        /// <param name="diagramConnector">Connector object</param>
+        /// <returns>Self reference</returns>
+        public LinkBuilder WithEaConnector(Connector diagramConnector)
         {
             eaConnector = diagramConnector;
             return this;
         }
 
-        public LinkBuilder withEaLink(DiagramLink diagramLink)
+        /// <summary>
+        /// Setter of the EA diagram link object
+        /// </summary>
+        /// <param name="diagramLink">EA diagram link object</param>
+        /// <returns>Self reference</returns>
+        public LinkBuilder WithEaLink(DiagramLink diagramLink)
         {
             eaDiagramLink = diagramLink;
             return this;
         }
 
-        public LinkBuilder withEaRepository(Repository repository)
+        /// <summary>
+        /// Setter of EA repository
+        /// </summary>
+        /// <param name="repository">EA repository</param>
+        /// <returns>Self reference</returns>
+        public LinkBuilder WithEaRepository(Repository repository)
         {
             eaRepository = repository;
             return this;
         }
 
-        public LinkBuilder withLayer(string layerId)
+        /// <summary>
+        /// Setter of a given layer
+        /// </summary>
+        /// <param name="layerId">Id of the selected layer</param>
+        /// <returns>Self reference</returns>
+        public LinkBuilder WithLayer(string layerId)
         {
             this.layerId = layerId;
             return this;
         }
 
-        public LinkBuilder build()
+        /// <summary>
+        /// Build a gliffy link
+        /// </summary>
+        /// <returns>Self reference</returns>
+        public LinkBuilder Build()
         {
+            if(eaDiagramLink == null || eaConnector == null || eaRepository == null || string.IsNullOrEmpty(layerId))
+            {
+                throw new InvalidBuilderSetupException();
+            }
+
             gliffyLink = new GliffyLink();
 
             buildProperties();
@@ -99,7 +129,11 @@ namespace eatogliffy.gliffy.builder.diagramlink
             return this;
         }
 
-        public GliffyObject getObject()
+        /// <summary>
+        /// Returns with generated object
+        /// </summary>
+        /// <returns>Generated Gliffy link</returns>
+        public GliffyObject GetObject()
         {
             return gliffyLink;
         }

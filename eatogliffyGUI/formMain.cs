@@ -1,4 +1,4 @@
-﻿using eatogliffy.gliffy.io;
+﻿using EaToGliffy.Gliffy.io;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,8 +51,8 @@ namespace eatogliffyGUI
                 treeDiagrams.Nodes.Clear();
 
                 List<EaObject> diagramList = eaManager
-                    .openFile(sourceFile)
-                    .getDiagramList();
+                    .OpenFile(sourceFile)
+                    .GetDiagramList();
 
                 foreach (EaObject entry in diagramList)
                 {
@@ -95,7 +95,7 @@ namespace eatogliffyGUI
 
         private void formMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            eaManager.closeFile();
+            eaManager.CloseFile();
 
             Properties.Settings.Default.SourcePath = textSourceFile.Text;
             Properties.Settings.Default.TargetPath = textTargetFile.Text;

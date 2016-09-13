@@ -1,15 +1,22 @@
 ﻿using EA;
-using eatogliffy.gliffy.model;
-using eatogliffy.gliffy.builder;
+using EaToGliffy.Gliffy.Model;
+using EaToGliffy.Gliffy.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using eatogliffy.gliffy.builder.tools;
-using eatogliffy.gliffy.exception;
+using EaToGliffy.Gliffy.Builder.Tools;
+using EaToGliffy.Gliffy.Exception;
 
-namespace eatogliffy.gliffy.builder.diagramobject
+namespace EaToGliffy.Gliffy.Builder.DiagramObjects
 {
+    /// <summary>
+    /// Builder class for converting a generic EA object to a gliffy version
+    /// </summary>
+    /// <remarks>Abstract class</remarks>
+    /// <see cref="ComponentBuilder"/>
+    /// <see cref="RectangleBuilder"/>
+    /// <see cref="TextBuilder"/>
     public abstract class ObjectBuilder
     {
         protected GliffyObject gliffyObject;
@@ -55,25 +62,46 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
         }
 
-        public ObjectBuilder withEaObject(DiagramObject diagramObject)
+        /// <summary>
+        /// Setter of EA diagram object
+        /// </summary>
+        /// <param name="diagramObject">EA diagram object</param>
+        /// <returns>Self reference</returns>
+        public ObjectBuilder WithEaObject(DiagramObject diagramObject)
         {
             eaDiagramObject = diagramObject;
             return this;
         }
 
-        public ObjectBuilder withEaElement(Element diagramElement)
+        /// <summary>
+        /// Setter of EA diagram element
+        /// </summary>
+        /// <param name="diagramElement">EA diagram element</param>
+        /// <returns>Self reference</returns>
+        public ObjectBuilder WithEaElement(Element diagramElement)
         {
             eaElement = diagramElement;
             return this;
         }
 
-        public ObjectBuilder withLayer(string layerId)
+        /// <summary>
+        /// Setter of target layer
+        /// </summary>
+        /// <param name="layerId">ID of the target layer</param>
+        /// <returns>Self reference</returns>
+        public ObjectBuilder WithLayer(string layerId)
         {
             this.layerId = layerId;
             return this;
         }
 
-        public ObjectBuilder buildAsParent()
+        /// <summary>
+        /// Build a particular diagram object as parent gliffy object
+        /// </summary>
+        /// <returns>Self reference</returns>
+        /// <remarks>Parent means it can have other objects as children</remarks>
+        /// <exception cref="InvalidBuilderSetupException">Throws if one or more related EA objects are null</exception>
+        public ObjectBuilder BuildAsParent()
         {
             if(eaDiagramObject == null || eaElement == null || String.IsNullOrEmpty(layerId))
             {
@@ -90,7 +118,13 @@ namespace eatogliffy.gliffy.builder.diagramobject
             return this;
         }
 
-        public ObjectBuilder buildAsChild()
+        /// <summary>
+        /// Build a particular diagram object as child gliffy object
+        /// </summary>
+        /// <returns>Self reference</returns>
+        /// <remarks>Child means it cannot have other objects as children</remarks>
+        /// <exception cref="InvalidBuilderSetupException">Throws if one or more related EA objects are null</exception>
+        public ObjectBuilder BuildAsChild()
         {
             if (eaDiagramObject == null || eaElement == null || String.IsNullOrEmpty(layerId))
             {
@@ -105,7 +139,11 @@ namespace eatogliffy.gliffy.builder.diagramobject
             return this;
         }
 
-        public GliffyObject getObject()
+        /// <summary>
+        /// Returns with generated gliffy object
+        /// </summary>
+        /// <returns></returns>
+        public GliffyObject GetObject()
         {
             return gliffyObject;
         }

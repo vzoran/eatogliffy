@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Web.Script.Serialization;
 using EA;
-using eatogliffy.gliffy.model;
+using EaToGliffy.Gliffy.Model;
 using System.Windows.Forms;
-using eatogliffy.gliffy.builder.core;
+using EaToGliffy.Gliffy.Builder.Core;
 
-namespace eatogliffy
+namespace EaToGliffy
 {
     [ComVisible(true)]
     public class AddIn
@@ -20,7 +20,7 @@ namespace eatogliffy
         public string EA_Connect(Repository repository)
         {
             // nothing special
-            return "eatogliffy.AddIn - connected";
+            return "EaToGliffy.AddIn - connected";
         }
 
         // Called when user Click Add-Ins Menu item.
@@ -101,16 +101,16 @@ namespace eatogliffy
             {
                 DiagramBuilder diagramBuilder = new DiagramBuilder();
                 GliffyDiagram gliffyDiagram = diagramBuilder
-                    .withContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
-                    .withVersion(DiagramBuilder.DEFAULT_VERSION)
-                    .fromActiveDiagram(repository)
-                    .build()
-                    .getDiagram();
+                    .WithContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
+                    .WithVersion(DiagramBuilder.DEFAULT_VERSION)
+                    .FromActiveDiagram(repository)
+                    .Build()
+                    .GetDiagram();
 
                 var json = new JavaScriptSerializer()
                     .Serialize(gliffyDiagram);
 
-                System.IO.File.WriteAllText("d:\\temp.gliffy", json);
+                System.IO.File.WriteAllText("d:\\temp.Gliffy", json);
             }
             catch (Exception ex)
             {

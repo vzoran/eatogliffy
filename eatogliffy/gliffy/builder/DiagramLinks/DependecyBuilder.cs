@@ -1,6 +1,6 @@
-﻿using eatogliffy.gliffy.model.graphics;
+﻿using EaToGliffy.Gliffy.Model.Graphics;
 
-namespace eatogliffy.gliffy.builder.diagramlink
+namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 {
     public class DependecyBuilder : LinkBuilder
     {

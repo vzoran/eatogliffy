@@ -1,4 +1,4 @@
-﻿namespace eatogliffy.gliffy.model
+﻿namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyPrintModel
     {

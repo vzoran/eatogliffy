@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.io
+namespace EaToGliffy.Gliffy.io
 {
     /// <summary>
     /// Model class to describe an item in diagram tree

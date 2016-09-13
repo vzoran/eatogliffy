@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.model.graphics
+namespace EaToGliffy.Gliffy.Model.Graphics
 {
     class GliffyGraphicText : GliffyGraphic
     {

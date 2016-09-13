@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.diagramlink
+namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 {
     public class SimpleLineBuilder : LinkBuilder
     {

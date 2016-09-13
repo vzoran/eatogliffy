@@ -1,11 +1,15 @@
-﻿using eatogliffy.gliffy.model.graphics;
+﻿using EaToGliffy.Gliffy.Model.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.diagramobject
+namespace EaToGliffy.Gliffy.Builder.DiagramObjects
 {
+    /// <summary>
+    /// Class for converting a Text object
+    /// </summary>
+    /// <see cref="ObjectBuilder"/> 
     class TextBuilder : ObjectBuilder
     {
         private readonly int MARGIN = 2;

@@ -1,18 +1,22 @@
-﻿using eatogliffy.gliffy.builder.graphics;
-using eatogliffy.gliffy.model;
+﻿using EaToGliffy.Gliffy.Builder.Graphics;
+using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.diagramobject
+namespace EaToGliffy.Gliffy.Builder.DiagramObjects
 {
-    public class RectangleBuilder : ObjectBuilder
+    /// <summary>
+    /// Class for converting an EA Component object
+    /// </summary>
+    /// <see cref="ObjectBuilder"/> 
+    public class ComponentBuilder : ObjectBuilder
     {
         protected override void buildProperties(bool isParent)
         {
             base.buildProperties(isParent);
-            this.gliffyObject.uid = "com.gliffy.shape.basic.basic_v1.default.rectangle";
+            this.gliffyObject.uid = "com.gliffy.shape.uml.uml_v2.component.component1";
         }
 
         protected override void buildGraphic()
@@ -20,12 +24,12 @@ namespace eatogliffy.gliffy.builder.diagramobject
             base.buildGraphic();
 
             ShapeBuilder shapeBuilder = new ShapeBuilder();
-            
+
             this.gliffyObject.graphic = shapeBuilder
-                    .withEaObject(this.eaDiagramObject)
-                    .withType(eShapeType.Rectangle)
-                    .build()
-                    .getShape();
+                    .WithEaObject(this.eaDiagramObject)
+                    .WithType(eShapeType.Component)
+                    .Build()
+                    .GetShape();
         }
 
         protected override void buildChildren()
@@ -37,11 +41,11 @@ namespace eatogliffy.gliffy.builder.diagramobject
 
             gliffyParentObject.children = new List<GliffyObject>();
             gliffyParentObject.children.Add(textBuilder
-                .withEaElement(this.eaElement)
-                .withEaObject(this.eaDiagramObject)
-                .withLayer(this.layerId)
-                .buildAsChild()
-                .getObject());
+                .WithEaElement(this.eaElement)
+                .WithEaObject(this.eaDiagramObject)
+                .WithLayer(this.layerId)
+                .BuildAsChild()
+                .GetObject());
 
         }
     }

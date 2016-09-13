@@ -1,4 +1,4 @@
-﻿namespace eatogliffy.gliffy.model.graphics
+﻿namespace EaToGliffy.Gliffy.Model.Graphics
 {
     public abstract class GliffyGraphic
     {

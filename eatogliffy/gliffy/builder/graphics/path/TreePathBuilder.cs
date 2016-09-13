@@ -1,19 +1,20 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.tools;
+using EaToGliffy.Gliffy.Builder.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.builder.graphics.path
+namespace EaToGliffy.Gliffy.Builder.Graphics.Path
 {
     /// <summary>
-    /// HElper class to support tree-like line paths
+    /// Helper class to support tree-like line paths
     /// </summary>
+    /// <see cref="PathBuilder"/>
     public class TreePathBuilder : PathBuilder
     {
         /// <summary>
-        /// Construct line path from start to end
+        /// Construct line Path from start to end
         /// </summary>
         protected override void buildSegments()
         {
@@ -23,7 +24,7 @@ namespace eatogliffy.gliffy.builder.graphics.path
         }
 
         /// <summary>
-        /// Translate diagram link's path string to a list of int arrays
+        /// Translate diagram link's Path string to a list of int arrays
         /// </summary>
         /// <returns>Generated list of coordinates</returns>
         private List<int[]> getControlPath()

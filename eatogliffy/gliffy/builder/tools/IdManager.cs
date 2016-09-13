@@ -1,7 +1,7 @@
 ﻿using EA;
 using System.Collections.Generic;
 
-namespace eatogliffy.gliffy.builder.tools
+namespace EaToGliffy.Gliffy.Builder.Tools
 {
     /// <summary>
     /// Global manager of Gliffy element IDs
@@ -33,10 +33,10 @@ namespace eatogliffy.gliffy.builder.tools
         } 
 
         /// <summary>
-        /// Create or get gliffy ID of an EA element
+        /// Create or get Gliffy ID of an EA element
         /// </summary>
         /// <param name="eaId">Unique ID of an EA element</param>
-        /// <returns>ID used in gliffy diagram to represent that element</returns>
+        /// <returns>ID used in Gliffy diagram to represent that element</returns>
         public static int GetId(string eaId)
         {
             if(keyStore.ContainsKey(eaId))
@@ -61,10 +61,10 @@ namespace eatogliffy.gliffy.builder.tools
         }
 
         /// <summary>
-        /// Create or get gliffy index of an EA element identified ny its index
+        /// Create or get Gliffy index of an EA element identified ny its index
         /// </summary>
         /// <param name="index">EA element index</param>
-        /// <returns>ID representing the EA element in gliffy</returns>
+        /// <returns>ID representing the EA element in Gliffy</returns>
         public static int GetIdByIndex(int index)
         {
             return GetId(eaRepository.GetElementByID(index).ElementGUID);

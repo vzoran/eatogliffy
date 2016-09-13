@@ -57,7 +57,7 @@
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.Filter = "Gliffy files|*.gliffy|All files|*.*";
+            this.saveFileDialog.Filter = "Gliffy files|*.Gliffy|All files|*.*";
             // 
             // panel1
             // 

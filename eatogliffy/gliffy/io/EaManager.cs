@@ -1,11 +1,11 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.core;
-using eatogliffy.gliffy.model;
+using EaToGliffy.Gliffy.Builder.Core;
+using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
-namespace eatogliffy.gliffy.io
+namespace EaToGliffy.Gliffy.io
 {
     /// <summary>
     /// Class for opening and querying an EA project file
@@ -17,11 +17,11 @@ namespace eatogliffy.gliffy.io
         /// <summary>
         /// Open a valid EA project
         /// </summary>
-        /// <param name="filePath">Full path of the EA file</param>
+        /// <param name="filePath">Full Path of the EA file</param>
         /// <returns>Return a self reference</returns>
-        public EaManager openFile(string filePath)
+        public EaManager OpenFile(string filePath)
         {
-            closeFile();
+            CloseFile();
             eaRepository = new Repository();
             eaRepository.OpenFile(filePath);
             return this;
@@ -31,7 +31,7 @@ namespace eatogliffy.gliffy.io
         /// Collects a list of folders and diagrams
         /// </summary>
         /// <returns>List of elements</returns>
-        public List<EaObject> getDiagramList()
+        public List<EaObject> GetDiagramList()
         {
             List<EaObject> results = new List<EaObject>();
             
@@ -52,7 +52,7 @@ namespace eatogliffy.gliffy.io
         /// Remove lock from the EA project files
         /// </summary>
         /// <returns>Self reference</returns>
-        public EaManager closeFile()
+        public EaManager CloseFile()
         {
             if(eaRepository != null)
             {
@@ -68,7 +68,7 @@ namespace eatogliffy.gliffy.io
         /// </summary>
         /// <param name="diagramGuid">Valid ID of the selected diagram</param>
         /// <returns>Self reference</returns>
-        public EaManager selectDiagram(string diagramGuid)
+        public EaManager SelectDiagram(string diagramGuid)
         {
             Diagram selectedDiagram = eaRepository.GetDiagramByGuid(diagramGuid);
             if(selectedDiagram != null)
@@ -80,7 +80,7 @@ namespace eatogliffy.gliffy.io
         }
 
         /// <summary>
-        /// Converts a diagram to gliffy format
+        /// Converts a diagram to Gliffy format
         /// </summary>
         /// <param name="diagramGuid">Valid ID of the selected diagram</param>
         /// <returns>Converted diagram in Gliffy's JSON format</returns>
@@ -96,18 +96,18 @@ namespace eatogliffy.gliffy.io
                 {
                     DiagramBuilder diagramBuilder = new DiagramBuilder();
                     GliffyDiagram gliffyDiagram = diagramBuilder
-                        .withContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
-                        .withVersion(DiagramBuilder.DEFAULT_VERSION)
-                        .fromActiveDiagram(eaRepository)
-                        .build()
-                        .getDiagram();
+                        .WithContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
+                        .WithVersion(DiagramBuilder.DEFAULT_VERSION)
+                        .FromActiveDiagram(eaRepository)
+                        .Build()
+                        .GetDiagram();
 
                     var json = new JavaScriptSerializer()
                         .Serialize(gliffyDiagram);
 
                     return json;
                 }
-                catch (Exception)
+                catch (System.Exception)
                 {
                     throw;
                 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace eatogliffy.gliffy.model
+namespace EaToGliffy.Gliffy.Model
 {
     public class GliffyConstraint
     {

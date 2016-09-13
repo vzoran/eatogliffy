@@ -1,8 +1,8 @@
 ﻿using EA;
-using eatogliffy.gliffy.builder.tools;
+using EaToGliffy.Gliffy.Builder.Tools;
 using System.Collections.Generic;
 
-namespace eatogliffy.gliffy.builder.graphics.path
+namespace EaToGliffy.Gliffy.Builder.Graphics.Path
 {
     /// <summary>
     /// An abstract class to support building the line characteristics based on line types.
@@ -19,7 +19,7 @@ namespace eatogliffy.gliffy.builder.graphics.path
         /// </summary>
         /// <param name="startObject">A not null diagram object.</param>
         /// <returns>self reference</returns>
-        public PathBuilder withStartObject(DiagramObject startObject)
+        public PathBuilder WithStartObject(DiagramObject startObject)
         {
             this.startObject = startObject;
             return this;
@@ -30,7 +30,7 @@ namespace eatogliffy.gliffy.builder.graphics.path
         /// </summary>
         /// <param name="endObject">A not null diagram object.</param>
         /// <returns>self reference</returns>
-        public PathBuilder withEndObject(DiagramObject endObject)
+        public PathBuilder WithEndObject(DiagramObject endObject)
         {
             this.endObject = endObject;
             return this;
@@ -41,25 +41,17 @@ namespace eatogliffy.gliffy.builder.graphics.path
         /// </summary>
         /// <param name="linkInfo">A not null LinkInfo object.</param>
         /// <returns>self reference</returns>
-        public PathBuilder withLinkInfo(LinkInfo linkInfo)
+        public PathBuilder WithLinkInfo(LinkInfo linkInfo)
         {
             this.linkInfo = linkInfo;
             return this;
         }
 
         /// <summary>
-        /// Create path put of geometry
+        /// Build Path segments
         /// </summary>
-        protected virtual void buildSegments()
-        {
-
-        }
-
-        /// <summary>
-        /// Build path segments
-        /// </summary>
-        /// <returns></returns>
-        public PathBuilder build()
+        /// <returns>Self reference</returns>
+        public PathBuilder Build()
         {
             segments = new List<int[]> ();
 
@@ -69,12 +61,20 @@ namespace eatogliffy.gliffy.builder.graphics.path
         }
 
         /// <summary>
-        /// Getter of the result path segments
+        /// Getter of the result Path segments
         /// </summary>
-        /// <returns></returns>
-        public List<int[]> getPath()
+        /// <returns>Generated path</returns>
+        public List<int[]> GetPath()
         {
             return segments;
+        }
+
+        /// <summary>
+        /// Create Path put of geometry
+        /// </summary>
+        protected virtual void buildSegments()
+        {
+
         }
     }
 }
