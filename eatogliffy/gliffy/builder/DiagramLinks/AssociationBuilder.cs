@@ -1,4 +1,5 @@
 ﻿using EaToGliffy.Gliffy.Builder.Core;
+using EaToGliffy.Gliffy.Model.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace EaToGliffy.Gliffy.Builder.DiagramLinks
         protected override void BuildProperties()
         {
             base.BuildProperties();
-            this.gliffyLink.Uid = "com.gliffy.shape.basic.basic_v1.default.line";
+            this.gliffyLink.Uid = "com.gliffy.shape.uml.uml_v1.default.association";
         }
     }
 }

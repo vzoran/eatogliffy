@@ -61,6 +61,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="gliffy\builder\Common\DiagramObjectList.cs" />
+    <Compile Include="gliffy\builder\core\BuilderFactoryUnitTest.cs" />
     <Compile Include="gliffy\builder\core\MetadataBuilderUnitTest.cs" />
     <Compile Include="gliffy\builder\core\StageBuilderUnitTest.cs" />
     <Compile Include="gliffy\builder\diagramLink\DiagramLinkBuilderTest.cs" />

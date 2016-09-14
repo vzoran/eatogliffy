@@ -1,4 +1,5 @@
-﻿using EaToGliffy.Gliffy.Builder.Graphics;
+﻿using EaToGliffy.Gliffy.Builder.Core;
+using EaToGliffy.Gliffy.Builder.Graphics;
 using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections.Generic;

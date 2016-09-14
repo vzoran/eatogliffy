@@ -96,7 +96,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             {
                 DiagramObject diagramObject = (DiagramObject)objectEnumerator.Current;
                 Element currentElement = eaRepository.GetElementByID(diagramObject.ElementID);
-                ObjectBuilder objectBuilder = GetObjectBuilder(currentElement.Type);
+                ObjectBuilder objectBuilder = BuilderFactory.GetObjectBuilder(currentElement.Type);
 
                 if(objectBuilder != null)
                 {
@@ -118,7 +118,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             {
                 EA.DiagramLink diagramLink = (EA.DiagramLink)linkEnumerator.Current;
                 Connector currentElement = eaRepository.GetConnectorByID(diagramLink.ConnectorID);
-                LinkBuilder linkBuilder = GetLinkBuilder(currentElement.Type);
+                LinkBuilder linkBuilder = BuilderFactory.GetLinkBuilder(currentElement.Type);
 
                 if (linkBuilder != null && !diagramLink.IsHidden)
                 {
@@ -138,34 +138,6 @@ namespace EaToGliffy.Gliffy.Builder.Core
         {
             gliffyStage.NodeIndex = IdManager.Counter;
             gliffyStage.Layers[0].NodeIndex = gliffyStage.Objects.Count;
-        }
-
-        private ObjectBuilder GetObjectBuilder(string eaElementType)
-        {
-            switch(eaElementType)
-            {
-                case "Boundary":
-                    return new BoundaryBuilder();
-
-                case "Component":
-                    return new ComponentBuilder();
-
-                default:
-                    return null;
-            }
-        }
-
-        private LinkBuilder GetLinkBuilder(string eaLinkType)
-        {
-            switch (eaLinkType)
-            {
-                case "Dependency":
-                    return new DependecyBuilder();
-
-                case "Association":
-                default:
-                    return new AssociationBuilder();
-            }
         }
 
         private void BuildProperties()
