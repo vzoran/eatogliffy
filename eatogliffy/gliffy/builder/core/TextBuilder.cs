@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EaToGliffy.Gliffy.Builder.DiagramObjects
+namespace EaToGliffy.Gliffy.Builder.Core
 {
     /// <summary>
     /// Class for converting a Text object

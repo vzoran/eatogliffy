@@ -1,11 +1,12 @@
-﻿using System;
+﻿using EaToGliffy.Gliffy.Builder.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace EaToGliffy.Gliffy.Builder.DiagramLinks
 {
-    public class SimpleLineBuilder : LinkBuilder
+    public class AssociationBuilder : LinkBuilder
     {
         protected override void BuildProperties()
         {

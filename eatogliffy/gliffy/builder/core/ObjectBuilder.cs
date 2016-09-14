@@ -8,7 +8,7 @@ using System.Text;
 using EaToGliffy.Gliffy.Builder.Tools;
 using EaToGliffy.Gliffy.Exception;
 
-namespace EaToGliffy.Gliffy.Builder.DiagramObjects
+namespace EaToGliffy.Gliffy.Builder.Core
 {
     /// <summary>
     /// Builder class for converting a generic EA object to a gliffy version

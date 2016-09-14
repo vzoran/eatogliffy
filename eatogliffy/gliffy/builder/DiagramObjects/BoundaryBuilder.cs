@@ -1,4 +1,5 @@
-﻿using EaToGliffy.Gliffy.Builder.Graphics;
+﻿using EaToGliffy.Gliffy.Builder.Core;
+using EaToGliffy.Gliffy.Builder.Graphics;
 using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace EaToGliffy.Gliffy.Builder.DiagramObjects
     /// Class for converting an EA Rectangle object
     /// </summary>
     /// <see cref="ObjectBuilder"/> 
-    public class RectangleBuilder : ObjectBuilder
+    public class BoundaryBuilder : ObjectBuilder
     {
         protected override void BuildProperties(bool isParent)
         {

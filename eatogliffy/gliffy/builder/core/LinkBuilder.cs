@@ -5,7 +5,7 @@ using EaToGliffy.Gliffy.Exception;
 using EaToGliffy.Gliffy.Model;
 using System.Collections.Generic;
 
-namespace EaToGliffy.Gliffy.Builder.DiagramLinks
+namespace EaToGliffy.Gliffy.Builder.Core
 {
     public abstract class LinkBuilder
     {

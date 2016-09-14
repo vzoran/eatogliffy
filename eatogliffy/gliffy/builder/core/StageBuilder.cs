@@ -145,7 +145,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
             switch(eaElementType)
             {
                 case "Boundary":
-                    return new RectangleBuilder();
+                    return new BoundaryBuilder();
 
                 case "Component":
                     return new ComponentBuilder();
@@ -164,7 +164,7 @@ namespace EaToGliffy.Gliffy.Builder.Core
 
                 case "Association":
                 default:
-                    return new SimpleLineBuilder();
+                    return new AssociationBuilder();
             }
         }
 
