@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="IO\EaManager.cs" />
     <Compile Include="IO\EaObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
