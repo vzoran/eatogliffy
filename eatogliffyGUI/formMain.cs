@@ -1,4 +1,5 @@
-﻿using EaToGliffy.Gliffy.io;
+﻿using eacore.io;
+using EaToGliffy.Gliffy.IO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace eatogliffyGUI
 {
     public partial class FormMain : Form
     {
-        private readonly EaManager eaManager = new EaManager();
+        private readonly GliffyManager eaManager = new GliffyManager();
 
         public FormMain()
         {
@@ -99,7 +100,11 @@ namespace eatogliffyGUI
 
             Properties.Settings.Default.SourcePath = textSourceFile.Text;
             Properties.Settings.Default.TargetPath = textTargetFile.Text;
-            Properties.Settings.Default.SelectedDiagram = treeDiagrams.SelectedNode.Name;
+            if(treeDiagrams.SelectedNode != null)
+            {
+                Properties.Settings.Default.SelectedDiagram = treeDiagrams.SelectedNode.Name;
+            }
+            
             Properties.Settings.Default.Save();
         }
 

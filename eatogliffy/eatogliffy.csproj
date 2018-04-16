@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EaToGliffy</RootNamespace>
     <AssemblyName>eatogliffy</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisRuleSet>eatogliffy.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisRuleSet>eatogliffy.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.EA">
@@ -80,8 +82,7 @@
     <Compile Include="Gliffy\Builder\Core\StageBuilder.cs" />
     <Compile Include="Gliffy\Builder\Tools\LinkInfo.cs" />
     <Compile Include="Gliffy\Exception\InvalidBuilderSetupException.cs" />
-    <Compile Include="Gliffy\IO\EaManager.cs" />
-    <Compile Include="Gliffy\IO\EaObject.cs" />
+    <Compile Include="Gliffy\IO\GliffyManager.cs" />
     <Compile Include="Gliffy\Model\GliffyBox.cs" />
     <Compile Include="Gliffy\Model\GliffyConstraint.cs" />
     <Compile Include="Gliffy\Model\GliffyDiagram.cs" />
@@ -111,6 +112,12 @@
   <ItemGroup>
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.1.13.0\analyzers\SonarAnalyzer.CSharp.dll" />
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.1.13.0\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eacore\eacore.csproj">
+      <Project>{f97037e0-9c77-4071-ad64-664a6a4c1da9}</Project>
+      <Name>eacore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

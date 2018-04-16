@@ -1,18 +1,15 @@
 ﻿using EA;
-using EaToGliffy.Gliffy.Builder.Core;
-using EaToGliffy.Gliffy.Model;
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
-namespace EaToGliffy.Gliffy.io
+namespace eacore.io
 {
     /// <summary>
     /// Class for opening and querying an EA project file
     /// </summary>
     public class EaManager
     {
-        private Repository eaRepository;
+        protected Repository eaRepository;
 
         /// <summary>
         /// Open a valid EA project
@@ -80,48 +77,12 @@ namespace EaToGliffy.Gliffy.io
         }
 
         /// <summary>
-        /// Converts a diagram to Gliffy format
-        /// </summary>
-        /// <param name="diagramGuid">Valid ID of the selected diagram</param>
-        /// <returns>Converted diagram in Gliffy's JSON format</returns>
-        public string ConvertDiagram(string diagramGuid)
-        {
-            Diagram selectedDiagram = eaRepository.GetDiagramByGuid(diagramGuid);
-            if (selectedDiagram != null)
-            {
-                eaRepository.OpenDiagram(selectedDiagram.DiagramID);
-                eaRepository.ActivateDiagram(selectedDiagram.DiagramID);
-
-                try
-                {
-                    DiagramBuilder diagramBuilder = new DiagramBuilder();
-                    GliffyDiagram gliffyDiagram = diagramBuilder
-                        .WithContentType(DiagramBuilder.DEFAULT_CONTENT_TYPE)
-                        .WithVersion(DiagramBuilder.DEFAULT_VERSION)
-                        .FromActiveDiagram(eaRepository)
-                        .Build()
-                        .GetDiagram();
-
-                    var json = JsonConvert.SerializeObject(gliffyDiagram);
-
-                    return json;
-                }
-                catch (System.Exception)
-                {
-                    throw;
-                }
-            }
-
-            return String.Empty;
-        }
-
-        /// <summary>
         /// Recursive function to collect all diagrams and folders in variable depth
         /// </summary>
         /// <param name="results">Reference of the result list</param>
         /// <param name="parentGuid">Unique ID of the parent folder</param>
         /// <param name="package">Parent package</param>
-        private void CollectDiagrams(List<EaObject> results, string parentGuid, Package package)
+        protected void CollectDiagrams(List<EaObject> results, string parentGuid, Package package)
         {
             results.Add(new EaObject(package.PackageGUID, package.Name, parentGuid, false));
 
