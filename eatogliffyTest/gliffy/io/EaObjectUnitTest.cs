@@ -1,5 +1,5 @@
 ﻿using System;
-using EaToGliffy.Gliffy.io;
+using eacore.io;
 using NUnit.Framework;
 
 namespace eatogliffyTest.gliffy.io
