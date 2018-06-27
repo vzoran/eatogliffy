@@ -1,0 +1,4 @@
+{INTEND}{NAME}
+{NOTES}
+_*Diagrams*_
+{DIAGRAM_LIST}

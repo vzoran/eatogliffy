@@ -105,6 +105,10 @@
       <Project>{f97037e0-9c77-4071-ad64-664a6a4c1da9}</Project>
       <Name>eacore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\eatogliffy\eatogliffy.csproj">
+      <Project>{c9993ba9-3f34-489c-8a0c-dc53d3fd30c4}</Project>
+      <Name>eatogliffy</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

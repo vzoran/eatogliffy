@@ -194,7 +194,7 @@
             this.imageTree.Images.SetKeyName(0, "folder.png");
             this.imageTree.Images.SetKeyName(1, "chart_organisation.png");
             // 
-            // formMain
+            // FormMain
             // 
             this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,7 +204,7 @@
             this.Controls.Add(this.treeDiagrams);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "formMain";
+            this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main console";
             this.Deactivate += new System.EventHandler(this.formMain_Deactivate);

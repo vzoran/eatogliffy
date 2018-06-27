@@ -135,8 +135,7 @@ namespace EaToGliffy
         ///
         public void EA_Disconnect()
         {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+           GC.WaitForPendingFinalizers();
         }
     }
 }
