@@ -10,6 +10,7 @@ namespace MdDocGenerator.Builder
     {
         Default,
         Package,
-        Diagram
+        Diagram,
+        Element
     }
 }
