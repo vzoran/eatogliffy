@@ -48,8 +48,9 @@
   <ItemGroup>
     <Compile Include="AddIn.cs" />
     <Compile Include="Builder\DocumentationBuilder.cs" />
-    <Compile Include="Builder\SectionBuilder.cs" />
+    <Compile Include="Builder\PackageSectionBuilder.cs" />
     <Compile Include="Builder\TemplateType.cs" />
+    <Compile Include="IO\IDocWriter.cs" />
     <Compile Include="Template\ITemplateReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -80,6 +81,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\package_md.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\element_md.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -61,7 +61,8 @@ namespace MdDocGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to {INTEND}{NAME}
+        ///{NOTES}.
         /// </summary>
         internal static string default_md {
             get {
@@ -70,7 +71,12 @@ namespace MdDocGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to {NAME}
+        ///{DIAGRAM_IMAGE}
+        ///_*Rationale*_
+        ///{NOTES}
+        ///_*Diagrams*_
+        ///.
         /// </summary>
         internal static string diagram_md {
             get {
@@ -80,6 +86,18 @@ namespace MdDocGenerator.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string element_md {
+            get {
+                return ResourceManager.GetString("element_md", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {INTEND}{NAME}
+        ///{NOTES}
+        ///_*Diagrams*_
+        ///{DIAGRAM_LIST}.
         /// </summary>
         internal static string package_md {
             get {

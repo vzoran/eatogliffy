@@ -124,6 +124,9 @@
   <data name="diagram_md" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\diagram_md.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
+  <data name="element_md" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\element_md.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
   <data name="package_md" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\package_md.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
