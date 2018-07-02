@@ -43,5 +43,18 @@
         /// Initialize the target (if needed)
         /// </summary>
         void Initialize();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="textContent"></param>
+        /// <param name="isRef"></param>
+        /// <param name="intend"></param>
+        void WriteToMasterDoc(string textContent, bool isRef = true, int intend = 0);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void FinalizeMaster();
     }
 }

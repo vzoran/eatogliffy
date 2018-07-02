@@ -74,20 +74,20 @@ namespace MdDocGenerator.Builder
 
         private string getElementContent(Element element)
         {
-            string elementContent = getDefaultContent(element, templateReader.ReadTemplate(TemplateType.Element));
-            return elementContent;
+            string elementContent = getDefaultContent(element.Name, element.Notes, templateReader.ReadTemplate(TemplateType.Element));
+            return docWriter.WriteFragment("E", element.ElementID, element.Name, elementContent);
         }
 
         private string getPackageContent(Package package)
         {
-            string packageContent = getDefaultContent(package, templateReader.ReadTemplate(TemplateType.Package));
-            return packageContent;
+            string packageContent = getDefaultContent(package.Name, package.Notes, templateReader.ReadTemplate(TemplateType.Package));
+            return docWriter.WriteFragment("P", package.PackageID, package.Name, packageContent);
         }
 
         private string getDiagramContent(Diagram diagram)
         {
             // Fill basic fields
-            string diagramContent = getDefaultContent(diagram, templateReader.ReadTemplate(TemplateType.Diagram));
+            string diagramContent = getDefaultContent(diagram.Name, diagram.Notes, templateReader.ReadTemplate(TemplateType.Diagram));
 
             // Get diagram image reference in MMD document
             ImageReference imageReference = docWriter.CreateImageReference(diagram.DiagramID, diagram.Name);
@@ -97,19 +97,19 @@ namespace MdDocGenerator.Builder
                 .GetProjectInterface()
                 .PutDiagramImageToFile(diagram.DiagramGUID, imageReference.fullImagePath, 1);
 
-            diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][]", imageReference.imageID));
+            diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][]", imageReference.imageID));
 
-            return diagramContent;
+            return docWriter.WriteFragment("D", diagram.DiagramID, diagram.Name, diagramContent);
         }
 
-        private string getDefaultContent(Object sourceObject, string template)
+        private string getDefaultContent(string name, string notes, string template)
         {
             string sectionContent = template;
 
-            sectionContent.Replace("{NAME}", sourceObject.GetType().GetProperty("Name").GetValue(sourceObject).ToString());
-            sectionContent.Replace("{NOTES}", sourceObject.GetType().GetProperty("Notes").GetValue(sourceObject).ToString());
+            sectionContent = sectionContent.Replace("{NAME}", name);
+            sectionContent = sectionContent.Replace("{NOTES}", notes);
             
-            return "";
+            return sectionContent;
         }
     }
 }

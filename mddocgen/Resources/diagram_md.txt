@@ -1,4 +1,7 @@
 **{NAME}**
+
 {DIAGRAM_IMAGE}
-_*Rationale*_
+
+__**Rationale**__
+
 {NOTES}

@@ -16,6 +16,7 @@ namespace MdDocGenerator.Builder
         public DocumentationBuilder SetTargetFolder(string targetFolder)
         {
             docWriter = new DocumentationFileWriter(targetFolder);
+            docWriter.Initialize();
             return this;
         }
 
@@ -36,17 +37,29 @@ namespace MdDocGenerator.Builder
             return true;
         }
 
+        protected virtual bool validateModel(Package package)
+        {
+            return true;
+        }
+
         private void parsePackage(Package package, int intend)
         {
             if (validatePackage(package))
             {
+                // Create package document fragments
                 List<string> mdPackageReferences = fragmentBuilder
-                    .SetEaPackage(eaProject)
+                    .SetEaRepository(eaRepository)
                     .SetDocWriter(docWriter)
                     .SetTemplateReader(templateReader)                    
                     .Build(package);
 
-                // TODD: Save reference to master document
+                // Store it in master document
+                int cnt = 0;
+                foreach(string refLine in mdPackageReferences)
+                {
+                    docWriter.WriteToMasterDoc(refLine, true, (cnt == 0 ? intend : 0));
+                    cnt++;
+                }
             }
 
             foreach(Package subpackage in package.Packages)
@@ -59,8 +72,13 @@ namespace MdDocGenerator.Builder
         {
             foreach (Package model in eaRepository.Models)
             {
-                parsePackage(model, 0);
+                if(validateModel(model))
+                {
+                    parsePackage(model, 1);
+                }
             }
+
+            docWriter.FinalizeMaster();
         }
     }
 }

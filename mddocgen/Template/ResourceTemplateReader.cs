@@ -10,7 +10,7 @@ namespace MdDocGenerator.Template
         /// <inheritdoc />
         public string ReadTemplate(TemplateType templateType)
         {
-            string resourceName = "mddocgen.";
+            string resourceName = "MdDocGenerator.Resources.";
             switch (templateType)
             {
                 case TemplateType.Package:

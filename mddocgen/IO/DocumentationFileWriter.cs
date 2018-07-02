@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace MdDocGenerator.IO
 {
@@ -19,9 +20,25 @@ namespace MdDocGenerator.IO
     public class DocumentationFileWriter : IDocWriter
     {
         private string targetFolder;
-        private const string IMAGE_FOLDER = @"auto\images\";
-        private const string FRAGMENT_FOLDER = @"auto\fragments\";
+        private const string IMAGE_FOLDER = @"auto/images/";
+        private const string FRAGMENT_FOLDER = @"auto/fragments/";
         private const string IMAGE_INDEX_FRAGMENT = "img_index.md";
+        private const string MASTER_DOC = "master.md";
+
+        private string MasterFullPath {
+            get
+            {
+                return targetFolder + MASTER_DOC;
+            }
+        }
+
+        private string ImageIndexFullPath
+        {
+            get
+            {
+                return targetFolder + FRAGMENT_FOLDER + IMAGE_INDEX_FRAGMENT;
+            }
+        }
 
         /// <summary>
         /// Constructor
@@ -30,9 +47,9 @@ namespace MdDocGenerator.IO
         public DocumentationFileWriter(string targetFolderName)
         {
             this.targetFolder = targetFolderName;
-            if(!targetFolder.EndsWith("\\"))
+            if(!targetFolder.EndsWith(@"\"))
             {
-                targetFolder += "\\";
+                targetFolder += @"\";
             }
         }
 
@@ -43,11 +60,11 @@ namespace MdDocGenerator.IO
             string fileName = createFileName("I", itemId, itemName, FileType.Image);
 
             imageReference.imageID = "I" + itemId.ToString().PadLeft(5, '0');
-            imageReference.fullImagePath = targetFolder + FRAGMENT_FOLDER + fileName;
+            imageReference.fullImagePath = targetFolder + IMAGE_FOLDER + fileName;
 
             string referenceLine = String.Format("[{0}]: {1} \"{2}\" ", imageReference.imageID, IMAGE_FOLDER.Replace(@"\", "/") + fileName, itemName);
             
-            File.AppendAllLines(imageReference.fullImagePath, new List<string>() { FRAGMENT_FOLDER.Replace(@"\", "/") + fileName });
+            File.AppendAllLines(ImageIndexFullPath, new List<string>() { referenceLine });
 
             return imageReference;
         }
@@ -74,8 +91,34 @@ namespace MdDocGenerator.IO
                 Directory.Delete(targetFolder + FRAGMENT_FOLDER, true);
             }
             
+            if(File.Exists(MasterFullPath))
+            {
+                File.Delete(MasterFullPath);
+            }
+
             Directory.CreateDirectory(targetFolder + IMAGE_FOLDER);
             Directory.CreateDirectory(targetFolder + FRAGMENT_FOLDER);
+        }
+
+        /// <inheritdoc />
+        public void FinalizeMaster()
+        {
+            WriteToMasterDoc(FRAGMENT_FOLDER + IMAGE_INDEX_FRAGMENT, true, 0);
+        }
+
+        /// <summary>
+        /// Writes string to the master.md file
+        /// </summary>
+        /// <param name="textContent"></param>
+        /// <param name="isRef"></param> 
+        public void WriteToMasterDoc(string textContent, bool isRef = true, int intend = 0)
+        {
+            if(isRef)
+            {
+                textContent = String.Format("{0} {{{{{1}}}}}\r\n", new String('#', intend), textContent);
+            }
+
+            File.AppendAllText(this.MasterFullPath, textContent, Encoding.UTF8);
         }
 
         private string createFileName(string prefix, long itemId, string itemName, FileType fileType)
@@ -83,7 +126,7 @@ namespace MdDocGenerator.IO
             return String.Format("{0}{1}_{2}.{3}", 
                 prefix.ToUpper().Trim(), 
                 itemId.ToString().PadLeft(5, '0'), 
-                itemName.Replace(" ", "_").ToLower().Trim(),
+                itemName.Replace(" ", "_").Replace("/", "").ToLower().Trim(),
                 fileType == FileType.Fragment ? "md" : "png");
         }
     }
