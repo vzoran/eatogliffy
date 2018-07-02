@@ -97,7 +97,7 @@ namespace MdDocGenerator.Builder
                 .GetProjectInterface()
                 .PutDiagramImageToFile(diagram.DiagramGUID, imageReference.fullImagePath, 1);
 
-            diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][]", imageReference.imageID));
+            diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][{1}]","", imageReference.imageID));
 
             return docWriter.WriteFragment("D", diagram.DiagramID, diagram.Name, diagramContent);
         }
