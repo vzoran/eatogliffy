@@ -1,4 +1,4 @@
-{INTEND}{NAME}
+{NAME}
 {NOTES}
-_*Diagrams*_
-{DIAGRAM_LIST}
+*Diagrams*
+{DIAGRAMS}

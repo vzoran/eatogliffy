@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MdDocGenerator.Builder
 {
+    /// <summary>
+    /// Enum for managed EA object types. 
+    /// </summary>
     public enum TemplateType
     {
         Default,

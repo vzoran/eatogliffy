@@ -4,8 +4,10 @@ using System.Reflection;
 
 namespace MdDocGenerator.Template
 {
+    /// <inheritdoc />
     public class ResourceTemplateReader: ITemplateReader
     {
+        /// <inheritdoc />
         public string ReadTemplate(TemplateType templateType)
         {
             string resourceName = "mddocgen.";
@@ -17,6 +19,10 @@ namespace MdDocGenerator.Template
 
                 case TemplateType.Diagram:
                     resourceName += "diagram_md.txt";
+                    break;
+
+                case TemplateType.Element:
+                    resourceName += "element_md.txt";
                     break;
 
                 default:

@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using EA;
 using System.Windows.Forms;
+using MdDocGenerator.Builder;
 
 namespace MdDocGenerator
 {
@@ -10,7 +11,7 @@ namespace MdDocGenerator
     {
         private const string menuNameMain = "-&Create documentation";
         private const string menuNameFull = "-&Full package";
-        
+                
         // Called Before EA starts to check Add-In Exists
         public string EA_Connect(Repository repository)
         {
@@ -75,7 +76,11 @@ namespace MdDocGenerator
         {
             try
             {
-                // TODO Fill business logic
+                DocumentationBuilder docBuilder = new DocumentationBuilder();
+                docBuilder
+                    .SetTargetFolder(@"d:\temp")
+                    .SetEaRepository(repository)
+                    .Build();
             }
             catch (Exception ex)
             {

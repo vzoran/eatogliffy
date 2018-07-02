@@ -1,28 +1,33 @@
 ﻿using EA;
+using MdDocGenerator.IO;
 using MdDocGenerator.Template;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MdDocGenerator.Builder
 {
-    public abstract class DocumentationBuilder
+    public class DocumentationBuilder
     {
-        protected ITemplateReader templateReader = new ResourceTemplateReader();
-        protected SectionBuilder sectionBuilder = new SectionBuilder();
-        protected string targetFolder = "\\";
+        private ITemplateReader templateReader = new ResourceTemplateReader();
+        private FragmentBuilder fragmentBuilder = new FragmentBuilder();
+        private IDocWriter docWriter;
+        private Repository eaRepository;
+
+        public DocumentationBuilder SetTargetFolder(string targetFolder)
+        {
+            docWriter = new DocumentationFileWriter(targetFolder);
+            return this;
+        }
+
+        public DocumentationBuilder SetEaRepository(Repository eaRepository)
+        {
+            this.eaRepository = eaRepository;
+            return this;
+        }
 
         public DocumentationBuilder SetTemplateReader(ITemplateReader templateReader)
         {
             this.templateReader = templateReader;
-            return this;
-        }
-
-        public DocumentationBuilder SetTargetFolder(string targetFolder)
-        {
-            this.targetFolder = targetFolder;
             return this;
         }
 
@@ -33,12 +38,14 @@ namespace MdDocGenerator.Builder
 
         private void parsePackage(Package package, int intend)
         {
-            if(validatePackage(package))
+            if (validatePackage(package))
             {
-                string packageTemplate = templateReader.ReadTemplate(TemplateType.Package);
-                string mdPackageDoc = sectionBuilder.BuildSection(package, packageTemplate, intend);
+                List<string> mdPackageReferences = fragmentBuilder
+                    .SetEaPackage(eaProject)
+                    .SetDocWriter(docWriter)
+                    .SetTemplateReader(templateReader)                    
+                    .Build(package);
 
-                // TODO: Save content to file
                 // TODD: Save reference to master document
             }
 
@@ -48,9 +55,9 @@ namespace MdDocGenerator.Builder
             }
         }
 
-        public void Build(Repository repository)
+        public void Build()
         {
-            foreach (Package model in repository.Models)
+            foreach (Package model in eaRepository.Models)
             {
                 parsePackage(model, 0);
             }

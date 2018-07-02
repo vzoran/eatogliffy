@@ -1,5 +1,4 @@
-{NAME}
+**{NAME}**
 {DIAGRAM_IMAGE}
 _*Rationale*_
 {NOTES}
-_*Diagrams*_
