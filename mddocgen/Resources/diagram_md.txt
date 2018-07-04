@@ -3,5 +3,4 @@
 {DIAGRAM_IMAGE}
 
 __**Rationale**__
-
 {NOTES}

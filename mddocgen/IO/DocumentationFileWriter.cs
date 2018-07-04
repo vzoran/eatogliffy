@@ -115,7 +115,7 @@ namespace MdDocGenerator.IO
         {
             if(isRef)
             {
-                textContent = String.Format("{0} {{{{{1}}}}}\r\n", new String('#', intend), textContent);
+                textContent = String.Format("{0}{{{{{1}}}}}\r\n", new String('#', intend) + (intend > 0 ? " " : String.Empty), textContent);
             }
 
             File.AppendAllText(this.MasterFullPath, textContent, Encoding.UTF8);

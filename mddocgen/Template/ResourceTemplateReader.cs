@@ -25,6 +25,10 @@ namespace MdDocGenerator.Template
                     resourceName += "element_md.txt";
                     break;
 
+                case TemplateType.ElementHeader:
+                    resourceName += "element_hdr_md.txt";
+                    break;
+
                 default:
                     resourceName += "default_md.txt";
                     break;

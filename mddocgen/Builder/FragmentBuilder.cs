@@ -3,6 +3,7 @@ using MdDocGenerator.IO;
 using MdDocGenerator.Template;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MdDocGenerator.Builder
 {
@@ -64,18 +65,24 @@ namespace MdDocGenerator.Builder
             // Generate fragment of each diagram
             foreach (Diagram diagram in package.Diagrams)
             {
-                referenceList.Add(getDiagramContent(diagram));
-                
-                // TODO: Iterate elements and collect the references to add to the diagram template
+                referenceList.Add(getDiagramContent(package, diagram));
+
+                // Get elementlist header
+                StringBuilder elementContent = new StringBuilder();
+                elementContent.Append(getDefaultContent(diagram.Name, String.Empty, templateReader.ReadTemplate(TemplateType.ElementHeader)));
+
+                // Iterate elements and collect the references to add to the diagram template
+                foreach (DiagramObject diagramObject in diagram.DiagramObjects)
+                {
+                    Element element = eaRepository.GetElementByID(diagramObject.ElementID);
+                    elementContent.Append(getDefaultContent(element.Name, element.Notes, templateReader.ReadTemplate(TemplateType.Element)));
+                }
+
+                // Generate and store elements fragment
+                referenceList.Add(docWriter.WriteFragment("E", diagram.DiagramID, diagram.Name, elementContent.ToString()));
             }
 
             return referenceList;
-        }
-
-        private string getElementContent(Element element)
-        {
-            string elementContent = getDefaultContent(element.Name, element.Notes, templateReader.ReadTemplate(TemplateType.Element));
-            return docWriter.WriteFragment("E", element.ElementID, element.Name, elementContent);
         }
 
         private string getPackageContent(Package package)
@@ -84,10 +91,14 @@ namespace MdDocGenerator.Builder
             return docWriter.WriteFragment("P", package.PackageID, package.Name, packageContent);
         }
 
-        private string getDiagramContent(Diagram diagram)
+        private string getDiagramContent(Package parentPackage, Diagram diagram)
         {
+            // Convert caption of this fragment
+            string caption = diagram.Name.Equals(parentPackage.Name) ? "Overview" : diagram.Name;
+            
+            
             // Fill basic fields
-            string diagramContent = getDefaultContent(diagram.Name, diagram.Notes, templateReader.ReadTemplate(TemplateType.Diagram));
+            string diagramContent = getDefaultContent(caption, diagram.Notes, templateReader.ReadTemplate(TemplateType.Diagram));
 
             // Get diagram image reference in MMD document
             ImageReference imageReference = docWriter.CreateImageReference(diagram.DiagramID, diagram.Name);
@@ -97,7 +108,7 @@ namespace MdDocGenerator.Builder
                 .GetProjectInterface()
                 .PutDiagramImageToFile(diagram.DiagramGUID, imageReference.fullImagePath, 1);
 
-            diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][{1}]","", imageReference.imageID));
+            diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][{1}]", diagram.Name, imageReference.imageID));
 
             return docWriter.WriteFragment("D", diagram.DiagramID, diagram.Name, diagramContent);
         }
