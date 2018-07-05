@@ -1,4 +1,5 @@
 ﻿using EA;
+using Html2Markdown;
 using MdDocGenerator.IO;
 using MdDocGenerator.Template;
 using System;
@@ -75,7 +76,12 @@ namespace MdDocGenerator.Builder
                 foreach (DiagramObject diagramObject in diagram.DiagramObjects)
                 {
                     Element element = eaRepository.GetElementByID(diagramObject.ElementID);
-                    elementContent.Append(getDefaultContent(element.Name, element.Notes, templateReader.ReadTemplate(TemplateType.Element)));
+                    if(validateElement(element))
+                    {
+                        elementContent.Append(getDefaultContent(element.Name, element.Notes, templateReader.ReadTemplate(TemplateType.Element)));
+                    }
+
+                    Console.WriteLine(String.Format("Element type: {0}; subtype: {1}", element.Type, element.Subtype));
                 }
 
                 // Generate and store elements fragment
@@ -83,6 +89,11 @@ namespace MdDocGenerator.Builder
             }
 
             return referenceList;
+        }
+
+        private bool validateElement(Element element)
+        {
+            return !element.Type.Equals("Note");
         }
 
         private string getPackageContent(Package package)
@@ -116,9 +127,10 @@ namespace MdDocGenerator.Builder
         private string getDefaultContent(string name, string notes, string template)
         {
             string sectionContent = template;
+            Converter mdConverter = new Converter();
 
             sectionContent = sectionContent.Replace("{NAME}", name);
-            sectionContent = sectionContent.Replace("{NOTES}", notes);
+            sectionContent = sectionContent.Replace("{NOTES}", mdConverter.Convert(notes));
             
             return sectionContent;
         }
