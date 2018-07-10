@@ -46,6 +46,20 @@ namespace MdDocGenerator.Builder
         private IDocWriter docWriter;
         private ITemplateReader templateReader;
         private Repository eaRepository;
+        private List<string> blackListedElements = new List<string>() {
+            "Text",
+            "Boundary",
+            "Note",
+            "ProvidedInterface",
+            "RequiredInterface",
+            "ActivityPartition",
+            "StateNode"
+        };
+
+        private List<string> linkedElements = new List<string>() {
+            "Package",
+            "Activity"
+        };
 
         /// <summary>
         /// Builder kind setter, in order to add a document writer
@@ -99,6 +113,7 @@ namespace MdDocGenerator.Builder
             // Generate fragment of each diagram
             foreach (Diagram diagram in package.Diagrams)
             {
+                
                 referenceList.Add(
                     new FragmentReference(
                         FragmentType.Diagram, 
@@ -159,7 +174,7 @@ namespace MdDocGenerator.Builder
         /// <returns>Allowed or not</returns>
         private bool validateElement(Element element)
         {
-            return !element.Type.Equals("Note");
+            return !blackListedElements.Contains(element.Type);
         }
 
         /// <summary>
@@ -169,7 +184,7 @@ namespace MdDocGenerator.Builder
         /// <returns>Generated MMD definition in string format</returns>
         private string getElementContent(Element element)
         {
-            bool isLinked = eaRepository.GetPackageByGuid(element.ElementGUID) != null;
+            bool isLinked = linkedElements.Contains(element.Type);
             string elementContent = getDefaultContent((isLinked ? createLink(element.Name) : element.Name), element.Notes, templateReader.ReadTemplate(TemplateType.Element), true);
 
             elementContent = elementContent.Replace("{TYPE}", element.Type);

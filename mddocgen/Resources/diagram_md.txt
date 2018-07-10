@@ -2,5 +2,6 @@
 
 {DIAGRAM_IMAGE}
 
-__**Rationale**__
+**Rationale**
+
 {NOTES}
