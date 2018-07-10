@@ -1,4 +1,4 @@
 Elements of {NAME}
 
-| Name | Description |
-| :--- | :---------- |
+| Type | Name | Description |
+| :--- | :--- | :---------- |

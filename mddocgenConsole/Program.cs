@@ -14,6 +14,8 @@ namespace mddocgenConsole
             MdDocManager mdDocManager = new MdDocManager();
 
             mdDocManager.GenerateMdDoc(args[0], args[1]);
+
+            Console.WriteLine("End of doc generator");
         }
     }
 }

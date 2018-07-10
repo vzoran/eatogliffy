@@ -1,1 +1,1 @@
-| [{NAME}][] | {NOTES} |
+| {TYPE} | {NAME} | {NOTES} |

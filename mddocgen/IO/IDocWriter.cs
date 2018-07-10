@@ -45,16 +45,23 @@
         void Initialize();
 
         /// <summary>
-        /// 
+        /// Write a single line to the master document
         /// </summary>
-        /// <param name="textContent"></param>
-        /// <param name="isRef"></param>
-        /// <param name="intend"></param>
+        /// <param name="textContent">The content will be written</param>
+        /// <param name="isRef">Is a reference line? In this case custom formatting  will be used</param>
+        /// <param name="intend">Intendation</param>
         void WriteToMasterDoc(string textContent, bool isRef = true, int intend = 0);
 
         /// <summary>
-        /// 
+        /// Finalize master document
         /// </summary>
         void FinalizeMaster();
+
+        /// <summary>
+        /// Write metadata to the master document
+        /// </summary>
+        /// <param name="key">Meta key</param>
+        /// <param name="value">Meta data</param>
+        void AddMetaInfo(string key, string value);
     }
 }

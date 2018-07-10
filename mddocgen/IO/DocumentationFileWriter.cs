@@ -25,6 +25,9 @@ namespace MdDocGenerator.IO
         private const string IMAGE_INDEX_FRAGMENT = "img_index.md";
         private const string MASTER_DOC = "master.md";
 
+        // it is needed to force UTF-8 wothout BOM
+        private UTF8Encoding uTF8Encoding = new UTF8Encoding(false);
+
         private string MasterFullPath {
             get
             {
@@ -103,7 +106,13 @@ namespace MdDocGenerator.IO
         /// <inheritdoc />
         public void FinalizeMaster()
         {
-            WriteToMasterDoc(FRAGMENT_FOLDER + IMAGE_INDEX_FRAGMENT, true, 0);
+            WriteToMasterDoc(FRAGMENT_FOLDER + IMAGE_INDEX_FRAGMENT, true);
+        }
+
+        /// <inheritdoc />
+        public void AddMetaInfo(string key, string value)
+        {
+            WriteToMasterDoc(String.Format("{0}: {1}  " + Environment.NewLine, key, value), false);
         }
 
         /// <summary>
@@ -115,10 +124,10 @@ namespace MdDocGenerator.IO
         {
             if(isRef)
             {
-                textContent = String.Format("{0}{{{{{1}}}}}\r\n", new String('#', intend) + (intend > 0 ? " " : String.Empty), textContent);
+                textContent = String.Format("{0}{{{{{1}}}}}" + Environment.NewLine, new String('#', intend) + (intend > 0 ? " " : String.Empty), textContent);
             }
 
-            File.AppendAllText(this.MasterFullPath, textContent, Encoding.UTF8);
+            File.AppendAllText(this.MasterFullPath, textContent, uTF8Encoding);
         }
 
         private string createFileName(string prefix, long itemId, string itemName, FileType fileType)
