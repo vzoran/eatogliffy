@@ -211,7 +211,7 @@ namespace MdDocGenerator.Builder
         private string getDiagramContent(Package parentPackage, Diagram diagram)
         {
             // Convert caption of this fragment
-            string caption = diagram.Name.Equals(parentPackage.Name) ? "Overview" : diagram.Name;
+            string caption = diagram.Name.Equals(parentPackage.Name) ? String.Format("{0} - Overview", diagram.Name) : diagram.Name;
                         
             // Fill basic fields
             string diagramContent = getDefaultContent(caption, diagram.Notes, templateReader.ReadTemplate(TemplateType.Diagram));
@@ -250,10 +250,24 @@ namespace MdDocGenerator.Builder
             } 
             else
             {
-                sectionContent = sectionContent.Replace("{NOTES}", mdConverter.Convert(notes));
+                sectionContent = sectionContent.Replace("{NOTES}", mdConverter.Convert(notes).Replace(Environment.NewLine, "  " + Environment.NewLine));
             }
             
             return sectionContent;
+        }
+
+        /// <summary>
+        /// Return with the template content filled woth default data
+        /// </summary>
+        /// <param name="name">name value</param>
+        /// <param name="notes">note value</param>
+        /// <param name="templateType">Type of the template we  want to read</param>
+        /// <param name="isSingleLine">needed to convert a single line note</param>
+        /// <returns></returns>
+        public string getContentByType(string name, string notes, TemplateType templateType, bool isSingleLine = false)
+        {
+            string sectionContent = templateReader.ReadTemplate(templateType);
+            return getDefaultContent(name, notes, sectionContent, isSingleLine);
         }
 
         /// <summary>

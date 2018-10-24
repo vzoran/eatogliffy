@@ -61,6 +61,27 @@ namespace MdDocGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abbreviations
+        ///
+        ///| Name | Description |
+        ///| :--- | :---------- |.
+        /// </summary>
+        internal static string abbreviation_hdr_md {
+            get {
+                return ResourceManager.GetString("abbreviation_hdr_md", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *[{NAME}]: {NOTES}.
+        /// </summary>
+        internal static string abbreviation_md {
+            get {
+                return ResourceManager.GetString("abbreviation_md", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default template
         ///**{NAME}**
         ///{NOTES}.
@@ -72,11 +93,14 @@ namespace MdDocGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to **{NAME}**
+        ///   Looks up a localized string similar to {NAME}
+        ///
         ///{DIAGRAM_IMAGE}
         ///
-        ///__**Rationale**__
-        ///{NOTES}.
+        ///**Rationale**
+        ///
+        ///{NOTES}
+        ///.
         /// </summary>
         internal static string diagram_md {
             get {
@@ -85,9 +109,11 @@ namespace MdDocGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Elements of {PARENT_NAME}
-        ///| Name | Description |
-        ///| ==== | =========== |.
+        ///   Looks up a localized string similar to Elements of {NAME}
+        ///
+        ///| Type | Name | Description |
+        ///| :--- | :--- | :---------- |
+        ///.
         /// </summary>
         internal static string element_hdr_md {
             get {
@@ -96,7 +122,8 @@ namespace MdDocGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to | [{NAME}][] | {NOTES} |.
+        ///   Looks up a localized string similar to | {TYPE} | {NAME} | {NOTES} |
+        ///.
         /// </summary>
         internal static string element_md {
             get {

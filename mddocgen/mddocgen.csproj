@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddIn.cs" />
+    <Compile Include="Builder\BuilderConfig.cs" />
     <Compile Include="Builder\DocumentationBuilder.cs" />
     <Compile Include="Builder\FragmentBuilder.cs" />
     <Compile Include="Builder\TemplateType.cs" />
@@ -97,6 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\abbreviation_md.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\abbreviation_hdr_md.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

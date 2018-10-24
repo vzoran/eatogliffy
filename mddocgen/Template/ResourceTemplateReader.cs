@@ -29,6 +29,14 @@ namespace MdDocGenerator.Template
                     resourceName += "element_hdr_md.txt";
                     break;
 
+                case TemplateType.Abbreviation:
+                    resourceName += "abbreviation_md.txt";
+                    break;
+
+                case TemplateType.AbbreviationHeader:
+                    resourceName += "abbreviation_hdr_md.txt";
+                    break;
+
                 default:
                     resourceName += "default_md.txt";
                     break;

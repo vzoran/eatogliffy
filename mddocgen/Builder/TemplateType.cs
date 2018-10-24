@@ -15,6 +15,8 @@ namespace MdDocGenerator.Builder
         Package,
         Diagram,
         Element,
-        ElementHeader
+        ElementHeader,
+        Abbreviation,
+        AbbreviationHeader
     }
 }
