@@ -42,7 +42,7 @@
         /// <summary>
         /// Initialize the target (if needed)
         /// </summary>
-        void Initialize();
+        void CleanUp(bool isFull = false);
 
         /// <summary>
         /// Write a single line to the master document
