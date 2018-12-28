@@ -178,6 +178,7 @@
             // 
             // treeDiagrams
             // 
+            this.treeDiagrams.CheckBoxes = true;
             this.treeDiagrams.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDiagrams.ImageIndex = 0;
             this.treeDiagrams.ImageList = this.imageTree;
