@@ -1,8 +1,8 @@
 ﻿using EA;
-using eacore.io;
 using MdDocGenerator.IO;
 using MdDocGenerator.Template;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,7 +27,6 @@ namespace MdDocGenerator.Builder
         public DocumentationBuilder SetTargetFolder(string targetFolder)
         {
             docWriter = new DocumentationFileWriter(targetFolder);
-            docWriter.Initialize();
             return this;
         }
 
@@ -95,8 +94,9 @@ namespace MdDocGenerator.Builder
                             break;
 
                         case FragmentType.ElementList:
-                            // elements of a diagram starts 2 levels lower
-                            realIntendation = intend + 2;
+                        case FragmentType.DiagramUncaptioned:
+                            // elementlist and diagram without caption will not be indented
+                            realIntendation = 0;
                             break;
 
                         case FragmentType.Package:
@@ -142,10 +142,21 @@ namespace MdDocGenerator.Builder
         /// </summary>
         public void Build()
         {
+            docWriter.CleanUp(builderConfig.CleanRun);
+
+            // Read last run
+            string propFileName = Path.GetDirectoryName(eaRepository.ConnectionString) + "\\mmd.lastrun";
+            if(System.IO.File.Exists(propFileName) && builderConfig != null) {
+                builderConfig.LastRun = DateTime.Parse(System.IO.File.ReadAllText(propFileName));
+            }
+
+            // Save last run
+            System.IO.File.WriteAllText(propFileName, DateTime.Now.ToString());
+
             // Set builder up
             fragmentBuilder
                 .SetEaRepository(eaRepository)
-                .SetDocWriter(docWriter)
+                .SetDocWriter(docWriter, builderConfig)
                 .SetTemplateReader(templateReader);
 
             // Fill header values

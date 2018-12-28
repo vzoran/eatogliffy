@@ -12,8 +12,9 @@ namespace mddocgenConsole
         static void Main(string[] args)
         {
             MdDocManager mdDocManager = new MdDocManager();
+            bool cleanRun = args.Contains("-c");
 
-            mdDocManager.GenerateMdDoc(args[0], args[1]);
+            mdDocManager.GenerateMdDoc(args[args.Length - 2], args[args.Length - 1], cleanRun);
 
             Console.WriteLine("End of doc generator");
         }

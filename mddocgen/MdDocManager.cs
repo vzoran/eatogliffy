@@ -25,8 +25,12 @@ namespace MdDocGenerator
         /// </summary>
         /// <param name="sourceFile">full path of the source EA file</param>
         /// <param name="targetFolder">root target folder</param>
-        public void GenerateMdDoc(string sourceFile, string targetFolder)
+        /// <param name="cleanRun">If true, all items will be regenerated</param>
+        public void GenerateMdDoc(string sourceFile, string targetFolder, bool cleanRun)
         {
+            BuilderConfig builderConfig = new BuilderConfig();
+            builderConfig.CleanRun = cleanRun;
+            
             // Open the EA file
             this.OpenFile(sourceFile);
 
@@ -35,6 +39,7 @@ namespace MdDocGenerator
             documentationBuilder
                 .SetEaRepository(this.eaRepository)
                 .SetTargetFolder(targetFolder)
+                .SetConfiguration(builderConfig)
                 .Build();
 
             // Close EA file

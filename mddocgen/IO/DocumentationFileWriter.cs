@@ -75,32 +75,41 @@ namespace MdDocGenerator.IO
         /// <inheritdoc />
         public string WriteFragment(string prefix, long itemId, string itemName, string fragment)
         {
-            string fileName = createFileName(prefix, itemId, itemName, FileType.Fragment); 
-            File.WriteAllText(targetFolder + FRAGMENT_FOLDER + fileName, fragment);
+            string fileName = createFileName(prefix, itemId, itemName, FileType.Fragment);
 
+            if(fragment != null)
+            {
+                File.WriteAllText(targetFolder + FRAGMENT_FOLDER + fileName, fragment);
+            }
+            
             return FRAGMENT_FOLDER + fileName;
         }
 
         /// <inheritdoc />
-        public void Initialize()
+        public void CleanUp(bool isFull)
         {
-            if (Directory.Exists(targetFolder + IMAGE_FOLDER))
+            if(isFull)
             {
-                Directory.Delete(targetFolder + IMAGE_FOLDER, true);
-            }
+                if (Directory.Exists(targetFolder + IMAGE_FOLDER))
+                {
+                    Directory.Delete(targetFolder + IMAGE_FOLDER, true);
+                }
 
-            if(Directory.Exists(targetFolder + FRAGMENT_FOLDER))
-            {
-                Directory.Delete(targetFolder + FRAGMENT_FOLDER, true);
-            }
-            
-            if(File.Exists(MasterFullPath))
-            {
-                File.Delete(MasterFullPath);
-            }
+                if (Directory.Exists(targetFolder + FRAGMENT_FOLDER))
+                {
+                    Directory.Delete(targetFolder + FRAGMENT_FOLDER, true);
+                }
 
-            Directory.CreateDirectory(targetFolder + IMAGE_FOLDER);
-            Directory.CreateDirectory(targetFolder + FRAGMENT_FOLDER);
+                if (File.Exists(MasterFullPath))
+                {
+                    File.Delete(MasterFullPath);
+                }
+
+                Directory.CreateDirectory(targetFolder + IMAGE_FOLDER);
+                Directory.CreateDirectory(targetFolder + FRAGMENT_FOLDER);
+            } else {
+                File.Delete(ImageIndexFullPath);
+            }
         }
 
         /// <inheritdoc />
