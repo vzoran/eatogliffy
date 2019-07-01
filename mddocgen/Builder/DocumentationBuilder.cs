@@ -165,13 +165,24 @@ namespace MdDocGenerator.Builder
             // Save generic fragments
             printAbbreviations();
 
-            // Parse all models
-            foreach (Package model in eaRepository.Models)
+            // TODO: Remove it before release
+            //string selectedDiagram = "{D95541E8-1F1A-4f3d-9958-9AADE40FEA6C}";
+            string selectedDiagram = String.Empty;
+
+            if (String.IsNullOrEmpty(selectedDiagram))
             {
-                if(validateModel(model))
+                // Parse all models
+                foreach (Package model in eaRepository.Models)
                 {
-                    parsePackage(model, 1);
+                    if (validateModel(model))
+                    {
+                        parsePackage(model, 1);
+                    }
                 }
+            }
+            else
+            {
+                parsePackage(eaRepository.GetPackageByGuid(selectedDiagram), 1);
             }
 
             // Finalize

@@ -48,6 +48,7 @@ namespace MdDocGenerator.Builder
         private ITemplateReader templateReader;
         private Repository eaRepository;
         private BuilderConfig builderConfig;
+        private IDiagramBuilder defaultDiagramBuilder = new DefaultDiagramBuilder();
 
         private List<string> blackListedElements = new List<string>() {
             "Text",
@@ -56,7 +57,9 @@ namespace MdDocGenerator.Builder
             "ProvidedInterface",
             "RequiredInterface",
             "ActivityPartition",
-            "StateNode"
+            "StateNode",
+            "Rectangle",
+            "Port"
         };
 
         private List<string> linkedElements = new List<string>() {
@@ -64,6 +67,8 @@ namespace MdDocGenerator.Builder
             "Activity",
             "UMLDiagram"
         };
+
+        private const string TAG_HIDDEN = "hidden";
 
         /// <summary>
         /// Builder kind setter, in order to add a document writer
@@ -108,6 +113,9 @@ namespace MdDocGenerator.Builder
         {
             // TODO: Validate the setup and throw exception
 
+            ((DefaultDiagramBuilder)defaultDiagramBuilder).SetRepository(eaRepository);
+            ((DefaultDiagramBuilder)defaultDiagramBuilder).SetTemplateReader(templateReader);
+
             // Create package fragment first
             List<FragmentReference> referenceList = new List<FragmentReference>();
             referenceList.Add(
@@ -124,56 +132,46 @@ namespace MdDocGenerator.Builder
                         getDiagramContent(package, diagram)));
                 
                 // Iterate elements and collect the references to add to the diagram template
-                List<Element> elementList = new List<Element>();
-                bool elementsUpdated = false;
-                foreach (DiagramObject diagramObject in diagram.DiagramObjects)
-                {
-                    Element element = eaRepository.GetElementByID(diagramObject.ElementID);
-                    if(validateElement(element))
-                    {
-                        elementList.Add(element);
+                bool elementsUpdated = builderConfig.CleanRun;
 
-                        // Check whether it has changed or not
-                        if (builderConfig.CleanRun || builderConfig.LastRun <= element.Modified)
+                if (!builderConfig.CleanRun)
+                {
+                    foreach (DiagramObject diagramObject in diagram.DiagramObjects)
+                    {
+                        Element element = eaRepository.GetElementByID(diagramObject.ElementID);
+                        if (validateElement(element) && builderConfig.LastRun <= element.Modified)
                         {
                             elementsUpdated = true;
-                            Console.WriteLine(String.Format("Element {0} saved", element.Name));
-                        } else
-                        {
-                            Console.WriteLine(String.Format("Element {0} skipped", element.Name));
+                            break;
                         }
                     }
                 }
 
                 // Create fragment only if it makes sense
-                if (elementsUpdated && elementList.Count > 0)
+                if (elementsUpdated)
                 {
-                    elementList.Sort(delegate (Element x, Element y)
-                    {
-                        int typeCompare = x.Type.CompareTo(y.Type);
-                        if (typeCompare == 0)
-                        {
-                            return x.Name.CompareTo(y.Name);
-                        }
-
-                        return typeCompare;
-                    });
-
-                    // Get elementlist header
-                    StringBuilder elementContent = new StringBuilder();
-                    elementContent.Append(getDefaultContent(diagram.Name, String.Empty, templateReader.ReadTemplate(TemplateType.ElementHeader)));
-
-                    // generate element lines
-                    foreach (Element element in elementList)
-                    {
-                        elementContent.Append(getElementContent(element));
-                    }
+                    string elementContent = defaultDiagramBuilder.GetElementContent(package, diagram);
 
                     // Generate and store elements fragment
                     referenceList.Add(
                         new FragmentReference(
                             FragmentType.ElementList,
-                            docWriter.WriteFragment("E", diagram.DiagramID, diagram.Name, elementContent.ToString())));
+                            docWriter.WriteFragment("E", diagram.DiagramID, diagram.Name, elementContent)));
+                }
+
+                // Run special doc generator if needed
+                if(diagram.Stereotype.Contains("fmea"))
+                {
+                    Console.WriteLine("FMEA Generator started for {0}", diagram.Name);
+
+                    foreach (DiagramLink diagramLink in diagram.DiagramLinks)
+                    {
+                        Connector connector = eaRepository.GetConnectorByID(diagramLink.ConnectorID);
+                        if (validateFmeaConnector(connector))
+                        {
+                            getFmeaElementContent(connector);
+                        }
+                    }
                 }
             }
 
@@ -187,7 +185,12 @@ namespace MdDocGenerator.Builder
         /// <returns>Allowed or not</returns>
         private bool validateElement(Element element)
         {
-            return !blackListedElements.Contains(element.Type);
+            return !(blackListedElements.Contains(element.Type) || element.Tag.Contains(TAG_HIDDEN));
+        }
+
+        private bool validateFmeaConnector(Connector connector)
+        {
+            return connector.MetaType.Equals("InformationFlow");
         }
 
         /// <summary>
@@ -203,6 +206,16 @@ namespace MdDocGenerator.Builder
             elementContent = elementContent.Replace("{TYPE}", element.Type);
 
             return elementContent;
+        }
+
+        private string getFmeaElementContent(Connector connector)
+        {
+            foreach(Element dtoElement in connector.ConveyedItems)
+            {
+                //dtoElement.Att
+            }
+
+            return connector.Name;
         }
 
         /// <summary>
@@ -235,20 +248,15 @@ namespace MdDocGenerator.Builder
 
             if (builderConfig.CleanRun || builderConfig.LastRun <= diagram.ModifiedDate)
             {
-                // Convert caption of this fragment
-                string caption = diagram.Name.Equals(parentPackage.Name) ? String.Empty : diagram.Name;
-
-                // Fill basic fields
-                diagramContent = getDefaultContent(caption, diagram.Notes, templateReader.ReadTemplate(TemplateType.Diagram));
+                diagramContent = defaultDiagramBuilder.GetBasicContent(parentPackage, diagram, imageReference.imageID);
+                Console.WriteLine("Diagram {0} saved.", diagram.Name);
 
                 // Save image and store the reference
-                this.eaRepository
+                eaRepository
                     .GetProjectInterface()
                     .PutDiagramImageToFile(diagram.DiagramGUID, imageReference.fullImagePath, 1);
-
-                diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][{1}]", diagram.Name, imageReference.imageID));
-                Console.WriteLine("Diagram {0} saved.", diagram.Name);
-            } else {
+            }
+            else {
                 Console.WriteLine("Diagram {0} skipped.", diagram.Name);
             }
 
@@ -276,7 +284,7 @@ namespace MdDocGenerator.Builder
             } 
             else
             {
-                sectionContent = sectionContent.Replace("{NOTES}", mdConverter.Convert(notes).Replace(Environment.NewLine, "  " + Environment.NewLine));
+                sectionContent = sectionContent.Replace("{NOTES}", notes);
             }
             
             return sectionContent;
