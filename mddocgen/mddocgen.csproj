@@ -56,6 +56,7 @@
     <Compile Include="Builder\BuilderConfig.cs" />
     <Compile Include="Builder\DefaultDiagramBuilder.cs" />
     <Compile Include="Builder\DocumentationBuilder.cs" />
+    <Compile Include="Builder\FmeaDiagramBuilder.cs" />
     <Compile Include="Builder\FragmentBuilder.cs" />
     <Compile Include="Builder\IDiagramBuilder.cs" />
     <Compile Include="Builder\TemplateType.cs" />

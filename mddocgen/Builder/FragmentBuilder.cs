@@ -39,6 +39,22 @@ namespace MdDocGenerator.Builder
         }
     }
 
+    class DiagramBuilderReference
+    {
+        public DiagramBuilderReference(string match, string diagramPrefix, string elementPrefix, IDiagramBuilder diagramBuilder)
+        {
+            Match = match;
+            DiagramPrefix = diagramPrefix;
+            ElementPrefix = elementPrefix;
+            DiagramBuilderRef = diagramBuilder;
+        }
+
+        public string Match { get; set; }
+        public string DiagramPrefix { get; set; }
+        public string ElementPrefix { get; set; }
+        public IDiagramBuilder DiagramBuilderRef { get; set; }
+    }
+
     /// <summary>
     /// Class for generating MMD document fragment out of a single EA package
     /// </summary>
@@ -48,7 +64,11 @@ namespace MdDocGenerator.Builder
         private ITemplateReader templateReader;
         private Repository eaRepository;
         private BuilderConfig builderConfig;
-        private IDiagramBuilder defaultDiagramBuilder = new DefaultDiagramBuilder();
+        private List<DiagramBuilderReference> diagramBuilderReferences = new List<DiagramBuilderReference>()
+        {
+            new DiagramBuilderReference("*", "D", "E", new DefaultDiagramBuilder()),
+            new DiagramBuilderReference("fmea", "FD", "FE", new FmeaDiagramBuilder())
+        };
 
         private List<string> blackListedElements = new List<string>() {
             "Text",
@@ -113,8 +133,11 @@ namespace MdDocGenerator.Builder
         {
             // TODO: Validate the setup and throw exception
 
-            ((DefaultDiagramBuilder)defaultDiagramBuilder).SetRepository(eaRepository);
-            ((DefaultDiagramBuilder)defaultDiagramBuilder).SetTemplateReader(templateReader);
+            // Initialize generators
+            foreach(DiagramBuilderReference diagramBuilderReference in diagramBuilderReferences)
+            {
+                diagramBuilderReference.DiagramBuilderRef.Initialize(eaRepository, templateReader);
+            }
 
             // Create package fragment first
             List<FragmentReference> referenceList = new List<FragmentReference>();
@@ -125,52 +148,27 @@ namespace MdDocGenerator.Builder
 
             // Generate fragment of each diagram
             foreach (Diagram diagram in package.Diagrams)
-            {   
-                referenceList.Add(
-                    new FragmentReference(
-                        package.Name.Equals(diagram.Name) ? FragmentType.DiagramUncaptioned : FragmentType.Diagram, 
-                        getDiagramContent(package, diagram)));
-                
-                // Iterate elements and collect the references to add to the diagram template
-                bool elementsUpdated = builderConfig.CleanRun;
+            {
+                ImageReference imageReference = docWriter.CreateImageReference(diagram.DiagramID, diagram.Name);
 
-                if (!builderConfig.CleanRun)
+                foreach (DiagramBuilderReference diagramBuilderReference in diagramBuilderReferences)
                 {
-                    foreach (DiagramObject diagramObject in diagram.DiagramObjects)
+                    if (diagramBuilderReference.Match.Equals("*") || diagram.Stereotype.Contains(diagramBuilderReference.Match))
                     {
-                        Element element = eaRepository.GetElementByID(diagramObject.ElementID);
-                        if (validateElement(element) && builderConfig.LastRun <= element.Modified)
-                        {
-                            elementsUpdated = true;
-                            break;
-                        }
-                    }
-                }
+                        string diagramContent = diagramBuilderReference.DiagramBuilderRef.GetBasicContent(package, diagram, imageReference);
+                        referenceList.Add(
+                            new FragmentReference(
+                                package.Name.Equals(diagram.Name) ? FragmentType.DiagramUncaptioned : FragmentType.Diagram,
+                                docWriter.WriteFragment(diagramBuilderReference.DiagramPrefix, diagram.DiagramID, diagram.Name, diagramContent)));
 
-                // Create fragment only if it makes sense
-                if (elementsUpdated)
-                {
-                    string elementContent = defaultDiagramBuilder.GetElementContent(package, diagram);
+                        // Create fragments
+                        string elementContent = diagramBuilderReference.DiagramBuilderRef.GetElementContent(package, diagram);
 
-                    // Generate and store elements fragment
-                    referenceList.Add(
-                        new FragmentReference(
-                            FragmentType.ElementList,
-                            docWriter.WriteFragment("E", diagram.DiagramID, diagram.Name, elementContent)));
-                }
-
-                // Run special doc generator if needed
-                if(diagram.Stereotype.Contains("fmea"))
-                {
-                    Console.WriteLine("FMEA Generator started for {0}", diagram.Name);
-
-                    foreach (DiagramLink diagramLink in diagram.DiagramLinks)
-                    {
-                        Connector connector = eaRepository.GetConnectorByID(diagramLink.ConnectorID);
-                        if (validateFmeaConnector(connector))
-                        {
-                            getFmeaElementContent(connector);
-                        }
+                        // Generate and store elements fragment
+                        referenceList.Add(
+                            new FragmentReference(
+                                FragmentType.ElementList,
+                                docWriter.WriteFragment(diagramBuilderReference.ElementPrefix, diagram.DiagramID, diagram.Name, elementContent)));
                     }
                 }
             }
@@ -194,31 +192,6 @@ namespace MdDocGenerator.Builder
         }
 
         /// <summary>
-        /// Generate MMD item out of a given element
-        /// </summary>
-        /// <param name="element">a non-null element object</param>
-        /// <returns>Generated MMD definition in string format</returns>
-        private string getElementContent(Element element)
-        {
-            bool isLinked = builderConfig.UseLinks && linkedElements.Contains(element.Type);
-            string elementContent = getDefaultContent((isLinked ? createLink(element.Name) : element.Name), element.Notes, templateReader.ReadTemplate(TemplateType.Element), true);
-
-            elementContent = elementContent.Replace("{TYPE}", element.Type);
-
-            return elementContent;
-        }
-
-        private string getFmeaElementContent(Connector connector)
-        {
-            foreach(Element dtoElement in connector.ConveyedItems)
-            {
-                //dtoElement.Att
-            }
-
-            return connector.Name;
-        }
-
-        /// <summary>
         /// Generate MMD item out of a given package
         /// </summary>
         /// <param name="package">a non-null package object</param>
@@ -232,35 +205,6 @@ namespace MdDocGenerator.Builder
             }
             
             return docWriter.WriteFragment("P", package.PackageID, package.Name, packageContent);
-        }
-
-        /// <summary>
-        /// Generate MMD item out of a given diagram
-        /// </summary>
-        /// <param name="package">a non-null diagram object</param>
-        /// <returns>Generated MMD definition in string format</returns>
-        private string getDiagramContent(Package parentPackage, Diagram diagram)
-        {
-            string diagramContent = null;
-            
-            // Get diagram image reference in MMD document
-            ImageReference imageReference = docWriter.CreateImageReference(diagram.DiagramID, diagram.Name);
-
-            if (builderConfig.CleanRun || builderConfig.LastRun <= diagram.ModifiedDate)
-            {
-                diagramContent = defaultDiagramBuilder.GetBasicContent(parentPackage, diagram, imageReference.imageID);
-                Console.WriteLine("Diagram {0} saved.", diagram.Name);
-
-                // Save image and store the reference
-                eaRepository
-                    .GetProjectInterface()
-                    .PutDiagramImageToFile(diagram.DiagramGUID, imageReference.fullImagePath, 1);
-            }
-            else {
-                Console.WriteLine("Diagram {0} skipped.", diagram.Name);
-            }
-
-            return docWriter.WriteFragment("D", diagram.DiagramID, diagram.Name, diagramContent);
         }
 
         /// <summary>

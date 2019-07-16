@@ -1,4 +1,5 @@
 ﻿using EA;
+using MdDocGenerator.IO;
 using MdDocGenerator.Template;
 using System;
 using System.Collections.Generic;
@@ -13,21 +14,22 @@ namespace MdDocGenerator.Builder
         private ITemplateReader templateReader;
         private Repository eaRepository;
 
-        public IDiagramBuilder SetRepository(Repository repository)
+        public void Initialize(Repository repository, ITemplateReader templateReader)
         {
-            this.eaRepository = repository;
-            return this;
-        }
-
-        public IDiagramBuilder SetTemplateReader(ITemplateReader templateReader)
-        {
+            eaRepository = repository;
             this.templateReader = templateReader;
-            return this;
         }
 
-        public string GetBasicContent(Package parentPackage, Diagram diagram, string imageId)
+        public string GetBasicContent(Package parentPackage, Diagram diagram, ImageReference imageReference)
         {
             string diagramContent = null;
+
+            // Save image and store the reference
+            eaRepository
+                .GetProjectInterface()
+                .PutDiagramImageToFile(diagram.DiagramGUID, imageReference.fullImagePath, 1);
+
+            Console.WriteLine("Diagram {0} saved.", diagram.Name);
 
             // Convert caption of this fragment
             string caption = diagram.Name.Equals(parentPackage.Name) ? String.Empty : diagram.Name;
@@ -36,7 +38,7 @@ namespace MdDocGenerator.Builder
             diagramContent = templateReader.ReadTemplate(TemplateType.Diagram);
             diagramContent = diagramContent.Replace("{NAME}", diagram.Name);
             diagramContent = diagramContent.Replace("{NOTES}", diagram.Notes.Replace(Environment.NewLine, "<BR>"));
-            diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][{1}]", diagram.Name, imageId));
+            diagramContent = diagramContent.Replace("{DIAGRAM_IMAGE}", String.Format("![{0}][{1}]", diagram.Name, imageReference.imageID));
 
             return diagramContent;
         }

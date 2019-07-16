@@ -166,8 +166,8 @@ namespace MdDocGenerator.Builder
             printAbbreviations();
 
             // TODO: Remove it before release
-            //string selectedDiagram = "{D95541E8-1F1A-4f3d-9958-9AADE40FEA6C}";
-            string selectedDiagram = String.Empty;
+            string selectedDiagram = "{D95541E8-1F1A-4f3d-9958-9AADE40FEA6C}";
+            //string selectedDiagram = String.Empty;
 
             if (String.IsNullOrEmpty(selectedDiagram))
             {

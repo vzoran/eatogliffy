@@ -1,16 +1,13 @@
 ﻿using EA;
+using MdDocGenerator.IO;
 using MdDocGenerator.Template;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MdDocGenerator.Builder
 {
-    interface IDiagramBuilder
+    public interface IDiagramBuilder
     {
-        string GetBasicContent(Package parentPackage, Diagram diagram, string imageId);
+        void Initialize(Repository repository, ITemplateReader templateReader);
+        string GetBasicContent(Package parentPackage, Diagram diagram, ImageReference imageReference);
         string GetElementContent(Package parentPackage, Diagram diagram);
     }
 }
